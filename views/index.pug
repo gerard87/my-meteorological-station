@@ -1,0 +1,49 @@
+extends layout
+
+block content
+    script(src="/socket.io/socket.io.js")
+    script(src="https://code.jquery.com/jquery-1.11.1.js")
+    script.
+        $(function () {
+            var socket = io();
+            socket.on('temperature', function (msg) {
+                $('#temperature').text(msg);
+            });
+            socket.on('humidity', function (msg) {
+                $('#humidity').text(msg);
+            });
+            socket.on('temperature2', function (msg) {
+                $('#temperature2').text(msg);
+            });
+            socket.on('pressure', function (msg) {
+                $('#pressure').text(msg);
+            });
+            socket.on('sealevel_pressure', function (msg) {
+                $('#sealevel_pressure').text(msg);
+            });
+            socket.on('altitude', function (msg) {
+                $('#altitude').text(msg);
+            });
+        });
+
+    h1= title
+
+    table
+        thead
+            tr
+                th TEMPERATURE
+                th HUMIDITY
+                th TEMPERATURE2
+                th PRESSURE
+                th SEA LEVEL PRESSURE
+                th ALTITUDE
+
+        tbody
+            tr
+                td(id='temperature') 0 *C
+                td(id='humidity') 0%
+                td(id='temperature2') 0 *C
+                td(id='pressure') 0 Pa
+                td(id='sealevel_pressure') 0 Pa
+                td(id='altitude') 0 m
+

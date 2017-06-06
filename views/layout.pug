@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= 'My meteorological station homepage'
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  body
+
+    #page
+      #logo
+        h1
+          a#logoLink(href='/')
+            // img(src='/images/logo.png')
+      #nav
+        ul
+          li 
+            a(href="/") Home
+      #content
+        block content
+      #footer
+        p
+          | Webpage made by
