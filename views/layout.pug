@@ -1,22 +1,17 @@
 doctype html
 html
-  head
-    title= 'My meteorological station homepage'
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    head
+        title=title
+        link(href='//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', rel='stylesheet')
+        link(rel='icon' type='image/png' href='img/cloud.png')
+    body
 
-  body
+        nav(class='navbar navbar-default navbar-static-top')
+            div(class='container')
+                div(class='navbar-header')
+                    button(type='button', class='navbar-toggle collapsed',
+                    data-toggle='collapse', data-target='#navbar',
+                    aria-expanded='false', aria-controls='navbar')
+                    a(class='navbar-brand', href='/') Home
 
-    #page
-      #logo
-        h1
-          a#logoLink(href='/')
-            // img(src='/images/logo.png')
-      #nav
-        ul
-          li 
-            a(href="/") Home
-      #content
         block content
-      #footer
-        p
-          | Webpage made by

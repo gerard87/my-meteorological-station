@@ -26,24 +26,30 @@ block content
             });
         });
 
-    h1= title
 
-    table
-        thead
-            tr
-                th TEMPERATURE
-                th HUMIDITY
-                th TEMPERATURE2
-                th PRESSURE
-                th SEA LEVEL PRESSURE
-                th ALTITUDE
+    div.container
+        div.jumbotron
+            div(class='page-header')
+                h1=title
 
-        tbody
-            tr
-                td(id='temperature') 0 *C
-                td(id='humidity') 0%
-                td(id='temperature2') 0 *C
-                td(id='pressure') 0 Pa
-                td(id='sealevel_pressure') 0 Pa
-                td(id='altitude') 0 m
+            div(class='container')
+                div(class='row')
 
+                    div(class='col-md-2', align='center')
+                        h4 TEMPERATURE
+                        p(id='temperature') 0 *C
+                    div(class='col-md-2', align='center')
+                        h4 HUMIDITY
+                        p(id='humidity') 0 %
+                    div(class='col-md-2', align='center')
+                        h4 TEMPERATURE2
+                        p(id='temperature2') 0 *C
+                    div(class='col-md-2', align='center')
+                        h4 PRESSURE
+                        p(id='pressure') 0 Pa
+                    div(class='col-md-2', align='center')
+                        h4 SEALEVEL PRESSURE
+                        p(id='sealevel_pressure') 0 Pa
+                    div(class='col-md-2', align='center')
+                        h4 ALTITUDE
+                        p(id='altitude') 0 m
