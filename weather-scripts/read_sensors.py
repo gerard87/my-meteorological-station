@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import sys
 import Adafruit_DHT
 import Adafruit_BMP.BMP085 as BMP085
@@ -15,7 +17,6 @@ while(True):
         print('Temp={0:0.2f} *C  Humidity={1:0.2f}%'.format(temperature, humidity))
     else:
         print('Failed to get reading. Try again!')
-        sys.exit(1)
 	
 	
     sensor = BMP085.BMP085()
@@ -32,7 +33,8 @@ while(True):
     print('Sealevel Pressure = {0:0.2f} Pa'.format(sealevel_pressure))
 	
 	
-    url = 'http://x.x.x.x:3000'
+    url = 'http://my-meteorological-station.herokuapp.com/'
+    url2 = 'http://x.x.x.x:3000'
     fields = {
         'temperature': '{0:0.2f} *C'.format(temperature),
         'humidity': '{0:0.2f}%'.format(humidity),
@@ -42,5 +44,9 @@ while(True):
         'altitude': '{0:0.2f} m'.format(altitude)
     }
     headers = {"content-type": "application/json"}
-    r = requests.post(url, data=json.dumps(fields), headers=headers)
+    try:
+        r = requests.post(url, data=json.dumps(fields), headers=headers)
+        r = requests.post(url2, data=json.dumps(fields), headers=headers)
+    except requests.exceptions.RequestException as e:
+        print e
 
