@@ -66,11 +66,23 @@ block content
 
         });
 
+    script.
+        $(function () {
+            $('#lg-btn').on('click', function (event) {
+                $.ajax({
+                    type: "POST",
+                    url: '/lg',
+                    data: {'city': $('#city').text()}
+                });
+            });
+        });
 
     div.jumbotron
         div.container
             div(class='page-header')
                 h1=title
+            div(align='right')
+                button(type='button', class='btn btn-primary', id='lg-btn') Send to Liquid Galaxy
 
     div.jumbotron
         div.container

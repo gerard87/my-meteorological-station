@@ -4,6 +4,7 @@ var path = require('path');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
+var PythonShell = require('python-shell');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -45,6 +46,16 @@ app.post('/api', function(req, res){
     io.sockets.emit('icon_url', req.body.icon_url);
 
     res.json(req.body);
+});
+
+app.post('/lg', function (req, res){
+
+    var options = {
+        mode: 'text',
+        args: [req.body.city]
+    };
+
+    PythonShell.run('./public/lg-scripts/lgComm.py', options, function (err, results) {});
 });
 
 http.listen(process.env.PORT || 3000, function(){
