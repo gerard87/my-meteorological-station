@@ -61,7 +61,7 @@ block content
                 $('#icon').text(msg);
             });
             socket.on('icon_url', function (msg) {
-                $('#icon_url').text(msg);
+                $('#icon_url').attr('src', msg);
             });
 
         });
@@ -126,6 +126,9 @@ block content
                     div(class='col-md-2', align='center')
                         h4 Heat index
                         p(id='heat_index_c')
+
+                div(class='row')
+
                     div(class='col-md-2', align='center')
                         h4 Windchill
                         p(id='windchill_c')
@@ -138,10 +141,12 @@ block content
                     div(class='col-md-2', align='center')
                         h4 Precipitation
                         p(id='precip_today_metric')
-                    div(class='col-md-2', align='center')
+                    div(class='col-md-4', align='center')
                         h4 Icon
-                        p(id='icon')
-                    div(class='col-md-2', align='center')
-                        h4 Icon url
-                        p(id='icon_url')
+                        div(class='row')
+                            div(class='col-sm-6')
+                                p(id='icon')
+                            div(class='col-sm-6')
+                                img(id='icon_url')
+
 
