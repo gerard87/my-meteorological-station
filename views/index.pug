@@ -24,6 +24,46 @@ block content
             socket.on('altitude', function (msg) {
                 $('#altitude').text(msg);
             });
+
+
+
+            socket.on('city', function (msg) {
+                $('#city').text(msg);
+            });
+            socket.on('weather', function (msg) {
+                $('#weather').text(msg);
+            });
+            socket.on('wind_dir', function (msg) {
+                $('#wind_dir').text(msg);
+            });
+            socket.on('wind_kph', function (msg) {
+                $('#wind_kph').text(msg);
+            });
+            socket.on('dewpoint_c', function (msg) {
+                $('#dewpoint_c').text(msg);
+            });
+            socket.on('heat_index_c', function (msg) {
+                $('#heat_index_c').text(msg);
+            });
+            socket.on('windchill_c', function (msg) {
+                $('#windchill_c').text(msg);
+            });
+            socket.on('feelslike_c', function (msg) {
+                $('#feelslike_c').text(msg);
+            });
+            socket.on('visibility_km', function (msg) {
+                $('#visibility_km').text(msg);
+            });
+            socket.on('precip_today_metric', function (msg) {
+                $('#precip_today_metric').text(msg);
+            });
+            socket.on('icon', function (msg) {
+                $('#icon').text(msg);
+            });
+            socket.on('icon_url', function (msg) {
+                $('#icon_url').text(msg);
+            });
+
         });
 
 
@@ -31,6 +71,11 @@ block content
         div.container
             div(class='page-header')
                 h1=title
+
+    div.jumbotron
+        div.container
+
+            p Sensors
 
             div(class='container')
                 div(class='row')
@@ -53,3 +98,50 @@ block content
                     div(class='col-md-2', align='center')
                         h4 ALTITUDE
                         p(id='altitude') 0 m
+
+
+    div.jumbotron
+        div.container
+
+            p API
+
+            div(class='container')
+                div(class='row')
+
+                    div(class='col-md-2', align='center')
+                        h4 City
+                        p(id='city')
+                    div(class='col-md-2', align='center')
+                        h4 Weather
+                        p(id='weather')
+                    div(class='col-md-2', align='center')
+                        h4 Wind direction
+                        p(id='wind_dir')
+                    div(class='col-md-2', align='center')
+                        h4 Wind kph
+                        p(id='wind_kph')
+                    div(class='col-md-2', align='center')
+                        h4 Dewpoint
+                        p(id='dewpoint_c')
+                    div(class='col-md-2', align='center')
+                        h4 Heat index
+                        p(id='heat_index_c')
+                    div(class='col-md-2', align='center')
+                        h4 Windchill
+                        p(id='windchill_c')
+                    div(class='col-md-2', align='center')
+                        h4 Feelslike
+                        p(id='feelslike_c')
+                    div(class='col-md-2', align='center')
+                        h4 Visibility
+                        p(id='visibility_km')
+                    div(class='col-md-2', align='center')
+                        h4 Precipitation
+                        p(id='precip_today_metric')
+                    div(class='col-md-2', align='center')
+                        h4 Icon
+                        p(id='icon')
+                    div(class='col-md-2', align='center')
+                        h4 Icon url
+                        p(id='icon_url')
+

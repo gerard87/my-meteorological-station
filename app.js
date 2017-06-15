@@ -18,7 +18,7 @@ app.get('/', function(req, res){
     })
 });
 
-app.post('/', function(req, res){
+app.post('/sensors', function(req, res){
     console.log(req.body);
     io.sockets.emit('temperature', req.body.temperature);
     io.sockets.emit('humidity', req.body.humidity);
@@ -26,6 +26,24 @@ app.post('/', function(req, res){
     io.sockets.emit('pressure', req.body.pressure);
     io.sockets.emit('sealevel_pressure', req.body.sealevel_pressure);
     io.sockets.emit('altitude', req.body.altitude);
+    res.json(req.body);
+});
+
+app.post('/api', function(req, res){
+    console.log(req.body);
+    io.sockets.emit('city', req.body.city);
+    io.sockets.emit('weather', req.body.weather);
+    io.sockets.emit('wind_dir', req.body.wind_dir);
+    io.sockets.emit('wind_kph', req.body.wind_kph);
+    io.sockets.emit('dewpoint_c', req.body.dewpoint_c);
+    io.sockets.emit('heat_index_c', req.body.heat_index_c);
+    io.sockets.emit('windchill_c', req.body.windchill_c);
+    io.sockets.emit('feelslike_c', req.body.feelslike_c);
+    io.sockets.emit('visibility_km', req.body.visibility_km);
+    io.sockets.emit('precip_today_metric', req.body.precip_today_metric);
+    io.sockets.emit('icon', req.body.icon);
+    io.sockets.emit('icon_url', req.body.icon_url);
+
     res.json(req.body);
 });
 
