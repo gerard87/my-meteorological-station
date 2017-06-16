@@ -81,7 +81,7 @@ def get_weather():
 
 def send_to_server(data):
     url = 'http://my-meteorological-station.herokuapp.com/api'
-    url2 = 'http://x.x.x.x:3000/api'
+    url2 = 'http://192.168.88.222:3000/api'
     fields = {
         'city': data['city'],
         'weather': data['weather'],

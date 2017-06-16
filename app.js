@@ -55,7 +55,10 @@ app.post('/lg', function (req, res){
         args: [req.body.city]
     };
 
-    PythonShell.run('./public/lg-scripts/lgComm.py', options, function (err, results) {});
+    PythonShell.run('./public/lg-scripts/lgComm.py', options, function (err, results) {
+        if(err)console.log(err);
+        console.log(results);
+    });
 });
 
 http.listen(process.env.PORT || 3000, function(){
