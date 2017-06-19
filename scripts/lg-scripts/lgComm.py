@@ -45,17 +45,17 @@ def comunicate(message):
     os.system("sshpass -p '{lg_pass}' ssh lg@{lg_ip} \"{message}\"".format(message=message, lg_ip=get_galaxy_ip(), lg_pass=get_password()))
 
 
-def create_kml_balloon(localization):
+def create_kml_balloon(localization, data):
 
     contentString = '<div id="content">'+'<div id="siteNotice">'+'</div>' + \
         '<h1 id="firstHeading" class="firstHeading">' + localization + '</h1>' + \
         '<div id="bodyContent">' + \
-        '<p><b>Temperature:</b></p>' + \
-        '<p><b>Humidity:</b></p>' + \
-        '<p><b>Temperarure2:</b></p>' + \
-        '<p><b>Pressure:</b></p>' + \
-        '<p><b>Sealevel pressure:</b></p>' + \
-        '<p><b>Altitude:</b></p>' + \
+        '<p><b>Temperature: '+data[0]+'</b></p>' + \
+        '<p><b>Humidity: '+data[1]+'</b></p>' + \
+        '<p><b>Temperarure2: '+data[2]+'</b></p>' + \
+        '<p><b>Pressure: '+data[3]+'</b></p>' + \
+        '<p><b>Sealevel pressure: '+data[4]+'</b></p>' + \
+        '<p><b>Altitude: '+data[5]+'</b></p>' + \
         '</div>' + \
         '</div>'
 
@@ -98,8 +98,10 @@ def send_galaxy(path):
 if __name__ == "__main__":
     try:
         city = sys.argv[1]
+        data = sys.argv[2]
+        data_array = data.split(',')
         flyto(city)
-        create_kml_balloon(city)
+        create_kml_balloon(city, data_array)
     except IndexError:
-        print "City arg empty"
+        print "City arg or data empty"
 

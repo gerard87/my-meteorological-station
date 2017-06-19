@@ -6,6 +6,8 @@ var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var PythonShell = require('python-shell');
 
+var sensors_array = [];
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('views', path.join(__dirname, 'views'));
@@ -20,18 +22,22 @@ app.get('/', function(req, res){
 });
 
 app.post('/sensors', function(req, res){
-    console.log(req.body);
+    // console.log(req.body);
     io.sockets.emit('temperature', req.body.temperature);
     io.sockets.emit('humidity', req.body.humidity);
     io.sockets.emit('temperature2', req.body.temperature2);
     io.sockets.emit('pressure', req.body.pressure);
     io.sockets.emit('sealevel_pressure', req.body.sealevel_pressure);
     io.sockets.emit('altitude', req.body.altitude);
+
+    sensors_array = [req.body.temperature, req.body.humidity, req.body.temperature2,
+        req.body.pressure, req.body.sealevel_pressure, req.body.altitude];
+
     res.json(req.body);
 });
 
 app.post('/api', function(req, res){
-    console.log(req.body);
+    // console.log(req.body);
     io.sockets.emit('city', req.body.city);
     io.sockets.emit('weather', req.body.weather);
     io.sockets.emit('wind_dir', req.body.wind_dir);
@@ -52,7 +58,7 @@ app.post('/lg', function (req, res){
 
     var options = {
         mode: 'text',
-        args: [req.body.city]
+        args: [req.body.city, sensors_array]
     };
 
     PythonShell.run('./scripts/lg-scripts/lgComm.py', options, function (err, results) {
