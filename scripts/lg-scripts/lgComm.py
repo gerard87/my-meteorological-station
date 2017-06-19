@@ -72,7 +72,10 @@ def create_kml_balloon(localization):
 
     path = os.path.join(os.getcwd(), 'public/kml/')
 
-    os.system('rm '+os.getcwd()+'/public/kml/MMS-*.kml')
+    if not os.path.exists(path):
+        os.system('mkdir '+path)
+
+    os.system('rm '+path+'MMS-*.kml')
 
     kml.save(path+filename)
     send_single_kml(filename, path)

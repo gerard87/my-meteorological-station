@@ -55,7 +55,7 @@ app.post('/lg', function (req, res){
         args: [req.body.city]
     };
 
-    PythonShell.run('./public/lg-scripts/lgComm.py', options, function (err, results) {
+    PythonShell.run('./scripts/lg-scripts/lgComm.py', options, function (err, results) {
         if(err)console.log(err);
         console.log(results);
     });
