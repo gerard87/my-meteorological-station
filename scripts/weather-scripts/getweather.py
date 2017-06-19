@@ -32,6 +32,8 @@ class WeatherClient(object):
 
         data = {
             'city': resp_json['display_location']['city'],
+            'longitude': resp_json['display_location']['longitude'],
+            'latitude': resp_json['display_location']['latitude'],
             'weather': resp_json['weather'],
             'wind_dir': resp_json['wind_dir'],
             'wind_kph': str(resp_json['wind_kph']),
@@ -50,6 +52,8 @@ class WeatherClient(object):
 
 def print_data(data):
     print "City: " + data['city']
+    print "Longitude: " + data['longitude']
+    print "Latitude: " + data['latitude']
     print "Weather: " + data['weather']
     print "wind_dir: " + data['wind_dir']
     print "wind_kph: " + data['wind_kph']
@@ -84,6 +88,8 @@ def send_to_server(data):
     url2 = 'http://192.168.88.222:3000/api'
     fields = {
         'city': data['city'],
+        'longitude': data['longitude'],
+        'latitude': data['latitude'],
         'weather': data['weather'],
         'wind_dir': data['wind_dir'],
         'wind_kph': data['wind_kph'],

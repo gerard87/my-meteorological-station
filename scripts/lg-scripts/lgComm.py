@@ -5,7 +5,6 @@ import sys
 import simplekml
 import subprocess
 import time
-from geopy.geocoders import Nominatim
 
 
 def get_galaxy_ip():
@@ -45,7 +44,7 @@ def comunicate(message):
     os.system("sshpass -p '{lg_pass}' ssh lg@{lg_ip} \"{message}\"".format(message=message, lg_ip=get_galaxy_ip(), lg_pass=get_password()))
 
 
-def create_kml_balloon(localization, data):
+def create_kml_balloon(localization, coords, data):
 
     contentString = '<div id="content">'+'<div id="siteNotice">'+'</div>' + \
         '<h1 id="firstHeading" class="firstHeading">' + localization + '</h1>' + \
@@ -61,11 +60,8 @@ def create_kml_balloon(localization, data):
 
     kml = simplekml.Kml()
 
-    geolocator = Nominatim()
-    location = geolocator.geocode(localization)
-
     kml.newpoint(name='My meteorological station', description=contentString,
-                 coords=[(location.longitude, location.latitude)], gxballoonvisibility=1)
+                 coords=[(coords[0], coords[1])], gxballoonvisibility=1)
 
     millis = int(round(time.time() * 1000))
     filename = 'MMS-' + localization + '-' + str(millis) + '.kml'
@@ -98,10 +94,14 @@ def send_galaxy(path):
 if __name__ == "__main__":
     try:
         city = sys.argv[1]
-        data = sys.argv[2]
+        coords = sys.argv[2]
+        data = sys.argv[3]
+
+        coords_array = coords.split(',')
         data_array = data.split(',')
+
         flyto(city)
-        create_kml_balloon(city, data_array)
+        create_kml_balloon(city, coords_array, data_array)
     except IndexError:
         print "City arg or data empty"
 

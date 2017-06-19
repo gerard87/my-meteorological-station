@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var PythonShell = require('python-shell');
 
 var sensors_array = [];
+var coords = [];
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -33,6 +34,8 @@ app.post('/sensors', function(req, res){
     sensors_array = [req.body.temperature, req.body.humidity, req.body.temperature2,
         req.body.pressure, req.body.sealevel_pressure, req.body.altitude];
 
+    coords = [req.body.longitude, req.body.latitude];
+
     res.json(req.body);
 });
 
@@ -58,7 +61,7 @@ app.post('/lg', function (req, res){
 
     var options = {
         mode: 'text',
-        args: [req.body.city, sensors_array]
+        args: [req.body.city, coords, sensors_array]
     };
 
     PythonShell.run('./scripts/lg-scripts/lgComm.py', options, function (err, results) {
