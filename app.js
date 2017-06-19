@@ -34,8 +34,6 @@ app.post('/sensors', function(req, res){
     sensors_array = [req.body.temperature, req.body.humidity, req.body.temperature2,
         req.body.pressure, req.body.sealevel_pressure, req.body.altitude];
 
-    coords = [req.body.longitude, req.body.latitude];
-
     res.json(req.body);
 });
 
@@ -53,6 +51,8 @@ app.post('/api', function(req, res){
     io.sockets.emit('precip_today_metric', req.body.precip_today_metric);
     io.sockets.emit('icon', req.body.icon);
     io.sockets.emit('icon_url', req.body.icon_url);
+
+    coords = [req.body.longitude, req.body.latitude];
 
     res.json(req.body);
 });
