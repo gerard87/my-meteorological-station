@@ -89,7 +89,7 @@ block content
             div(class='page-header')
                 h1=title
             div(align='right')
-                if data.city === ''
+                if api_data.city === ''
                     button(type='button', class='btn btn-primary', id='lg-btn' disabled) Send to Liquid Galaxy
                 else
                     button(type='button', class='btn btn-primary', id='lg-btn') Send to Liquid Galaxy
@@ -104,22 +104,22 @@ block content
 
                     div(class='col-md-2', align='center')
                         h4 TEMPERATURE
-                        p(id='temperature') 0 *C
+                        p(id='temperature') #{sensors_data.temperature}
                     div(class='col-md-2', align='center')
                         h4 HUMIDITY
-                        p(id='humidity') 0 %
+                        p(id='humidity') #{sensors_data.humidity}
                     div(class='col-md-2', align='center')
                         h4 TEMPERATURE2
-                        p(id='temperature2') 0 *C
+                        p(id='temperature2') #{sensors_data.temperature2}
                     div(class='col-md-2', align='center')
                         h4 PRESSURE
-                        p(id='pressure') 0 Pa
+                        p(id='pressure') #{sensors_data.pressure}
                     div(class='col-md-2', align='center')
                         h4 SEALEVEL PRESSURE
-                        p(id='sealevel_pressure') 0 Pa
+                        p(id='sealevel_pressure') #{sensors_data.sealevel_pressure}
                     div(class='col-md-2', align='center')
                         h4 ALTITUDE
-                        p(id='altitude') 0 m
+                        p(id='altitude') #{sensors_data.altitude}
 
 
     div.jumbotron
@@ -132,43 +132,43 @@ block content
 
                     div(class='col-md-2', align='center')
                         h4 City
-                        p(id='city') #{data.city}
+                        p(id='city') #{api_data.city}
                     div(class='col-md-2', align='center')
                         h4 Weather
-                        p(id='weather') #{data.weather}
+                        p(id='weather') #{api_data.weather}
                     div(class='col-md-2', align='center')
                         h4 Wind direction
-                        p(id='wind_dir') #{data.wind_dir}
+                        p(id='wind_dir') #{api_data.wind_dir}
                     div(class='col-md-2', align='center')
                         h4 Wind velocity
-                        p(id='wind_kph') #{data.wind_kph} kph
+                        p(id='wind_kph') #{api_data.wind_kph} kph
                     div(class='col-md-2', align='center')
                         h4 Dewpoint
-                        p(id='dewpoint_c') #{data.dewpoint_c} *C
+                        p(id='dewpoint_c') #{api_data.dewpoint_c} *C
                     div(class='col-md-2', align='center')
                         h4 Heat index
-                        p(id='heat_index_c') #{data.heat_index_c} *C
+                        p(id='heat_index_c') #{api_data.heat_index_c} *C
 
                 div(class='row')
 
                     div(class='col-md-2', align='center')
                         h4 Windchill
-                        p(id='windchill_c') #{data.windchill_c} *C
+                        p(id='windchill_c') #{api_data.windchill_c} *C
                     div(class='col-md-2', align='center')
                         h4 Feelslike
-                        p(id='feelslike_c') #{data.feelslike_c} *C
+                        p(id='feelslike_c') #{api_data.feelslike_c} *C
                     div(class='col-md-2', align='center')
                         h4 Visibility
-                        p(id='visibility_km') #{data.visibility_km} km
+                        p(id='visibility_km') #{api_data.visibility_km} km
                     div(class='col-md-2', align='center')
                         h4 Precipitation
-                        p(id='precip_today_metric') #{data.precip_today_metric} mm
+                        p(id='precip_today_metric') #{api_data.precip_today_metric} mm
                     div(class='col-md-4', align='center')
                         h4 Icon
                         div(class='row')
                             div(class='col-sm-6')
-                                p(id='icon') #{data.icon}
+                                p(id='icon') #{api_data.icon}
                             div(class='col-sm-6')
-                                img(id='icon_url' src=data.icon_url)
+                                img(id='icon_url' src=api_data.icon_url)
 
 

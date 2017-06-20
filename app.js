@@ -20,6 +20,7 @@ storage.initSync();
 app.get('/', function(req, res){
 
     var api_data = storage.getItemSync('apiData');
+    var sensors_data = storage.getItemSync('sensorsData');
 
     if (api_data === undefined) {
         api_data = api_init_values();
@@ -27,9 +28,17 @@ app.get('/', function(req, res){
         coords = [api_data['longitude'], api_data['latitude']];
     }
 
+    if (sensors_data === undefined) {
+        sensors_data = sensors_init_values();
+    } else {
+        sensors_array = [sensors_data['temperature'], sensors_data['humidity'], sensors_data['temperature2'],
+            sensors_data['pressure'], sensors_data['sealevel_pressure'], sensors_data['altitude']];
+    }
+
     res.render('index',{
         title: 'My Meteorological Station',
-        data: api_data
+        api_data: api_data,
+        sensors_data: sensors_data
     });
 });
 
@@ -44,6 +53,8 @@ app.post('/sensors', function(req, res){
 
     sensors_array = [req.body.temperature, req.body.humidity, req.body.temperature2,
         req.body.pressure, req.body.sealevel_pressure, req.body.altitude];
+
+    storage.setItemSync('sensorsData', req.body);
 
     res.json(req.body);
 });
@@ -97,6 +108,17 @@ function api_init_values () {
         'precip_today_metric': '0',
         'icon': '',
         'icon_url': ''
+    }
+}
+
+function sensors_init_values () {
+    return {
+        'temperature': '0 *C',
+        'humidity': '0 %',
+        'temperature2': '0 *C',
+        'pressure': '0 Pa',
+        'sealevel_pressure': '0 Pa',
+        'altitude': '0 m'
     }
 }
 
