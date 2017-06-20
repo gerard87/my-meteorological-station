@@ -64,3 +64,11 @@ data/*
 # Dolphin
 .directory
 
+# node-persist
+persist/
+
+# npm
+package-lock.json
+
+#kml
+public/kml/
