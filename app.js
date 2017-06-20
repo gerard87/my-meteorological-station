@@ -5,6 +5,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var PythonShell = require('python-shell');
+var storage = require('node-persist');
 
 var sensors_array = [];
 var coords = [];
@@ -14,12 +15,22 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
-
+storage.initSync();
 
 app.get('/', function(req, res){
+
+    var api_data = storage.getItemSync('apiData');
+
+    if (api_data === undefined) {
+        api_data = api_init_values();
+    } else {
+        coords = [api_data['longitude'], api_data['latitude']];
+    }
+
     res.render('index',{
-        title: 'My Meteorological Station'
-    })
+        title: 'My Meteorological Station',
+        data: api_data
+    });
 });
 
 app.post('/sensors', function(req, res){
@@ -54,6 +65,8 @@ app.post('/api', function(req, res){
 
     coords = [req.body.longitude, req.body.latitude];
 
+    storage.setItemSync('apiData', req.body);
+
     res.json(req.body);
 });
 
@@ -64,11 +77,30 @@ app.post('/lg', function (req, res){
         args: [req.body.city, coords, sensors_array]
     };
 
+
+
     PythonShell.run('./scripts/lg-scripts/lgComm.py', options, function (err, results) {
         if(err)console.log(err);
         console.log(results);
     });
 });
+
+function api_init_values () {
+    return {
+        'city': '',
+        'weather': '',
+        'wind_dir': '',
+        'wind_kph': '0 kph',
+        'dewpoint_c': '0 *C',
+        'heat_index_c': '0 *C',
+        'windchill_c': '0 *C',
+        'feelslike_c': '0 *C',
+        'visibility_km': '0 km',
+        'precip_today_metric': '0',
+        'icon': '',
+        'icon_url': ''
+    }
+}
 
 http.listen(process.env.PORT || 3000, function(){
     console.log('listening on *:3000');

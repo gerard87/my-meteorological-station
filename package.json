@@ -8,6 +8,7 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.2",
+    "node-persist": "0.0.6",
     "pug": "^2.0.0-rc.2",
     "python-shell": "^0.4.0",
     "socket.io": "^2.0.2"

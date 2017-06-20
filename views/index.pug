@@ -69,7 +69,6 @@ block content
     script.
         $(function () {
             $('#lg-btn').on('click', function (event) {
-                var send_lg;
                 if($('#lg-btn').text() == 'Send to Liquid Galaxy'){
                     $('#lg-btn').text('Stop Liquid Galaxy');
                     $('#lg-btn').attr('class', 'btn btn-danger');
@@ -90,7 +89,10 @@ block content
             div(class='page-header')
                 h1=title
             div(align='right')
-                button(type='button', class='btn btn-primary', id='lg-btn') Send to Liquid Galaxy
+                if data.city === ''
+                    button(type='button', class='btn btn-primary', id='lg-btn' disabled) Send to Liquid Galaxy
+                else
+                    button(type='button', class='btn btn-primary', id='lg-btn') Send to Liquid Galaxy
 
     div.jumbotron
         div.container
@@ -130,43 +132,43 @@ block content
 
                     div(class='col-md-2', align='center')
                         h4 City
-                        p(id='city')
+                        p(id='city') #{data.city}
                     div(class='col-md-2', align='center')
                         h4 Weather
-                        p(id='weather')
+                        p(id='weather') #{data.weather}
                     div(class='col-md-2', align='center')
                         h4 Wind direction
-                        p(id='wind_dir')
+                        p(id='wind_dir') #{data.wind_dir}
                     div(class='col-md-2', align='center')
                         h4 Wind kph
-                        p(id='wind_kph')
+                        p(id='wind_kph') #{data.wind_kph}
                     div(class='col-md-2', align='center')
                         h4 Dewpoint
-                        p(id='dewpoint_c')
+                        p(id='dewpoint_c') #{data.dewpoint_c}
                     div(class='col-md-2', align='center')
                         h4 Heat index
-                        p(id='heat_index_c')
+                        p(id='heat_index_c') #{data.heat_index_c}
 
                 div(class='row')
 
                     div(class='col-md-2', align='center')
                         h4 Windchill
-                        p(id='windchill_c')
+                        p(id='windchill_c') #{data.windchill_c}
                     div(class='col-md-2', align='center')
                         h4 Feelslike
-                        p(id='feelslike_c')
+                        p(id='feelslike_c') #{data.feelslike_c}
                     div(class='col-md-2', align='center')
                         h4 Visibility
-                        p(id='visibility_km')
+                        p(id='visibility_km') #{data.visibility_km}
                     div(class='col-md-2', align='center')
                         h4 Precipitation
-                        p(id='precip_today_metric')
+                        p(id='precip_today_metric') #{data.precip_today_metric}
                     div(class='col-md-4', align='center')
                         h4 Icon
                         div(class='row')
                             div(class='col-sm-6')
-                                p(id='icon')
+                                p(id='icon') #{data.icon}
                             div(class='col-sm-6')
-                                img(id='icon_url')
+                                img(id='icon_url' src=data.icon_url)
 
 
