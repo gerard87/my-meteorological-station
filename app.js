@@ -6,6 +6,7 @@ var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var PythonShell = require('python-shell');
 var storage = require('node-persist');
+var env = process.env.NODE_ENV || 'development';
 
 var sensors_array = [];
 var coords = [];
@@ -38,7 +39,8 @@ app.get('/', function(req, res){
     res.render('index',{
         title: 'My Meteorological Station',
         api_data: api_data,
-        sensors_data: sensors_data
+        sensors_data: sensors_data,
+        env: env
     });
 });
 
