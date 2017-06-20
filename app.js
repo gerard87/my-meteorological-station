@@ -77,8 +77,6 @@ app.post('/lg', function (req, res){
         args: [req.body.city, coords, sensors_array]
     };
 
-
-
     PythonShell.run('./scripts/lg-scripts/lgComm.py', options, function (err, results) {
         if(err)console.log(err);
         console.log(results);
@@ -90,12 +88,12 @@ function api_init_values () {
         'city': '',
         'weather': '',
         'wind_dir': '',
-        'wind_kph': '0 kph',
-        'dewpoint_c': '0 *C',
-        'heat_index_c': '0 *C',
-        'windchill_c': '0 *C',
-        'feelslike_c': '0 *C',
-        'visibility_km': '0 km',
+        'wind_kph': '0',
+        'dewpoint_c': '0',
+        'heat_index_c': '0',
+        'windchill_c': '0',
+        'feelslike_c': '0',
+        'visibility_km': '0',
         'precip_today_metric': '0',
         'icon': '',
         'icon_url': ''
