@@ -53,13 +53,13 @@ app.post('/api', function(req, res){
     io.sockets.emit('city', req.body.city);
     io.sockets.emit('weather', req.body.weather);
     io.sockets.emit('wind_dir', req.body.wind_dir);
-    io.sockets.emit('wind_kph', req.body.wind_kph);
-    io.sockets.emit('dewpoint_c', req.body.dewpoint_c);
-    io.sockets.emit('heat_index_c', req.body.heat_index_c);
-    io.sockets.emit('windchill_c', req.body.windchill_c);
-    io.sockets.emit('feelslike_c', req.body.feelslike_c);
-    io.sockets.emit('visibility_km', req.body.visibility_km);
-    io.sockets.emit('precip_today_metric', req.body.precip_today_metric);
+    io.sockets.emit('wind_kph', req.body.wind_kph + ' kph');
+    io.sockets.emit('dewpoint_c', req.body.dewpoint_c + ' *C');
+    io.sockets.emit('heat_index_c', req.body.heat_index_c + ' *C');
+    io.sockets.emit('windchill_c', req.body.windchill_c + ' *C');
+    io.sockets.emit('feelslike_c', req.body.feelslike_c + ' *C');
+    io.sockets.emit('visibility_km', req.body.visibility_km + ' km');
+    io.sockets.emit('precip_today_metric', req.body.precip_today_metric + ' mm');
     io.sockets.emit('icon', req.body.icon);
     io.sockets.emit('icon_url', req.body.icon_url);
 
