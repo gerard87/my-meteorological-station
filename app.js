@@ -6,6 +6,7 @@ var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var PythonShell = require('python-shell');
 var storage = require('node-persist');
+var init_values = require('./public/js/init_values');
 var env = process.env.NODE_ENV || 'development';
 
 var sensors_array = [];
@@ -24,13 +25,13 @@ app.get('/', function(req, res){
     var sensors_data = storage.getItemSync('sensorsData');
 
     if (api_data === undefined) {
-        api_data = api_init_values();
+        api_data = init_values.api_init_values;
     } else {
         coords = [api_data['longitude'], api_data['latitude']];
     }
 
     if (sensors_data === undefined) {
-        sensors_data = sensors_init_values();
+        sensors_data = init_values.sensors_init_values;
     } else {
         sensors_array = [sensors_data['temperature'], sensors_data['humidity'], sensors_data['temperature2'],
             sensors_data['pressure'], sensors_data['sealevel_pressure'], sensors_data['altitude']];
@@ -96,33 +97,6 @@ app.post('/lg', function (req, res){
     });
 });
 
-function api_init_values () {
-    return {
-        'city': '',
-        'weather': '',
-        'wind_dir': '',
-        'wind_kph': '0',
-        'dewpoint_c': '0',
-        'heat_index_c': '0',
-        'windchill_c': '0',
-        'feelslike_c': '0',
-        'visibility_km': '0',
-        'precip_today_metric': '0',
-        'icon': '',
-        'icon_url': ''
-    }
-}
-
-function sensors_init_values () {
-    return {
-        'temperature': '0 *C',
-        'humidity': '0 %',
-        'temperature2': '0 *C',
-        'pressure': '0 Pa',
-        'sealevel_pressure': '0 Pa',
-        'altitude': '0 m'
-    }
-}
 
 http.listen(process.env.PORT || 3000, function(){
     console.log('listening on *:3000');
