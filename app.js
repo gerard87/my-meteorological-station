@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var PythonShell = require('python-shell');
 var storage = require('node-persist');
 var init_values = require('./public/js/init_values');
+var sockets = require('./public/js/sockets');
 var env = process.env.NODE_ENV || 'development';
 
 var sensors_array = [];
@@ -47,12 +48,8 @@ app.get('/', function(req, res){
 
 app.post('/sensors', function(req, res){
     // console.log(req.body);
-    io.sockets.emit('temperature', req.body.temperature);
-    io.sockets.emit('humidity', req.body.humidity);
-    io.sockets.emit('temperature2', req.body.temperature2);
-    io.sockets.emit('pressure', req.body.pressure);
-    io.sockets.emit('sealevel_pressure', req.body.sealevel_pressure);
-    io.sockets.emit('altitude', req.body.altitude);
+
+    sockets.update_sensor_values(io, req.body);
 
     sensors_array = [req.body.temperature, req.body.humidity, req.body.temperature2,
         req.body.pressure, req.body.sealevel_pressure, req.body.altitude];
@@ -64,18 +61,8 @@ app.post('/sensors', function(req, res){
 
 app.post('/api', function(req, res){
     // console.log(req.body);
-    io.sockets.emit('city', req.body.city);
-    io.sockets.emit('weather', req.body.weather);
-    io.sockets.emit('wind_dir', req.body.wind_dir);
-    io.sockets.emit('wind_kph', req.body.wind_kph + ' kph');
-    io.sockets.emit('dewpoint_c', req.body.dewpoint_c + ' *C');
-    io.sockets.emit('heat_index_c', req.body.heat_index_c + ' *C');
-    io.sockets.emit('windchill_c', req.body.windchill_c + ' *C');
-    io.sockets.emit('feelslike_c', req.body.feelslike_c + ' *C');
-    io.sockets.emit('visibility_km', req.body.visibility_km + ' km');
-    io.sockets.emit('precip_today_metric', req.body.precip_today_metric + ' mm');
-    io.sockets.emit('icon', req.body.icon);
-    io.sockets.emit('icon_url', req.body.icon_url);
+
+    sockets.update_api_values(io, req.body);
 
     coords = [req.body.longitude, req.body.latitude];
 
