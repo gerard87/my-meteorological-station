@@ -1,6 +1,2 @@
 # Get weather api script
 requests
-
-# Liquid Galaxy script
-simplekml
-geopy
