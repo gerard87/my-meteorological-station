@@ -4,10 +4,10 @@ var path = require('path');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
-var PythonShell = require('python-shell');
 var storage = require('node-persist');
 var init_values = require('./public/js/init_values');
 var sockets = require('./public/js/sockets');
+var lg = require('./public/js/lg-communication');
 var env = process.env.NODE_ENV || 'development';
 
 var sensors_array = [];
@@ -73,15 +73,9 @@ app.post('/api', function(req, res){
 
 app.post('/lg', function (req, res){
 
-    var options = {
-        mode: 'text',
-        args: [req.body.city, coords, sensors_array]
-    };
+    lg.flyTo(req.body.city);
+    lg.create_kml_balloon(req.body.city, coords, sensors_array);
 
-    PythonShell.run('./scripts/lg-scripts/lgComm.py', options, function (err, results) {
-        if(err)console.log(err);
-        console.log(results);
-    });
 });
 
 
