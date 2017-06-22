@@ -84,6 +84,14 @@ function send_galaxy (route) {
 }
 
 
+module.exports.clean_lg = function () {
+    var route = path.join(__dirname, '..', 'kml');
+    var command = "echo '' > "+route+"/kmls.txt";
+    execute_command(command);
+    send_galaxy(route);
+};
+
+
 function execute_command (command) {
     child = exec( command, function (error, stdout, stderr) {
         if (error !== null) {
