@@ -25,7 +25,8 @@ function get_server_ip () {
 
 module.exports.show_kml_balloon = function (city, coords, data) {
 
-    var contentString = '<div id="content">'+'<div id="siteNotice">'+'</div>' +
+    var contentString = '<table width="280"><tr><td>' +
+        '<div id="content">'+'<div id="siteNotice">'+'</div>' +
         '<h1 id="firstHeading" class="firstHeading">' + city + '</h1>' +
         '<div id="bodyContent">' +
         '<p><b>Temperature: '+data[0]+'</b></p>' +
@@ -34,8 +35,8 @@ module.exports.show_kml_balloon = function (city, coords, data) {
         '<p><b>Pressure: '+data[3]+'</b></p>' +
         '<p><b>Sealevel pressure: '+data[4]+'</b></p>' +
         '<p><b>Altitude: '+data[5]+'</b></p>' +
-        '</div>' +
-        '</div>';
+        '</div></div>' +
+        '</td></tr></table>';
 
 
     ejs.renderFile(path.join(__dirname, '..', 'templates/template.kml'), {
