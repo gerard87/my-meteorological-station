@@ -74,11 +74,12 @@ app.post('/api', function(req, res){
 app.post('/lg', function (req, res){
 
     if (req.body.stop === 'true') {
-        lg.clean_lg()
+        lg.exit_tour();
+        lg.clean_lg();
     } else {
-        lg.flyTo(req.body.city);
-        lg.create_kml_balloon(req.body.city, coords, sensors_array);
+        lg.show_kml_balloon(req.body.city, coords, sensors_array);
     }
+    res.end();
 
 });
 

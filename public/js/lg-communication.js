@@ -23,7 +23,7 @@ function get_server_ip () {
     return '192.168.88.222';
 }
 
-module.exports.create_kml_balloon = function (city, coords, data) {
+module.exports.show_kml_balloon = function (city, coords, data) {
 
     var contentString = '<div id="content">'+'<div id="siteNotice">'+'</div>' +
         '<h1 id="firstHeading" class="firstHeading">' + city + '</h1>' +
@@ -40,9 +40,13 @@ module.exports.create_kml_balloon = function (city, coords, data) {
 
     ejs.renderFile(path.join(__dirname, '..', 'templates/template.kml'), {
         description: contentString,
-        coordinates: coords[0]+','+coords[1]
+        coordinates: coords[0]+','+coords[1],
+        longitude: coords[0],
+        latitude: coords[1]
     }, function (err, data) {
-        if (!err) {
+        if (err) {
+            console.log(err);
+        } else {
             var dir = path.join(__dirname, '..', 'kml');
             if (!fs.existsSync(dir)) {
                 fs.mkdir(dir, function (err) {});
@@ -59,20 +63,22 @@ module.exports.create_kml_balloon = function (city, coords, data) {
                 fs.writeFile(path.join(dir, name), data, function (err) {});
 
                 send_single_kml(name, dir);
-
             });
-
         }
     });
 
 };
 
+
 function send_single_kml (name, route) {
     var content = 'http://' + get_server_ip() + ':3000/kml/' + name + '\n';
     var command = "echo '" + content + "' > "+route+"/kmls.txt";
-    execute_command(command);
-
-    send_galaxy(route)
+    child = exec( command, function (error, stdout, stderr) {
+        if (error !== null) {
+            console.log('exec error: ' + error);
+        }
+        send_galaxy(route)
+    });
 
 }
 
@@ -80,15 +86,42 @@ function send_galaxy (route) {
     var file_path = route+'/kmls.txt';
     var server_path = '/var/www/html';
     var command = "sshpass -p '" + galaxy_pass + "' scp " + file_path + " lg@" + galaxy_ip + ":" + server_path;
-    execute_command(command);
+    child = exec( command, function (error, stdout, stderr) {
+        if (error !== null) {
+            console.log('exec error: ' + error);
+        }
+        setTimeout(function () {
+            start_tour();
+        }, 1000);
+
+    });
 }
+
+function start_tour () {
+    var message = "echo 'playtour=Show Balloon' > /tmp/query.txt";
+    communicate(message)
+}
+
+module.exports.exit_tour = function () {
+    var message = "echo 'exittour=Show Balloon' > /tmp/query.txt";
+    communicate(message)
+};
 
 
 module.exports.clean_lg = function () {
     var route = path.join(__dirname, '..', 'kml');
     var command = "echo '' > "+route+"/kmls.txt";
-    execute_command(command);
-    send_galaxy(route);
+    child = exec( command, function (error, stdout, stderr) {
+        if (error !== null) {
+            console.log('exec error: ' + error);
+        }
+        var file_path = route+'/kmls.txt';
+        var server_path = '/var/www/html';
+        var command = "sshpass -p '" + galaxy_pass + "' scp " + file_path + " lg@" + galaxy_ip + ":" + server_path;
+        execute_command(command);
+    });
+
+
 };
 
 

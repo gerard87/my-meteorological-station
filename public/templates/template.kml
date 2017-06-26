@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="feat_5">
+        <Style id="stylesel_0">
+            <BalloonStyle>
+                <bgColor>ffe6d8ad</bgColor>
+                <displayMode>default</displayMode>
+            </BalloonStyle>
+        </Style>
+        <Placemark id="feat_6">
+            <name>My meteorological station</name>
+            <description><%=description%></description>
+            <styleUrl>#stylesel_0</styleUrl>
+            <gx:balloonVisibility>0</gx:balloonVisibility>
+            <Point id="geom_2">
+                <coordinates><%=coordinates%>,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <gx:Tour>
+            <name>Show Balloon</name>
+            <gx:Playlist>
+                <gx:FlyTo id="tour">
+                    <gx:duration>3</gx:duration>
+                    <gx:flyToMode>smooth</gx:flyToMode>
+                    <Camera>
+                        <longitude><%=longitude%></longitude>
+                        <latitude><%=latitude%></latitude>
+                        <altitude>10000</altitude>
+                    </Camera>
+                </gx:FlyTo>
+                <gx:Wait>
+                    <gx:duration>1</gx:duration>
+                </gx:Wait>
+                <gx:AnimatedUpdate id="tour_0">
+                    <gx:duration>0.1</gx:duration>
+                    <Update>
+                        <targetHref/>
+                        <Change>
+                            <Placemark targetId="feat_6">
+                                <visibility>1</visibility>
+                                <gx:balloonVisibility>1</gx:balloonVisibility>
+                            </Placemark>
+                        </Change>
+                    </Update>
+                </gx:AnimatedUpdate>
+            </gx:Playlist>
+        </gx:Tour>
+    </Document>
+</kml>
