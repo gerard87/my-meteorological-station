@@ -10,7 +10,6 @@ var sockets = require('./public/js/sockets');
 var lg = require('./public/js/lg-communication');
 var env = process.env.NODE_ENV || 'development';
 
-var sensors_array = [];
 var coords = [];
 
 app.use(bodyParser.json());
@@ -22,20 +21,24 @@ storage.initSync();
 
 app.get('/', function(req, res){
 
+    var stations = storage.getItemSync('stations');
+
+    var sensors_data = [];
+    if (stations !== undefined) {
+        var station;
+        for (station in stations) {
+            if (stations.hasOwnProperty(station))
+                sensors_data.push(storage.getItemSync('sensorsData'+stations[station]));
+        }
+
+    }
+
     var api_data = storage.getItemSync('apiData');
-    var sensors_data = storage.getItemSync('sensorsData');
 
     if (api_data === undefined) {
         api_data = init_values.api_init_values;
     } else {
         coords = [api_data['longitude'], api_data['latitude']];
-    }
-
-    if (sensors_data === undefined) {
-        sensors_data = init_values.sensors_init_values;
-    } else {
-        sensors_array = [sensors_data['temperature'], sensors_data['humidity'], sensors_data['temperature2'],
-            sensors_data['pressure'], sensors_data['sealevel_pressure'], sensors_data['altitude']];
     }
 
     res.render('index',{
@@ -47,20 +50,34 @@ app.get('/', function(req, res){
 });
 
 app.post('/sensors', function(req, res){
-    // console.log(req.body);
 
     sockets.update_sensor_values(io, req.body);
 
-    sensors_array = [req.body.temperature, req.body.humidity, req.body.temperature2,
-        req.body.pressure, req.body.sealevel_pressure, req.body.altitude];
+    storage.setItemSync('sensorsData'+req.body.name, req.body);
 
-    storage.setItemSync('sensorsData', req.body);
+    var stations = storage.getItemSync('stations');
+    if (stations === undefined) {
+        storage.setItemSync('stations', [req.body.name]);
+    } else {
+        if (!isStationRegistered(req.body.name, stations)) {
+            stations.push(req.body.name);
+            storage.setItemSync('stations', stations);
+        }
+    }
 
     res.json(req.body);
 });
 
+function isStationRegistered (name, stations) {
+    var station;
+    for (station in stations) {
+        if (stations.hasOwnProperty(station) &&
+            stations[station] === name) return true
+    }
+    return false;
+}
+
 app.post('/api', function(req, res){
-    // console.log(req.body);
 
     sockets.update_api_values(io, req.body);
 
@@ -77,6 +94,8 @@ app.post('/lg', function (req, res){
         lg.exit_tour();
         lg.clean_lg();
     } else {
+        var sensors_array = [req.body.temperature, req.body.humidity, req.body.temperature2,
+            req.body.pressure, req.body.sealevel_pressure, req.body.altitude];
         lg.show_kml_balloon(req.body.city, coords, sensors_array);
     }
     res.end();

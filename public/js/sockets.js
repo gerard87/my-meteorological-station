@@ -1,10 +1,10 @@
 module.exports.update_sensor_values = function (io, body) {
-    io.sockets.emit('temperature', body.temperature);
-    io.sockets.emit('humidity', body.humidity);
-    io.sockets.emit('temperature2', body.temperature2);
-    io.sockets.emit('pressure', body.pressure);
-    io.sockets.emit('sealevel_pressure', body.sealevel_pressure);
-    io.sockets.emit('altitude', body.altitude);
+    io.sockets.emit('temperature'+body.name, body.temperature);
+    io.sockets.emit('humidity'+body.name, body.humidity);
+    io.sockets.emit('temperature2'+body.name, body.temperature2);
+    io.sockets.emit('pressure'+body.name, body.pressure);
+    io.sockets.emit('sealevel_pressure'+body.name, body.sealevel_pressure);
+    io.sockets.emit('altitude'+body.name, body.altitude);
 };
 
 module.exports.update_api_values = function (io, body) {

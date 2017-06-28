@@ -1,0 +1,28 @@
+script.
+    $(function () {
+        $('#lg-btn-'+'#{val.name}').on('click', function (event) {
+            var stop = false;
+            if ($('#lg-btn-'+'#{val.name}').text() === 'Send to Liquid Galaxy') {
+                $('#lg-btn-'+'#{val.name}').text('Stop Liquid Galaxy');
+                $('#lg-btn-'+'#{val.name}').attr('class', 'btn btn-danger');
+            } else {
+                $('#lg-btn-'+'#{val.name}').text('Send to Liquid Galaxy');
+                $('#lg-btn-'+'#{val.name}').attr('class', 'btn btn-primary');
+                stop = true;
+            }
+            $.ajax({
+                type: "POST",
+                url: '/lg',
+                data: {
+                    'city': $('#city').text(),
+                    'temperature': $('#temperature'+'#{val.name}').text(),
+                    'humidity': $('#humidity'+'#{val.name}').text(),
+                    'temperature2': $('#temperature2'+'#{val.name}').text(),
+                    'pressure': $('#pressure'+'#{val.name}').text(),
+                    'sealevel_pressure': $('#sealevel_pressure'+'#{val.name}').text(),
+                    'altitude': $('#altitude'+'#{val.name}').text(),
+                    'stop': stop
+                }
+            });
+        });
+    });

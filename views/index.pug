@@ -1,97 +1,112 @@
 extends layout
 
 block content
+
     script(src="/socket.io/socket.io.js")
     script(src="https://code.jquery.com/jquery-1.11.1.js")
-    script(src="./js/update-values.js")
-    script(src="./js/lg-button.js")
+    each val in sensors_data
+        include update-values
+        include lg-button
+
 
     div.jumbotron
         div.container
             div(class='page-header')
                 h1=title
-            div(align='right')
-                if env !== 'production'
-                    if api_data.city === ''
-                        button(type='button', class='btn btn-primary', id='lg-btn' disabled) Send to Liquid Galaxy
-                    else
-                        button(type='button', class='btn btn-primary', id='lg-btn') Send to Liquid Galaxy
-
-    div.jumbotron
-        div.container
-
-            p Sensors
-
-            div(class='container')
-                div(class='row')
-
-                    div(class='col-md-2', align='center')
-                        h4 TEMPERATURE
-                        p(id='temperature') #{sensors_data.temperature}
-                    div(class='col-md-2', align='center')
-                        h4 HUMIDITY
-                        p(id='humidity') #{sensors_data.humidity}
-                    div(class='col-md-2', align='center')
-                        h4 TEMPERATURE2
-                        p(id='temperature2') #{sensors_data.temperature2}
-                    div(class='col-md-2', align='center')
-                        h4 PRESSURE
-                        p(id='pressure') #{sensors_data.pressure}
-                    div(class='col-md-2', align='center')
-                        h4 SEALEVEL PRESSURE
-                        p(id='sealevel_pressure') #{sensors_data.sealevel_pressure}
-                    div(class='col-md-2', align='center')
-                        h4 ALTITUDE
-                        p(id='altitude') #{sensors_data.altitude}
 
 
-    div.jumbotron
-        div.container
 
-            p API
+    ul(class='nav nav-tabs nav-justified subtab' role='tablist')
+        each val, index in sensors_data
+            li(class=(index==0) ? 'active' : '')
+                a(href='#'+val.name data-toggle='tab') #{val.name}
 
-            div(class='container')
-                div(class='row')
+    if sensors_data.length === 0
+        h1(align='center') No stations registered yet
 
-                    div(class='col-md-2', align='center')
-                        h4 City
-                        p(id='city') #{api_data.city}
-                    div(class='col-md-2', align='center')
-                        h4 Weather
-                        p(id='weather') #{api_data.weather}
-                    div(class='col-md-2', align='center')
-                        h4 Wind direction
-                        p(id='wind_dir') #{api_data.wind_dir}
-                    div(class='col-md-2', align='center')
-                        h4 Wind velocity
-                        p(id='wind_kph') #{api_data.wind_kph} kph
-                    div(class='col-md-2', align='center')
-                        h4 Dewpoint
-                        p(id='dewpoint_c') #{api_data.dewpoint_c} *C
-                    div(class='col-md-2', align='center')
-                        h4 Heat index
-                        p(id='heat_index_c') #{api_data.heat_index_c} *C
+    div(class='tab-content')
+        each val, index in sensors_data
+            div(class=(index==0) ? 'tab-pane active' : 'tab-pane' id=val.name)
+                div.jumbotron
+                    div.container
 
-                div(class='row')
+                        div(align='right')
+                            if env !== 'production'
+                                if api_data.city === ''
+                                    button(type='button', class='btn btn-primary', id='lg-btn-'+val.name disabled) Send to Liquid Galaxy
+                                else
+                                    button(type='button', class='btn btn-primary', id='lg-btn-'+val.name) Send to Liquid Galaxy
 
-                    div(class='col-md-2', align='center')
-                        h4 Windchill
-                        p(id='windchill_c') #{api_data.windchill_c} *C
-                    div(class='col-md-2', align='center')
-                        h4 Feelslike
-                        p(id='feelslike_c') #{api_data.feelslike_c} *C
-                    div(class='col-md-2', align='center')
-                        h4 Visibility
-                        p(id='visibility_km') #{api_data.visibility_km} km
-                    div(class='col-md-2', align='center')
-                        h4 Precipitation
-                        p(id='precip_today_metric') #{api_data.precip_today_metric} mm
-                    div(class='col-md-4', align='center')
-                        h4 Icon
-                        div(class='row')
-                            div(class='col-sm-6')
-                                p(id='icon') #{api_data.icon}
-                            div(class='col-sm-6')
-                                img(id='icon_url' src=api_data.icon_url)
+                        p Sensors
+
+                        div(class='container')
+                            div(class='row')
+
+                                div(class='col-md-2', align='center')
+                                    h4 TEMPERATURE
+                                    p(id='temperature'+val.name) #{val.temperature}
+                                div(class='col-md-2', align='center')
+                                    h4 HUMIDITY
+                                    p(id='humidity'+val.name) #{val.humidity}
+                                div(class='col-md-2', align='center')
+                                    h4 TEMPERATURE2
+                                    p(id='temperature2'+val.name) #{val.temperature2}
+                                div(class='col-md-2', align='center')
+                                    h4 PRESSURE
+                                    p(id='pressure'+val.name) #{val.pressure}
+                                div(class='col-md-2', align='center')
+                                    h4 SEALEVEL PRESSURE
+                                    p(id='sealevel_pressure'+val.name) #{val.sealevel_pressure}
+                                div(class='col-md-2', align='center')
+                                    h4 ALTITUDE
+                                    p(id='altitude'+val.name) #{val.altitude}
 
 
+                div.jumbotron
+                    div.container
+
+                        p API
+
+                        div(class='container')
+                            div(class='row')
+
+                                div(class='col-md-2', align='center')
+                                    h4 City
+                                    p(id='city') #{api_data.city}
+                                div(class='col-md-2', align='center')
+                                    h4 Weather
+                                    p(id='weather') #{api_data.weather}
+                                div(class='col-md-2', align='center')
+                                    h4 Wind direction
+                                    p(id='wind_dir') #{api_data.wind_dir}
+                                div(class='col-md-2', align='center')
+                                    h4 Wind velocity
+                                    p(id='wind_kph') #{api_data.wind_kph} kph
+                                div(class='col-md-2', align='center')
+                                    h4 Dewpoint
+                                    p(id='dewpoint_c') #{api_data.dewpoint_c} *C
+                                div(class='col-md-2', align='center')
+                                    h4 Heat index
+                                    p(id='heat_index_c') #{api_data.heat_index_c} *C
+
+                            div(class='row')
+
+                                div(class='col-md-2', align='center')
+                                    h4 Windchill
+                                    p(id='windchill_c') #{api_data.windchill_c} *C
+                                div(class='col-md-2', align='center')
+                                    h4 Feelslike
+                                    p(id='feelslike_c') #{api_data.feelslike_c} *C
+                                div(class='col-md-2', align='center')
+                                    h4 Visibility
+                                    p(id='visibility_km') #{api_data.visibility_km} km
+                                div(class='col-md-2', align='center')
+                                    h4 Precipitation
+                                    p(id='precip_today_metric') #{api_data.precip_today_metric} mm
+                                div(class='col-md-4', align='center')
+                                    h4 Icon
+                                    div(class='row')
+                                        div(class='col-sm-6')
+                                            p(id='icon') #{api_data.icon}
+                                        div(class='col-sm-6')
+                                            img(id='icon_url' src=api_data.icon_url)
