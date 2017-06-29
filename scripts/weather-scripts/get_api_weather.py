@@ -74,19 +74,20 @@ def get_location():
     return data['city']
 
 
-def get_weather():
+def get_weather(name):
     while True:
         weatherclient = WeatherClient(api_key)
         data = weatherclient.conditions()
         print_data(data)
-        send_to_server(data)
+        send_to_server(data, name)
         time.sleep(180)
 
 
-def send_to_server(data):
+def send_to_server(data, name):
     url = 'http://my-meteorological-station.herokuapp.com/api'
     url2 = 'http://192.168.88.222:3000/api'
     fields = {
+        'name': name,
         'city': data['city'],
         'longitude': data['longitude'],
         'latitude': data['latitude'],
@@ -112,11 +113,13 @@ def send_to_server(data):
 
 if __name__ == "__main__":
     if api_key:
-        get_weather()
+        name = sys.argv[1]
+        get_weather(name)
     else:
         try:
             api_key = sys.argv[1]
-            get_weather()
+            name = sys.argv[2]
+            get_weather(name)
         except IndexError:
             print "Must provide api key in code or cmdline arg"
 

@@ -21,41 +21,41 @@ script.
         });
 
 
-        socket.on('city', function (msg) {
-            $('#city').text(msg);
+        socket.on('city' + '#{val.name}', function (msg) {
+            $('#city' + '#{val.name}').text(msg);
         });
-        socket.on('weather', function (msg) {
-            $('#weather').text(msg);
+        socket.on('weather' + '#{val.name}', function (msg) {
+            $('#weather' + '#{val.name}').text(msg);
         });
-        socket.on('wind_dir', function (msg) {
-            $('#wind_dir').text(msg);
+        socket.on('wind_dir' + '#{val.name}', function (msg) {
+            $('#wind_dir' + '#{val.name}').text(msg);
         });
-        socket.on('wind_kph', function (msg) {
-            $('#wind_kph').text(msg);
+        socket.on('wind_kph' + '#{val.name}', function (msg) {
+            $('#wind_kph' + '#{val.name}').text(msg);
         });
-        socket.on('dewpoint_c', function (msg) {
-            $('#dewpoint_c').text(msg);
+        socket.on('dewpoint_c' + '#{val.name}', function (msg) {
+            $('#dewpoint_c' + '#{val.name}').text(msg);
         });
-        socket.on('heat_index_c', function (msg) {
-            $('#heat_index_c').text(msg);
+        socket.on('heat_index_c' + '#{val.name}', function (msg) {
+            $('#heat_index_c' + '#{val.name}').text(msg);
         });
-        socket.on('windchill_c', function (msg) {
-            $('#windchill_c').text(msg);
+        socket.on('windchill_c' + '#{val.name}', function (msg) {
+            $('#windchill_c' + '#{val.name}').text(msg);
         });
-        socket.on('feelslike_c', function (msg) {
-            $('#feelslike_c').text(msg);
+        socket.on('feelslike_c' + '#{val.name}', function (msg) {
+            $('#feelslike_c' + '#{val.name}').text(msg);
         });
-        socket.on('visibility_km', function (msg) {
-            $('#visibility_km').text(msg);
+        socket.on('visibility_km' + '#{val.name}', function (msg) {
+            $('#visibility_km' + '#{val.name}').text(msg);
         });
-        socket.on('precip_today_metric', function (msg) {
-            $('#precip_today_metric').text(msg);
+        socket.on('precip_today_metric' + '#{val.name}', function (msg) {
+            $('#precip_today_metric' + '#{val.name}').text(msg);
         });
-        socket.on('icon', function (msg) {
-            $('#icon').text(msg);
+        socket.on('icon' + '#{val.name}', function (msg) {
+            $('#icon' + '#{val.name}').text(msg);
         });
-        socket.on('icon_url', function (msg) {
-            $('#icon_url').attr('src', msg);
+        socket.on('icon_url' + '#{val.name}', function (msg) {
+            $('#icon_url' + '#{val.name}').attr('src', msg);
         });
 
     });

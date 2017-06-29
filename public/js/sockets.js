@@ -8,16 +8,16 @@ module.exports.update_sensor_values = function (io, body) {
 };
 
 module.exports.update_api_values = function (io, body) {
-    io.sockets.emit('city', body.city);
-    io.sockets.emit('weather', body.weather);
-    io.sockets.emit('wind_dir', body.wind_dir);
-    io.sockets.emit('wind_kph', body.wind_kph + ' kph');
-    io.sockets.emit('dewpoint_c', body.dewpoint_c + ' *C');
-    io.sockets.emit('heat_index_c', body.heat_index_c + ' *C');
-    io.sockets.emit('windchill_c', body.windchill_c + ' *C');
-    io.sockets.emit('feelslike_c', body.feelslike_c + ' *C');
-    io.sockets.emit('visibility_km', body.visibility_km + ' km');
-    io.sockets.emit('precip_today_metric', body.precip_today_metric + ' mm');
-    io.sockets.emit('icon', body.icon);
-    io.sockets.emit('icon_url', body.icon_url);
+    io.sockets.emit('city'+body.name, body.city);
+    io.sockets.emit('weather'+body.name, body.weather);
+    io.sockets.emit('wind_dir'+body.name, body.wind_dir);
+    io.sockets.emit('wind_kph'+body.name, body.wind_kph + ' kph');
+    io.sockets.emit('dewpoint_c'+body.name, body.dewpoint_c + ' *C');
+    io.sockets.emit('heat_index_c'+body.name, body.heat_index_c + ' *C');
+    io.sockets.emit('windchill_c'+body.name, body.windchill_c + ' *C');
+    io.sockets.emit('feelslike_c'+body.name, body.feelslike_c + ' *C');
+    io.sockets.emit('visibility_km'+body.name, body.visibility_km + ' km');
+    io.sockets.emit('precip_today_metric'+body.name, body.precip_today_metric + ' mm');
+    io.sockets.emit('icon'+body.name, body.icon);
+    io.sockets.emit('icon_url'+body.name, body.icon_url);
 };

@@ -1,2 +1,1 @@
-# Get weather api script
 requests

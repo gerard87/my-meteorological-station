@@ -14,7 +14,8 @@ script.
                 type: "POST",
                 url: '/lg',
                 data: {
-                    'city': $('#city').text(),
+                    'name': '#{val.name}',
+                    'city': $('#city'+'#{val.name}').text(),
                     'temperature': $('#temperature'+'#{val.name}').text(),
                     'humidity': $('#humidity'+'#{val.name}').text(),
                     'temperature2': $('#temperature2'+'#{val.name}').text(),

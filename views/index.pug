@@ -4,7 +4,7 @@ block content
 
     script(src="/socket.io/socket.io.js")
     script(src="https://code.jquery.com/jquery-1.11.1.js")
-    each val in sensors_data
+    each val in data
         include update-values
         include lg-button
 
@@ -17,22 +17,22 @@ block content
 
 
     ul(class='nav nav-tabs nav-justified subtab' role='tablist')
-        each val, index in sensors_data
+        each val, index in data
             li(class=(index==0) ? 'active' : '')
                 a(href='#'+val.name data-toggle='tab') #{val.name}
 
-    if sensors_data.length === 0
+    if data.length === 0
         h1(align='center') No stations registered yet
 
     div(class='tab-content')
-        each val, index in sensors_data
+        each val, index in data
             div(class=(index==0) ? 'tab-pane active' : 'tab-pane' id=val.name)
                 div.jumbotron
                     div.container
 
                         div(align='right')
                             if env !== 'production'
-                                if api_data.city === ''
+                                if data.city === ''
                                     button(type='button', class='btn btn-primary', id='lg-btn-'+val.name disabled) Send to Liquid Galaxy
                                 else
                                     button(type='button', class='btn btn-primary', id='lg-btn-'+val.name) Send to Liquid Galaxy
@@ -72,41 +72,41 @@ block content
 
                                 div(class='col-md-2', align='center')
                                     h4 City
-                                    p(id='city') #{api_data.city}
+                                    p(id='city'+val.name) #{val.city}
                                 div(class='col-md-2', align='center')
                                     h4 Weather
-                                    p(id='weather') #{api_data.weather}
+                                    p(id='weather'+val.name) #{val.weather}
                                 div(class='col-md-2', align='center')
                                     h4 Wind direction
-                                    p(id='wind_dir') #{api_data.wind_dir}
+                                    p(id='wind_dir'+val.name) #{val.wind_dir}
                                 div(class='col-md-2', align='center')
                                     h4 Wind velocity
-                                    p(id='wind_kph') #{api_data.wind_kph} kph
+                                    p(id='wind_kph'+val.name) #{val.wind_kph} kph
                                 div(class='col-md-2', align='center')
                                     h4 Dewpoint
-                                    p(id='dewpoint_c') #{api_data.dewpoint_c} *C
+                                    p(id='dewpoint_c'+val.name) #{val.dewpoint_c} *C
                                 div(class='col-md-2', align='center')
                                     h4 Heat index
-                                    p(id='heat_index_c') #{api_data.heat_index_c} *C
+                                    p(id='heat_index_c'+val.name) #{val.heat_index_c} *C
 
                             div(class='row')
 
                                 div(class='col-md-2', align='center')
                                     h4 Windchill
-                                    p(id='windchill_c') #{api_data.windchill_c} *C
+                                    p(id='windchill_c'+val.name) #{val.windchill_c} *C
                                 div(class='col-md-2', align='center')
                                     h4 Feelslike
-                                    p(id='feelslike_c') #{api_data.feelslike_c} *C
+                                    p(id='feelslike_c'+val.name) #{val.feelslike_c} *C
                                 div(class='col-md-2', align='center')
                                     h4 Visibility
-                                    p(id='visibility_km') #{api_data.visibility_km} km
+                                    p(id='visibility_km'+val.name) #{val.visibility_km} km
                                 div(class='col-md-2', align='center')
                                     h4 Precipitation
-                                    p(id='precip_today_metric') #{api_data.precip_today_metric} mm
+                                    p(id='precip_today_metric'+val.name) #{val.precip_today_metric} mm
                                 div(class='col-md-4', align='center')
                                     h4 Icon
                                     div(class='row')
                                         div(class='col-sm-6')
-                                            p(id='icon') #{api_data.icon}
+                                            p(id='icon'+val.name) #{val.icon}
                                         div(class='col-sm-6')
-                                            img(id='icon_url' src=api_data.icon_url)
+                                            img(id='icon_url'+val.name src=val.icon_url)
