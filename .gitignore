@@ -64,11 +64,12 @@ data/*
 # Dolphin
 .directory
 
-# node-persist
-persist/
 
 # npm
 package-lock.json
 
-#kml
+# kml
 public/kml/
+
+# firebase config
+firebase-config.json

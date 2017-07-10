@@ -110,7 +110,7 @@ module.exports.exit_tour = function () {
 
 
 module.exports.clean_lg = function () {
-    var route = path.join(__dirname, '..', 'kml');
+    var route = path.join(__dirname, '..', 'public/kml');
     var command = "echo '' > "+route+"/kmls.txt";
     child = exec( command, function (error, stdout, stderr) {
         if (error !== null) {
