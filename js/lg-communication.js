@@ -39,7 +39,7 @@ module.exports.show_kml_balloon = function (city, coords, data) {
         '</td></tr></table>';
 
 
-    ejs.renderFile(path.join(__dirname, '..', 'templates/template.kml'), {
+    ejs.renderFile(path.join(__dirname, '..', 'public/templates/template.kml'), {
         description: contentString,
         coordinates: coords[0]+','+coords[1],
         longitude: coords[0],
@@ -48,7 +48,7 @@ module.exports.show_kml_balloon = function (city, coords, data) {
         if (err) {
             console.log(err);
         } else {
-            var dir = path.join(__dirname, '..', 'kml');
+            var dir = path.join(__dirname, '..', 'public/kml');
             if (!fs.existsSync(dir)) {
                 fs.mkdir(dir, function (err) {});
             }
