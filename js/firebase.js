@@ -48,7 +48,8 @@ module.exports.readStations = function (res, env) {
         res.render('index',{
             title: 'My Meteorological Station',
             data: data,
-            env: env
+            env: env,
+            config: config
         });
     });
 };

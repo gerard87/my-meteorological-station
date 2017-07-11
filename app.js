@@ -4,8 +4,6 @@ var path = require('path');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
-var init_values = require('./js/init_values');
-var sockets = require('./js/sockets');
 var lg = require('./js/lg-communication');
 var env = process.env.NODE_ENV || 'development';
 var firebase = require('./js/firebase');
@@ -26,8 +24,6 @@ app.get('/', function(req, res){
 
 app.post('/sensors', function(req, res){
 
-    sockets.update_sensor_values(io, req.body);
-
     firebase.writeStationSensors(req.body);
 
     res.json(req.body);
@@ -35,8 +31,6 @@ app.post('/sensors', function(req, res){
 
 
 app.post('/api', function(req, res){
-
-    sockets.update_api_values(io, req.body);
 
     firebase.writeStationAPI(req.body);
 

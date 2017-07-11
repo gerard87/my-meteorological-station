@@ -4,8 +4,10 @@ block content
 
     script(src="/socket.io/socket.io.js")
     script(src="https://code.jquery.com/jquery-1.11.1.js")
+    script(src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js")
+
+    include update-values
     each val in data
-        include update-values
         include lg-button
 
 
@@ -13,7 +15,6 @@ block content
         div.container
             div(class='page-header')
                 h1=title
-
 
 
     ul(class='nav nav-tabs nav-justified subtab' role='tablist')
