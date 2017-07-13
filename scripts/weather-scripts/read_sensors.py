@@ -34,8 +34,8 @@ def read_sensors(name):
         print('Sealevel Pressure = {0:0.2f} Pa'.format(sealevel_pressure))
 
 
-        url = 'http://my-meteorological-station.herokuapp.com/sensors'
-        url2 = 'http://x.x.x.x:3000/sensors'
+        url = 'http://mymeteorologicalstation.appspot.com/sensors'
+        url2 = 'http://192.168.88.222:3000/sensors'
         fields = {
             'name': name,
             'temperature': '{0:0.2f} *C'.format(temperature),
@@ -46,8 +46,13 @@ def read_sensors(name):
             'altitude': '{0:0.2f} m'.format(altitude)
         }
         headers = {"content-type": "application/json"}
+
         try:
             r = requests.post(url, data=json.dumps(fields), headers=headers)
+        except requests.exceptions.RequestException as e:
+            print e
+
+        try:
             r = requests.post(url2, data=json.dumps(fields), headers=headers)
         except requests.exceptions.RequestException as e:
             print e

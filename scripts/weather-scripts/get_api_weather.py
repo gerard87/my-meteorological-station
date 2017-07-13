@@ -84,8 +84,9 @@ def get_weather(name):
 
 
 def send_to_server(data, name):
-    url = 'http://my-meteorological-station.herokuapp.com/api'
+    url = 'http://mymeteorologicalstation.appspot.com/api'
     url2 = 'http://192.168.88.222:3000/api'
+
     fields = {
         'name': name,
         'city': data['city'],
@@ -104,9 +105,14 @@ def send_to_server(data, name):
         'icon_url': data['icon_url']
     }
     headers = {"content-type": "application/json"}
+
     try:
-        requests.post(url, data=json.dumps(fields), headers=headers)
-        requests.post(url2, data=json.dumps(fields), headers=headers)
+        r = requests.post(url, data=json.dumps(fields), headers=headers)
+    except requests.exceptions.RequestException as e:
+        print e
+
+    try:
+        r = requests.post(url2, data=json.dumps(fields), headers=headers)
     except requests.exceptions.RequestException as e:
         print e
 
@@ -121,6 +127,6 @@ if __name__ == "__main__":
             name = sys.argv[2]
             get_weather(name)
         except IndexError:
-            print "Must provide api key in code or cmdline arg"
+            print "Must provide api key and station name in code or cmdline arg"
 
 
