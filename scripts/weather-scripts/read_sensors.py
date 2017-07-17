@@ -6,7 +6,7 @@ import Adafruit_BMP.BMP085 as BMP085
 import requests
 import json
 
-def read_sensors(name):
+def read_sensors(name, ip_server):
     while(True):
         sensor = Adafruit_DHT.DHT22
         pin = 17
@@ -35,15 +35,15 @@ def read_sensors(name):
 
 
         url = 'http://mymeteorologicalstation.appspot.com/sensors'
-        url2 = 'http://192.168.88.222:3000/sensors'
+        url2 = 'http://{}:3000/sensors'.format(ip_server)
         fields = {
             'name': name,
-            'temperature': '{0:0.2f} *C'.format(temperature),
-            'humidity': '{0:0.2f}%'.format(humidity),
-            'temperature2': '{0:0.2f} *C'.format(temperature2),
-            'pressure': '{0:0.2f} Pa'.format(pressure),
-            'sealevel_pressure': '{0:0.2f} Pa'.format(sealevel_pressure),
-            'altitude': '{0:0.2f} m'.format(altitude)
+            'temperature': '{0:0.2f}'.format(temperature),
+            'humidity': '{0:0.2f}'.format(humidity),
+            'temperature2': '{0:0.2f}'.format(temperature2),
+            'pressure': '{0:0.2f}'.format(pressure),
+            'sealevel_pressure': '{0:0.2f}'.format(sealevel_pressure),
+            'altitude': '{0:0.2f}'.format(altitude)
         }
         headers = {"content-type": "application/json"}
 
@@ -61,6 +61,7 @@ if __name__ == "__main__":
 
     try:
         name = sys.argv[1]
-        read_sensors(name)
+        ip_server = sys.argv[2]
+        read_sensors(name, ip_server)
     except IndexError:
-        print "Must provide station name in code or cmdline arg"
+        print "Must provide station name and server ip in code or cmdline arg"

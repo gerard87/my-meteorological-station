@@ -74,18 +74,18 @@ def get_location():
     return data['city']
 
 
-def get_weather(name):
+def get_weather(name, ip_server):
     while True:
         weatherclient = WeatherClient(api_key)
         data = weatherclient.conditions()
         print_data(data)
-        send_to_server(data, name)
+        send_to_server(data, name, ip_server)
         time.sleep(180)
 
 
-def send_to_server(data, name):
+def send_to_server(data, name, ip_server):
     url = 'http://mymeteorologicalstation.appspot.com/api'
-    url2 = 'http://192.168.88.222:3000/api'
+    url2 = 'http://{}:3000/api'.format(ip_server)
 
     fields = {
         'name': name,
@@ -119,14 +119,20 @@ def send_to_server(data, name):
 
 if __name__ == "__main__":
     if api_key:
-        name = sys.argv[1]
-        get_weather(name)
+        try:
+            name = sys.argv[1]
+            ip_server = sys.argv[2]
+            get_weather(name, ip_server)
+        except IndexError:
+            print "Must provide a station name and local server ip in cmdline arg"
+
     else:
         try:
             api_key = sys.argv[1]
             name = sys.argv[2]
-            get_weather(name)
+            ip_server = sys.argv[3]
+            get_weather(name, ip_server)
         except IndexError:
-            print "Must provide api key and station name in code or cmdline arg"
+            print "Must provide api key, station name and local server ip in code or cmdline arg"
 
 
