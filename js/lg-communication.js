@@ -3,7 +3,7 @@ var ejs = require('ejs');
 var path = require('path');
 var fs = require('fs');
 
-var galaxy_ip = '192.168.88.198';
+var galaxy_ip = '10.160.67.136';
 var galaxy_pass = 'lqgalaxy';
 
 module.exports.flyTo = function (city) {
@@ -20,7 +20,7 @@ function get_server_ip () {
     /* TODO */
     // var command = "ifconfig | grep 'inet ' | awk '{print $2}'";
     // execute_command(command);
-    return '192.168.88.222';
+    return '10.160.67.29';
 }
 
 module.exports.show_kml_balloon = function (city, coords, data) {

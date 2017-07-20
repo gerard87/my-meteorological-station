@@ -1,5 +1,5 @@
-var firebase = require("firebase");
-var config = require('../firebase-config.json');
+const firebase = require("firebase");
+const config = require('../firebase-config.json');
 
 firebase.initializeApp(config);
 
@@ -39,10 +39,12 @@ module.exports.writeStationAPI = function (data) {
 module.exports.readStations = function (res, env) {
     firebase.database().ref('/stations/').once('value').then(function(snapshot) {
 
-        var data = [];
+        let data = [];
 
-        for (var station in snapshot.val()) {
-            data.push(snapshot.child(station).val());
+        for (let station in snapshot.val()) {
+            let s = snapshot.child(station).val();
+            s.icon = getIconName(snapshot.child(station).child('icon').val());
+            data.push(s);
         }
 
         res.render('index',{
@@ -53,6 +55,13 @@ module.exports.readStations = function (res, env) {
         });
     });
 };
+
+function getIconName (icon) {
+    return icon === 'flurries' || icon === 'chanceflurries' || icon === 'chancesleet' ? 'sleet' :
+        icon === 'chancerain' ? 'rain' : icon === 'chancesnow' ? 'snow' :
+        icon === 'chancetstorms' ? 'tstorms' : icon === 'clear' || icon === 'hazy' ? 'sunny' :
+        icon === 'mostlycloudy' || icon === 'mostlysunny' || icon === 'partlysunny' ? 'partlycloudy': icon;
+}
 
 
 module.exports.readStationData = function (name) {

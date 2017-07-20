@@ -2,111 +2,142 @@ extends layout
 
 block content
 
-    script(src="https://code.jquery.com/jquery-1.11.1.js")
-    script(src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js")
-
     include update-values
     each val in data
         include lg-button
 
 
-    div.jumbotron
-        div.container
-            div(class='page-header')
-                h1=title
+    main.mdl-layout__content.mdl-color--grey-100
+
+        if data.length === 0
+            h1(align='center') No stations registered yet
 
 
-    ul(class='nav nav-tabs nav-justified subtab' role='tablist')
         each val, index in data
-            li(class=(index==0) ? 'active' : '')
-                a(href='#'+val.name data-toggle='tab') #{val.name}
-
-    if data.length === 0
-        h1(align='center') No stations registered yet
-
-    div(class='tab-content')
-        each val, index in data
-            div(class=(index==0) ? 'tab-pane active' : 'tab-pane' id=val.name)
-                div.jumbotron
-                    div.container
-
-                        div(align='right')
-                            if env !== 'production'
-                                if data.city === ''
-                                    button(type='button', class='btn btn-primary', id='lg-btn-'+val.name disabled) Send to Liquid Galaxy
-                                else
-                                    button(type='button', class='btn btn-primary', id='lg-btn-'+val.name) Send to Liquid Galaxy
-
-                        p Sensors
-
-                        div(class='container')
-                            div(class='row')
-
-                                div(class='col-md-2', align='center')
-                                    h4 TEMPERATURE
-                                    p(id='temperature'+val.name) #{val.temperature}
-                                div(class='col-md-2', align='center')
-                                    h4 HUMIDITY
-                                    p(id='humidity'+val.name) #{val.humidity}
-                                div(class='col-md-2', align='center')
-                                    h4 TEMPERATURE2
-                                    p(id='temperature2'+val.name) #{val.temperature2}
-                                div(class='col-md-2', align='center')
-                                    h4 PRESSURE
-                                    p(id='pressure'+val.name) #{val.pressure}
-                                div(class='col-md-2', align='center')
-                                    h4 SEALEVEL PRESSURE
-                                    p(id='sealevel_pressure'+val.name) #{val.sealevel_pressure}
-                                div(class='col-md-2', align='center')
-                                    h4 ALTITUDE
-                                    p(id='altitude'+val.name) #{val.altitude}
+            section(class=(index==0) ? 'mdl-layout__tab-panel is-active' : 'mdl-layout__tab-panel', id=val.name)
+                .page-content
 
 
-                div.jumbotron
-                    div.container
+                    .mdl-grid
+                        .mdl-cell.mdl-cell--12-col.mdl-grid
+                            .mdl-layout-spacer
+                                if env !== 'production'
+                                    if val.city === '' || val.city === undefined
+                                        div(align='right')
+                                            button(id='lg-btn-'+val.name disabled).mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-200.mdl-color-text--grey Send to Liquid Galaxy
+                                    else
+                                        div(align='right')
+                                            button(id='lg-btn-'+val.name).mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey.mdl-color-text--white Send to Liquid Galaxy
 
-                        p API
 
-                        div(class='container')
-                            div(class='row')
+                    .mdl-grid.demo-content
+                        .demo-charts.mdl-color--blue-50.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
 
-                                div(class='col-md-2', align='center')
-                                    h4 City
-                                    p(id='city'+val.name) #{val.city}
-                                div(class='col-md-2', align='center')
-                                    h4 Weather
-                                    p(id='weather'+val.name) #{val.weather}
-                                div(class='col-md-2', align='center')
-                                    h4 Wind direction
-                                    p(id='wind_dir'+val.name) #{val.wind_dir}
-                                div(class='col-md-2', align='center')
-                                    h4 Wind velocity
-                                    p(id='wind_kph'+val.name) #{val.wind_kph} kph
-                                div(class='col-md-2', align='center')
-                                    h4 Dewpoint
-                                    p(id='dewpoint_c'+val.name) #{val.dewpoint_c} *C
-                                div(class='col-md-2', align='center')
-                                    h4 Heat index
-                                    p(id='heat_index_c'+val.name) #{val.heat_index_c} *C
+                            .mdl-cell.mdl-cell--6-col
 
-                            div(class='row')
+                                center
+                                    br
+                                    p(style='line-height: 1.5;')
+                                        font(style='font-size: 3em', color='#7a7a7a', id='city' + val.name) #{val.city}
 
-                                div(class='col-md-2', align='center')
-                                    h4 Windchill
-                                    p(id='windchill_c'+val.name) #{val.windchill_c} *C
-                                div(class='col-md-2', align='center')
-                                    h4 Feelslike
-                                    p(id='feelslike_c'+val.name) #{val.feelslike_c} *C
-                                div(class='col-md-2', align='center')
-                                    h4 Visibility
-                                    p(id='visibility_km'+val.name) #{val.visibility_km} km
-                                div(class='col-md-2', align='center')
-                                    h4 Precipitation
-                                    p(id='precip_today_metric'+val.name) #{val.precip_today_metric} mm
-                                div(class='col-md-4', align='center')
-                                    h4 Icon
-                                    div(class='row')
-                                        div(class='col-sm-6')
-                                            p(id='icon'+val.name) #{val.icon}
-                                        div(class='col-sm-6')
-                                            img(id='icon_url'+val.name src=val.icon_url)
+                                    br
+
+                                    p.nobr
+                                        font(style='font-size: 6em', color='#7a7a7a', id='temperature' + val.name) #{val.temperature}
+                                        font(style='font-size: 3em; position: absolute; margin-top: -16px', color='#888') ºC
+
+                                    p(style='line-height: 1.5;')
+                                        font(style='font-size: 1.5em', color='#7a7a7a') Feels like&nbsp;
+                                        font(style='font-size: 2.2em', color='#7a7a7a', id='feelslike_c'+val.name) #{val.feelslike_c}
+                                        font(style='font-size: 1.5em; position: absolute; margin-top: 1.5px', color='#888') ºC
+
+
+
+
+                            .mdl-cell.mdl-cell--6-col
+                                center
+                                    img(id='icon_url'+val.name src='/img/'+val.icon+'.png' height='128' width='128')
+                                    p(style='line-height: 2.5;')
+                                        font(style='font-size: 1.5em', color='#7a7a7a', id='weather'+val.name) #{val.weather}
+
+
+                    .mdl-grid.demo-content
+                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
+                            .mdl-cell.mdl-cell--12-col
+                                p Current details:
+
+                            .mdl-cell.mdl-cell--4-col
+                                p Temperature 2
+                            .mdl-cell.mdl-cell--8-col
+                                p
+                                    font(id='temperature2' + val.name) #{val.temperature2}
+                                    font &nbsp;ºC
+
+                            .mdl-cell.mdl-cell--4-col
+                                p Humidity
+                            .mdl-cell.mdl-cell--8-col
+                                p
+                                    font(id='humidity'+val.name) #{val.humidity}
+                                    font &nbsp;%
+
+                            .mdl-cell.mdl-cell--4-col
+                                p Pressure
+                            .mdl-cell.mdl-cell--8-col
+                                p
+                                    font(id='pressure' + val.name) #{val.pressure}
+                                    font &nbsp;Pa
+
+                            .mdl-cell.mdl-cell--4-col
+                                p Sea level pressure
+                            .mdl-cell.mdl-cell--8-col
+                                p
+                                    font(id='sealevel_pressure' + val.name) #{val.sealevel_pressure}
+                                    font &nbsp;Pa
+
+                            .mdl-cell.mdl-cell--4-col
+                                p Altitude
+                            .mdl-cell.mdl-cell--8-col
+                                p
+                                    font(id='altitude' + val.name) #{val.altitude}
+                                    font &nbsp;m
+
+                            .mdl-cell.mdl-cell--4-col
+                                p Wind velocity
+                            .mdl-cell.mdl-cell--8-col
+                                p
+                                    font(id='wind_kph' + val.name) #{val.wind_kph}
+                                    font &nbsp;kph
+
+                            .mdl-cell.mdl-cell--4-col
+                                p Wind direction
+                            .mdl-cell.mdl-cell--8-col
+                                p
+                                    font(id='wind_dir' + val.name) #{val.wind_dir}
+
+                            .mdl-cell.mdl-cell--4-col
+                                p Precipitation (dialy)
+                            .mdl-cell.mdl-cell--8-col
+                                p
+                                    font(id='precip_today_metric' + val.name) #{val.precip_today_metric}
+                                    font &nbsp;mm
+
+                            .mdl-cell.mdl-cell--4-col
+                                p Visibility
+                            .mdl-cell.mdl-cell--8-col
+                                p
+                                    font(id='visibility_km' + val.name) #{val.visibility_km}
+                                    font &nbsp;km
+
+                            .mdl-cell.mdl-cell--4-col
+                                p Dewpoint
+                            .mdl-cell.mdl-cell--8-col
+                                p
+                                    font(id='dewpoint_c' + val.name) #{val.dewpoint_c}
+                                    font &nbsp;ºC
+
+                            .mdl-cell.mdl-cell--4-col
+                                p Heat index
+                            .mdl-cell.mdl-cell--8-col
+                                p
+                                    font(id='heat_index_c' + val.name) #{val.heat_index_c}
+                                    font &nbsp;ºC
