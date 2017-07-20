@@ -1,5 +1,6 @@
 const firebase = require("firebase");
 const config = require('../firebase-config.json');
+const env = process.env.NODE_ENV || 'development';
 
 firebase.initializeApp(config);
 
@@ -36,7 +37,7 @@ module.exports.writeStationAPI = function (data) {
 };
 
 
-module.exports.readStations = function (res, env) {
+module.exports.readStations = function (res) {
     firebase.database().ref('/stations/').once('value').then(function(snapshot) {
 
         let data = [];
