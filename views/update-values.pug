@@ -4,7 +4,13 @@ script.
 
         for (var station in snapshot.val()) {
             $('#temperature' + station).text(snapshot.child(station).child('temperature').val());
-            $('#humidity' + station).text(snapshot.child(station).child('humidity').val());
+
+            $('#humidityCircle' + station).circleProgress({
+                value: snapshot.child(station).child('humidity').val() / 100,
+                animation: false
+            })
+            $('#humidityStrong'+ station).text(snapshot.child(station).child('humidity').val() + '%');
+
             $('#temperature2' + station).text(snapshot.child(station).child('temperature2').val());
             $('#pressure' + station).text(snapshot.child(station).child('pressure').val());
             $('#sealeve_pressure' + station).text(snapshot.child(station).child('sealevel_pressure').val());

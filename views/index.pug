@@ -17,11 +17,10 @@ block content
             section(class=(index==0) ? 'mdl-layout__tab-panel is-active' : 'mdl-layout__tab-panel', id=val.name)
                 .page-content
 
-
-                    .mdl-grid
-                        .mdl-cell.mdl-cell--12-col.mdl-grid
-                            .mdl-layout-spacer
-                                if env !== 'production'
+                    if env !== 'production'
+                        .mdl-grid
+                            .mdl-cell.mdl-cell--12-col.mdl-grid
+                                .mdl-layout-spacer
                                     if val.city === '' || val.city === undefined
                                         div(align='right')
                                             button(id='lg-btn-'+val.name disabled).mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-200.mdl-color-text--grey Send to Liquid Galaxy
@@ -61,7 +60,24 @@ block content
                                         font(style='font-size: 1.5em', color='#7a7a7a', id='weather'+val.name) #{val.weather}
 
 
-                    .mdl-grid.demo-content
+
+
+                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
+                            .mdl-cell.mdl-cell--6-col
+                                center
+                                    .circles
+                                        div(id='humidityCircle'+val.name).circle
+                                            strong(id='humidityStrong'+val.name)
+                                            span
+                                                | Humidity
+
+                            .mdl-cell.mdl-cell--6-col
+
+                        include init-circle
+
+
+
+
                         .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
                             .mdl-cell.mdl-cell--12-col
                                 p Current details:
@@ -72,13 +88,6 @@ block content
                                 p
                                     font(id='temperature2' + val.name) #{val.temperature2}
                                     font &nbsp;ºC
-
-                            .mdl-cell.mdl-cell--4-col
-                                p Humidity
-                            .mdl-cell.mdl-cell--8-col
-                                p
-                                    font(id='humidity'+val.name) #{val.humidity}
-                                    font &nbsp;%
 
                             .mdl-cell.mdl-cell--4-col
                                 p Pressure

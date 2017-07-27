@@ -7,9 +7,9 @@ firebase.initializeApp(config);
 module.exports.writeStationSensors = function (data) {
     firebase.database().ref('stations/' + data.name).update({
         name: data.name,
-        temperature: data.temperature,
-        humidity: data.humidity,
-        temperature2: data.temperature2,
+        temperature: round(data.temperature),
+        humidity: round(data.humidity),
+        temperature2: round(data.temperature2),
         pressure: data.pressure,
         sealevel_pressure: data.sealevel_pressure,
         altitude: data.altitude
@@ -35,6 +35,12 @@ module.exports.writeStationAPI = function (data) {
         icon_url: data.icon_url
     });
 };
+
+function round (number) {
+    let num = Number(number).toFixed(1);
+    let sp_num = num.split(".");
+    return sp_num.pop() === '0' ? sp_num[0] : num;
+}
 
 
 module.exports.readStations = function (res) {

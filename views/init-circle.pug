@@ -1,0 +1,6 @@
+script.
+    $('#humidityCircle'+'#{val.name}').circleProgress({
+        value: #{val.humidity} / 100
+    }).on('circle-animation-progress', function (event, progress, stepValue) {
+        $('#humidityStrong'+'#{val.name}').text(#{val.humidity} + '%');
+    });
