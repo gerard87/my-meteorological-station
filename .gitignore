@@ -71,5 +71,6 @@ package-lock.json
 # kml
 public/kml/
 
-# firebase config
+# firebase
 firebase-config.json
+firebase-admin.json

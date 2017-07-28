@@ -1,11 +1,17 @@
-const firebase = require("firebase");
-const config = require('../firebase-config.json');
 const env = process.env.NODE_ENV || 'development';
+const admin = require("firebase-admin");
+const config = require('../firebase-config.json');
+const serviceAccount = require("../firebase-admin.json");
 
-firebase.initializeApp(config);
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: config.databaseURL
+});
+
 
 module.exports.writeStationSensors = function (data) {
-    firebase.database().ref('stations/' + data.name).update({
+    admin.database().ref('stations/' + data.name).update({
         name: data.name,
         temperature: round(data.temperature),
         humidity: round(data.humidity),
@@ -18,7 +24,7 @@ module.exports.writeStationSensors = function (data) {
 
 
 module.exports.writeStationAPI = function (data) {
-    firebase.database().ref('stations/' + data.name).update({
+    admin.database().ref('stations/' + data.name).update({
         city: data.city,
         longitude: data.longitude,
         latitude: data.latitude,
@@ -44,7 +50,7 @@ function round (number) {
 
 
 module.exports.readStations = function (res) {
-    firebase.database().ref('/stations/').once('value').then(function(snapshot) {
+    admin.database().ref('/stations/').once('value').then(function(snapshot) {
 
         let data = [];
 
@@ -72,7 +78,7 @@ function getIconName (icon) {
 
 
 module.exports.readStationData = function (name) {
-    firebase.database().ref('/stations/' + name).once('value').then(function(snapshot) {
+    admin.database().ref('/stations/' + name).once('value').then(function(snapshot) {
         console.log(snapshot.val());
     });
 };
