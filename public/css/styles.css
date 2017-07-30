@@ -257,17 +257,17 @@ _:-ms-input-placeholder, :root .demo-graph {
 
 .circle canvas {
     vertical-align: top;
-    height: 120px;
+    height: 100px;
 }
 
 .circle strong {
     position: absolute;
-    top: 40px;
-    left: 10px;
+    top: 22%;
+    left: 4%;
     width: 100%;
     text-align: center;
     line-height: 40px;
-    font-size: 30px;
+    font-size: 25px;
     color: #7a7a7a;
 }
 
@@ -282,7 +282,6 @@ _:-ms-input-placeholder, :root .demo-graph {
     color: #7a7a7a;
     font-size: 25px;
     margin-top: 12px;
-    margin-left: 9px;
 }
 
 #menuitem {
