@@ -1,10 +1,16 @@
 extends layout
 
+block tab
+    .mdl-layout__tab-bar.mdl-js-ripple-effect.mdl-color--blue-grey.mdl-color-text--grey-600
+        each val, index in data
+            a(class=(index == 0) ? 'mdl-layout__tab is-active' : 'mdl-layout__tab' href='#' + val.name) #{val.name}
+
+
 block content
 
-    include update-values
+    include scripts/update-values
     each val in data
-        include lg-button
+        include scripts/lg-button
 
 
     main.mdl-layout__content.mdl-color--grey-100
@@ -73,7 +79,7 @@ block content
 
                             .mdl-cell.mdl-cell--6-col
 
-                        include init-circle
+                        include scripts/init-circle
 
 
 

@@ -3,11 +3,21 @@ const router = express.Router();
 
 const firebase = require('../js/firebase');
 const lg = require('../js/lg-communication');
-
+const config = require('../firebase-config.json');
 
 router.get('/', function(req, res){
 
     firebase.readStations(res);
+
+});
+
+
+router.get('/settings', function(req, res){
+
+    res.render('settings', {
+        title: 'Settings',
+        config: config
+    });
 
 });
 

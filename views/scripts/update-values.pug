@@ -1,5 +1,4 @@
 script.
-    firebase.initializeApp(!{JSON.stringify(config)});
     firebase.database().ref('/stations/').on('value', function (snapshot) {
 
         for (var station in snapshot.val()) {

@@ -1,0 +1,42 @@
+script.
+    $(function () {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                $('#signinbtn').css({display: 'none'});
+                $('#username').text(user.displayName);
+                $('#username').css({display: 'block'});
+                $('#accbtn').css({display: 'block'});
+                $('#managestations').css({display: 'block'});
+            } else {
+                // No user is signed in.
+                $('#signinbtn').css({display: 'block'});
+                $('#username').css({display: 'none'});
+                $('#accbtn').css({display: 'none'});
+                $('#managestations').css({display: 'none'});
+            }
+        });
+
+
+
+        $('#signinbtn').on('click', function (event) {
+
+            const provider = new firebase.auth.GoogleAuthProvider();
+
+            firebase.auth().signInWithPopup(provider).then(function (result) {
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+        });
+
+
+        $('#signout').on('click', function (event) {
+
+            firebase.auth().signOut().then(function () {
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+        });
+    });

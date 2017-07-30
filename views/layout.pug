@@ -21,7 +21,12 @@ html
 
 
         link(rel='icon' type='image/png' href='img/cloud.png')
-        title=title
+        title='My meteorological station'
+
+        script.
+            firebase.initializeApp(!{JSON.stringify(config)});
+
+        include scripts/signin
 
     body
 
@@ -30,8 +35,8 @@ html
 
 
             header.demo-header.mdl-layout__header.mdl-color--blue-grey.mdl-color-text--blue-grey-50
-                .mdl-layout__header-row
-                    span.mdl-layout-title Home
+                #bar.mdl-layout__header-row
+                    span.mdl-layout-title #{title}
                     .mdl-layout-spacer
                     .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable
                         label.mdl-button.mdl-js-button.mdl-button--icon(for='search')
@@ -45,12 +50,20 @@ html
                         li.mdl-menu__item About
                         li.mdl-menu__item Contact
 
+                    #signinbtn.mdl-button.mdl-js-button.mdl-color-text--blue-grey-50 SIGN IN
+                    a#username.mdl-color--blue-grey.mdl-color-text--blue-grey-50
+                    button#accbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon
+                        i.material-icons(role='presentation') arrow_drop_down
+                        span.visuallyhidden Accounts
+                    ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for='accbtn')
+                        li.mdl-menu__item
+                            #signout
+                                i#menuitem.material-icons arrow_back
+                                | Sign out
 
 
-                .mdl-layout__tab-bar.mdl-js-ripple-effect.mdl-color--blue-grey.mdl-color-text--grey-600
-                    each val, index in data
-                        a(class=(index==0) ? 'mdl-layout__tab is-active' : 'mdl-layout__tab' href='#'+val.name) #{val.name}
 
+                block tab
 
 
             .demo-drawer.mdl-layout__drawer.mdl-color--blue-grey-800.mdl-color-text--blue-grey-50
@@ -61,13 +74,14 @@ html
 
 
                 nav.demo-navigation.mdl-navigation.mdl-color--blue-grey
-                    a.mdl-navigation__link(href='')
+                    a.mdl-navigation__link(href='/')
                         i.mdl-color-text--blue-grey-50.material-icons(role='presentation') home
                         | Home
-                    a.mdl-navigation__link(href='')
-                        i.mdl-color-text--blue-grey-50.material-icons(role='presentation') edit
-                        | Manage stations
-                    a.mdl-navigation__link(href='')
+                    #managestations
+                        a.mdl-navigation__link(href='')
+                            i.mdl-color-text--blue-grey-50.material-icons(role='presentation') edit
+                            | Manage stations
+                    a.mdl-navigation__link(href='settings')
                         i.mdl-color-text--blue-grey-50.material-icons(role='presentation') settings
                         | Settings
                     .mdl-layout-spacer
