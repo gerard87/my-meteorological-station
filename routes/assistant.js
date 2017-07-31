@@ -29,27 +29,36 @@ router.post('/', function(req, res){
 
 
     const app = new App({request: req, response: res});
-    console.log('Request headers: ' + JSON.stringify(req.headers));
-    console.log('Request body: ' + JSON.stringify(req.body));
+    // console.log('Request headers: ' + JSON.stringify(req.headers));
+    // console.log('Request body: ' + JSON.stringify(req.body));
 
 
     function valueStationIntent (app) {
         let value = app.getArgument(VALUE_ARGUMENT);
-        let station = app.getArgument(STATION_ARGUMENT);
+        let station = normalizeName(app.getArgument(STATION_ARGUMENT));
+        let val = getKeyAndUnit(value);
 
         firebase.database().ref('/stations/' + station).once('value').then(function(snapshot) {
-            app.tell('You are asking for '+ value + ' of ' + station +
-                '. The ' + value + ' is ' + snapshot.child(value).val());
+
+            let answer = '<speak>';
+
+            if (snapshot.hasChild(val.valueId)) {
+
+                answer += 'The ' + value + ' is ' + snapshot.child(val.valueId).val() + val.measureUnit +
+                    '. Do you want anything more?';
+            } else {
+                answer += 'The ' + station + ' doesn\'t have the '+ value + ' value. Try again!';
+            }
+
+            answer += '</speak>';
+
+            app.ask(answer);
         });
     }
 
     function allValuesIntent (app) {
 
-        console.log(app);
-
         firebase.database().ref('/stations/').once('value').then(function(snapshot) {
-
-            console.log(snapshot.val());
 
             let answer = '<speak>';
 
@@ -70,8 +79,6 @@ router.post('/', function(req, res){
             answer += 'That\'s all the information. Do you want anything more?</speak>';
 
 
-            console.log(answer);
-
             app.ask(answer);
 
         });
@@ -86,5 +93,52 @@ router.post('/', function(req, res){
 
 
 });
+
+function normalizeName (name) {
+    return capitalizeFirstLetter(name.replace(/\s+/g, ''));
+}
+
+function capitalizeFirstLetter (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function getKeyAndUnit (value) {
+    let valueId = ' ';
+    let measureUnit = '';
+    switch (value) {
+        case 'temperature':
+            valueId = value;
+            measureUnit = ' centigrade degrees';
+            break;
+        case 'city':
+        case 'weather':
+            valueId = value;
+            break;
+        case 'humidity':
+            valueId = value;
+            measureUnit = ' %';
+            break;
+        case 'pressure':
+            valueId = value;
+            measureUnit = ' Pa';
+            break;
+        case 'sea level pressure':
+            valueId = 'sealevel_pressure';
+            measureUnit = ' Pa';
+            break;
+        case 'altitude':
+            valueId = value;
+            measureUnit = ' m';
+            break;
+        case 'wind velocity':
+            valueId = 'wind_kph';
+            measureUnit = ' kph';
+            break;
+    }
+    return {
+        valueId: valueId,
+        measureUnit: measureUnit
+    }
+}
 
 module.exports = router;
