@@ -5,6 +5,7 @@ const http = require('http').Server(app);
 const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
+const assistant = require('./routes/assistant');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -13,6 +14,7 @@ app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/assistant', assistant);
 
 
 http.listen(process.env.PORT || 3000, function(){

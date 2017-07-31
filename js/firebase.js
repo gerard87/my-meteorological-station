@@ -2,6 +2,7 @@ const env = process.env.NODE_ENV || 'development';
 const admin = require("firebase-admin");
 const config = require('../firebase-config.json');
 const serviceAccount = require("../firebase-admin.json");
+const utils = require('../js/utils');
 
 
 admin.initializeApp({
@@ -13,9 +14,9 @@ admin.initializeApp({
 module.exports.writeStationSensors = function (data) {
     admin.database().ref('stations/' + data.name).update({
         name: data.name,
-        temperature: round(data.temperature),
-        humidity: round(data.humidity),
-        temperature2: round(data.temperature2),
+        temperature: utils.round(data.temperature),
+        humidity: utils.round(data.humidity),
+        temperature2: utils.round(data.temperature2),
         pressure: data.pressure,
         sealevel_pressure: data.sealevel_pressure,
         altitude: data.altitude
@@ -41,12 +42,6 @@ module.exports.writeStationAPI = function (data) {
         icon_url: data.icon_url
     });
 };
-
-function round (number) {
-    let num = Number(number).toFixed(1);
-    let sp_num = num.split(".");
-    return sp_num.pop() === '0' ? sp_num[0] : num;
-}
 
 
 module.exports.readStations = function (res) {
