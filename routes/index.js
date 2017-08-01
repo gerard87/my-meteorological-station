@@ -3,6 +3,7 @@ const router = express.Router();
 
 const firebase = require('../js/firebase');
 const lg = require('../js/lg-communication');
+const twitter = require('../js/twitter');
 const config = require('../firebase-config.json');
 
 router.get('/', function(req, res){
@@ -52,6 +53,12 @@ router.post('/lg', function (req, res){
     }
     res.end();
 
+});
+
+
+router.post('/tweet', function (req, res) {
+    twitter.tweetUpdate();
+    res.end();
 });
 
 

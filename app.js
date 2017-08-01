@@ -4,6 +4,10 @@ const path = require('path');
 const http = require('http').Server(app);
 const bodyParser = require('body-parser');
 
+const admin = require("firebase-admin");
+const config = require('./firebase-config.json');
+const serviceAccount = require("./firebase-admin.json");
+
 const index = require('./routes/index');
 const assistant = require('./routes/assistant');
 
@@ -15,6 +19,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/assistant', assistant);
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: config.databaseURL
+});
 
 
 http.listen(process.env.PORT || 3000, function(){

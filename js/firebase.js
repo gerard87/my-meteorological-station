@@ -1,14 +1,7 @@
 const env = process.env.NODE_ENV || 'development';
 const admin = require("firebase-admin");
 const config = require('../firebase-config.json');
-const serviceAccount = require("../firebase-admin.json");
 const utils = require('../js/utils');
-
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: config.databaseURL
-});
 
 
 module.exports.writeStationSensors = function (data) {
