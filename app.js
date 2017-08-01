@@ -8,6 +8,8 @@ const admin = require("firebase-admin");
 const config = require('./firebase-config.json');
 const serviceAccount = require("./firebase-admin.json");
 
+const twitter = require('./js/twitter');
+
 const index = require('./routes/index');
 const assistant = require('./routes/assistant');
 
@@ -24,6 +26,9 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: config.databaseURL
 });
+
+// Tweet the update every 24 hours
+setInterval(twitter.tweetUpdate, 86400000);
 
 
 http.listen(process.env.PORT || 3000, function(){
