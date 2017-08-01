@@ -3,19 +3,12 @@
 const express = require('express');
 const router = express.Router();
 
-
 process.env.DEBUG = 'actions-on-google:*';
 const App = require('actions-on-google').ApiAiApp;
 
-
-const firebase = require("firebase");
-const config = require('../firebase-config.json');
+const admin = require("firebase-admin");
 
 const utils = require('../js/utils');
-
-
-firebase.initializeApp(config);
-
 
 
 const VALUE_STATION_ACTION = 'value_station';
@@ -38,7 +31,7 @@ router.post('/', function(req, res){
         let station = normalizeName(app.getArgument(STATION_ARGUMENT));
         let val = getKeyAndUnit(value);
 
-        firebase.database().ref('/stations/' + station).once('value').then(function(snapshot) {
+        admin.database().ref('/stations/' + station).once('value').then(function(snapshot) {
 
             let answer = '<speak>';
 
@@ -58,7 +51,7 @@ router.post('/', function(req, res){
 
     function allValuesIntent (app) {
 
-        firebase.database().ref('/stations/').once('value').then(function(snapshot) {
+        admin.database().ref('/stations/').once('value').then(function(snapshot) {
 
             let answer = '<speak>';
 
