@@ -69,7 +69,8 @@ def print_data(data):
 
 def get_location():
     url = 'http://ipinfo.io/json'
-    response = urllib2.urlopen(url)
+    url2 = 'http://ip-api.com/json'
+    response = urllib2.urlopen(url2)
     data = json.load(response)
     return data['city']
 
