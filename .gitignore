@@ -74,3 +74,6 @@ public/kml/
 # firebase
 firebase-config.json
 firebase-admin.json
+
+# twitter
+twitter-config.json
