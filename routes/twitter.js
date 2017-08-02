@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const { assistant } = require('../assistant');
+const { twitter } = require('../twitter');
 
 router.post('/', function(req, res){
 
-    assistant.webhook(req, res);
+    twitter.tweetUpdate();
+    res.end();
 
 });
 

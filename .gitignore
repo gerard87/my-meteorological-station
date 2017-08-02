@@ -65,9 +65,6 @@ data/*
 .directory
 
 
-# npm
-package-lock.json
-
 # kml
 public/kml/
 

@@ -1,10 +1,8 @@
-const env = process.env.NODE_ENV || 'development';
 const admin = require("firebase-admin");
-const config = require('../firebase-config.json');
-const utils = require('../js/utils');
+const utils = require('./utils');
 
 
-module.exports.writeStationSensors = function (data) {
+function writeStationSensors (data) {
     admin.database().ref('stations/' + data.name).update({
         name: data.name,
         temperature: utils.round(data.temperature),
@@ -14,10 +12,10 @@ module.exports.writeStationSensors = function (data) {
         sealevel_pressure: data.sealevel_pressure,
         altitude: data.altitude
     });
-};
+}
 
 
-module.exports.writeStationAPI = function (data) {
+function writeStationAPI (data) {
     admin.database().ref('stations/' + data.name).update({
         city: data.city,
         longitude: data.longitude,
@@ -34,28 +32,29 @@ module.exports.writeStationAPI = function (data) {
         icon: data.icon,
         icon_url: data.icon_url
     });
-};
+}
 
 
-module.exports.readStations = function (res) {
-    admin.database().ref('/stations/').once('value').then(function(snapshot) {
+function readStations () {
+    return new Promise(function (resolve, reject) {
+        admin.database().ref('/stations/').once('value').then(function (snapshot) {
 
-        let data = [];
+            let data = [];
 
-        for (let station in snapshot.val()) {
-            let s = snapshot.child(station).val();
-            s.icon = getIconName(snapshot.child(station).child('icon').val());
-            data.push(s);
-        }
+            for (let station in snapshot.val()) {
+                let s = snapshot.child(station).val();
+                s.icon = getIconName(snapshot.child(station).child('icon').val());
+                data.push(s);
+            }
 
-        res.render('index',{
-            title: 'Home',
-            data: data,
-            env: env,
-            config: config
+            return resolve(data);
+
+        }).catch(function (error) {
+            return reject(error);
         });
     });
-};
+
+}
 
 function getIconName (icon) {
     return icon === 'flurries' || icon === 'chanceflurries' || icon === 'chancesleet' ? 'sleet' :
@@ -65,10 +64,24 @@ function getIconName (icon) {
 }
 
 
-module.exports.readStationData = function (name) {
-    admin.database().ref('/stations/' + name).once('value').then(function(snapshot) {
-        console.log(snapshot.val());
+function readStationData (name) {
+
+    return new Promise(function (resolve, reject) {
+
+        admin.database().ref('/stations/' + name).once('value').then(function(snapshot) {
+            return resolve(snapshot.val());
+        }).catch(function (error) {
+            return reject(error);
+        });
     });
+
+}
+
+module.exports = {
+    writeStationSensors,
+    writeStationAPI,
+    readStations,
+    readStationData
 };
 
 

@@ -1,18 +1,18 @@
-var exec = require('child_process').exec, child;
-var ejs = require('ejs');
-var path = require('path');
-var fs = require('fs');
+let exec = require('child_process').exec, child;
+const ejs = require('ejs');
+const path = require('path');
+const fs = require('fs');
 
-var galaxy_ip = '10.160.67.136';
-var galaxy_pass = 'lqgalaxy';
+const galaxy_ip = '10.160.67.122';
+const galaxy_pass = 'lqgalaxy';
 
-module.exports.flyTo = function (city) {
-    var message = "echo 'search="+city+"' > /tmp/query.txt";
+function flyTo (city) {
+    const message = "echo 'search="+city+"' > /tmp/query.txt";
     communicate(message);
-};
+}
 
 function communicate (message) {
-    var command = "sshpass -p '"+galaxy_pass+"' ssh lg@"+galaxy_ip+" \""+message+"\"";
+    const command = "sshpass -p '"+galaxy_pass+"' ssh lg@"+galaxy_ip+" \""+message+"\"";
     execute_command(command);
 }
 
@@ -20,12 +20,12 @@ function get_server_ip () {
     /* TODO */
     // var command = "ifconfig | grep 'inet ' | awk '{print $2}'";
     // execute_command(command);
-    return '10.160.67.29';
+    return '10.160.67.73';
 }
 
-module.exports.show_kml_balloon = function (city, coords, data) {
+function show_kml_balloon (city, coords, data) {
 
-    var contentString = '<table width="280"><tr><td>' +
+    const contentString = '<table width="280"><tr><td>' +
         '<div id="content">'+'<div id="siteNotice">'+'</div>' +
         '<h1 id="firstHeading" class="firstHeading">' + city + '</h1>' +
         '<div id="bodyContent">' +
@@ -48,19 +48,19 @@ module.exports.show_kml_balloon = function (city, coords, data) {
         if (err) {
             console.log(err);
         } else {
-            var dir = path.join(__dirname, '..', 'public/kml');
+            const dir = path.join(__dirname, '..', 'public/kml');
             if (!fs.existsSync(dir)) {
                 fs.mkdir(dir, function (err) {});
             }
 
-            var command = 'rm '+dir+'/MMS-*.kml';
+            const command = 'rm '+dir+'/MMS-*.kml';
             child = exec( command, function (error, stdout, stderr) {
                 if (error !== null) {
                     console.log('exec error: ' + error);
                 }
 
-                var millis = new Date().getMilliseconds();
-                var name = 'MMS-'+city+'-'+millis+'.kml';
+                const millis = new Date().getMilliseconds();
+                const name = 'MMS-'+city+'-'+millis+'.kml';
                 fs.writeFile(path.join(dir, name), data, function (err) {});
 
                 send_single_kml(name, dir);
@@ -68,12 +68,12 @@ module.exports.show_kml_balloon = function (city, coords, data) {
         }
     });
 
-};
+}
 
 
 function send_single_kml (name, route) {
-    var content = 'http://' + get_server_ip() + ':3000/kml/' + name + '\n';
-    var command = "echo '" + content + "' > "+route+"/kmls.txt";
+    const content = 'http://' + get_server_ip() + ':3000/kml/' + name + '\n';
+    const command = "echo '" + content + "' > "+route+"/kmls.txt";
     child = exec( command, function (error, stdout, stderr) {
         if (error !== null) {
             console.log('exec error: ' + error);
@@ -84,9 +84,9 @@ function send_single_kml (name, route) {
 }
 
 function send_galaxy (route) {
-    var file_path = route+'/kmls.txt';
-    var server_path = '/var/www/html';
-    var command = "sshpass -p '" + galaxy_pass + "' scp " + file_path + " lg@" + galaxy_ip + ":" + server_path;
+    const file_path = route+'/kmls.txt';
+    const server_path = '/var/www/html';
+    const command = "sshpass -p '" + galaxy_pass + "' scp " + file_path + " lg@" + galaxy_ip + ":" + server_path;
     child = exec( command, function (error, stdout, stderr) {
         if (error !== null) {
             console.log('exec error: ' + error);
@@ -99,31 +99,31 @@ function send_galaxy (route) {
 }
 
 function start_tour () {
-    var message = "echo 'playtour=Show Balloon' > /tmp/query.txt";
+    const message = "echo 'playtour=Show Balloon' > /tmp/query.txt";
     communicate(message)
 }
 
-module.exports.exit_tour = function () {
-    var message = "echo 'exittour=Show Balloon' > /tmp/query.txt";
+function exit_tour () {
+    const message = "echo 'exittour=Show Balloon' > /tmp/query.txt";
     communicate(message)
-};
+}
 
 
-module.exports.clean_lg = function () {
-    var route = path.join(__dirname, '..', 'public/kml');
-    var command = "echo '' > "+route+"/kmls.txt";
+function clean_lg () {
+    const route = path.join(__dirname, '..', 'public/kml');
+    const command = "echo '' > "+route+"/kmls.txt";
     child = exec( command, function (error, stdout, stderr) {
         if (error !== null) {
             console.log('exec error: ' + error);
         }
-        var file_path = route+'/kmls.txt';
-        var server_path = '/var/www/html';
-        var command = "sshpass -p '" + galaxy_pass + "' scp " + file_path + " lg@" + galaxy_ip + ":" + server_path;
+        const file_path = route+'/kmls.txt';
+        const server_path = '/var/www/html';
+        const command = "sshpass -p '" + galaxy_pass + "' scp " + file_path + " lg@" + galaxy_ip + ":" + server_path;
         execute_command(command);
     });
 
 
-};
+}
 
 
 function execute_command (command) {
@@ -133,3 +133,10 @@ function execute_command (command) {
         }
     });
 }
+
+module.exports = {
+    flyTo,
+    show_kml_balloon,
+    exit_tour,
+    clean_lg
+};

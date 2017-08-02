@@ -8,10 +8,9 @@ const admin = require("firebase-admin");
 const config = require('./firebase-config.json');
 const serviceAccount = require("./firebase-admin.json");
 
-const twitter = require('./js/twitter');
+const { twitter } = require('./twitter');
 
-const index = require('./routes/index');
-const assistant = require('./routes/assistant');
+const { home, assistant, liquidgalaxy, tweet } = require('./routes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -19,8 +18,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', home);
+app.use('/lg', liquidgalaxy);
 app.use('/assistant', assistant);
+app.use('/tweet', tweet);
+
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
