@@ -43,7 +43,7 @@ function readStations () {
 
             for (let station in snapshot.val()) {
                 let s = snapshot.child(station).val();
-                s.icon = getIconName(snapshot.child(station).child('icon').val());
+                s.icon = utils.getIconName(snapshot.child(station).child('icon').val());
                 data.push(s);
             }
 
@@ -54,13 +54,6 @@ function readStations () {
         });
     });
 
-}
-
-function getIconName (icon) {
-    return icon === 'flurries' || icon === 'chanceflurries' || icon === 'chancesleet' ? 'sleet' :
-        icon === 'chancerain' ? 'rain' : icon === 'chancesnow' ? 'snow' :
-        icon === 'chancetstorms' ? 'tstorms' : icon === 'clear' || icon === 'hazy' ? 'sunny' :
-        icon === 'mostlycloudy' || icon === 'mostlysunny' || icon === 'partlysunny' ? 'partlycloudy': icon;
 }
 
 
