@@ -1,0 +1,9 @@
+script.
+    function setHref () {
+        const user = firebase.auth().currentUser.uid;
+        if (user) {
+            document.getElementById("managelink").setAttribute("href", 'manage?id=' + user);
+        }
+    }
+
+

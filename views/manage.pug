@@ -1,0 +1,28 @@
+extends layout
+
+block tab
+    #header-row.mdl-layout__header-row
+
+
+
+block content
+
+    main.mdl-layout__content.mdl-color--grey-100
+        .mdl-grid.demo-content
+            each val in data
+                .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid(id='stationmngcard'+val)
+                    .mdl-cell.mdl-cell--6-col
+                        span#stationmng
+                            | #{val}
+                    .mdl-cell.mdl-cell--6-col
+                        include scripts/delete-station
+                        div(align='right')
+                            a.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-color-text--red(href='#', id='remove'+val)
+                                i.material-icons delete
+
+
+
+
+
+
+

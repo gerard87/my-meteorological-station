@@ -1,0 +1,18 @@
+script.
+    $(function () {
+        $('#remove'+'#{val}').on('click', function (event) {
+
+            const user = firebase.auth().currentUser.uid;
+
+            firebase.database().ref('/users/'+user).on('value', function (snapshot) {
+                for (var station in snapshot.val()) {
+                    if ('#{val}' === snapshot.child(station).val()) {
+                        firebase.database().ref('/users/'+user+'/'+station).remove();
+                        firebase.database().ref('/stations/'+user+'/'+'#{val}').remove();
+                        $('#stationmngcard'+'#{val}').remove();
+                    }
+                }
+            });
+
+        });
+    });

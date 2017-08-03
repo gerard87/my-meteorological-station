@@ -230,7 +230,7 @@ _:-ms-input-placeholder, :root .demo-graph {
 }
 
 
-#view-source {
+#fab {
     position: fixed;
     display: block;
     right: 0;
@@ -287,4 +287,16 @@ _:-ms-input-placeholder, :root .demo-graph {
 #menuitem {
     width: 33px;
     vertical-align: -7px;
+}
+
+#stationresult {
+    display: none;
+}
+
+#stationmng {
+    font-style: normal;
+    font-size: 1.5em;
+    font-weight: normal;
+    color:#7a7a7a;
+    line-height: 2;
 }

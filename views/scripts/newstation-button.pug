@@ -1,0 +1,38 @@
+script.
+    $(function () {
+        $('#newstationbtn').on('click', function (event) {
+            const user = firebase.auth().currentUser;
+            let station = 'Station';
+
+            if (user) {
+
+                firebase.database().ref('station_index/').once('value').then(function (snapshot) {
+
+                    if (snapshot.val() === null) {
+                        station += 1;
+                        firebase.database().ref('station_index/').set(
+                            2
+                        );
+                    } else {
+                        station += snapshot.val();
+                        firebase.database().ref('station_index/').set(
+                            snapshot.val() + 1
+                        );
+                    }
+
+
+                    $('#stationresult').css({display: 'block'});
+                    $('#stationname').text(station);
+
+                    $('#userid').text(user.uid);
+
+                    firebase.database().ref('users/' + user.uid).push(
+                        station
+                    );
+
+                });
+
+            }
+
+        });
+    });

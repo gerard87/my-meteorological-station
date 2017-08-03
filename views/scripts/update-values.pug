@@ -1,32 +1,38 @@
 script.
     firebase.database().ref('/stations/').on('value', function (snapshot) {
 
-        for (var station in snapshot.val()) {
-            $('#temperature' + station).text(snapshot.child(station).child('temperature').val());
+        for (const user in snapshot.val()) {
 
-            $('#humidityCircle' + station).circleProgress({
-                value: snapshot.child(station).child('humidity').val() / 100,
-                animation: false
-            })
-            $('#humidityStrong'+ station).text(snapshot.child(station).child('humidity').val() + '%');
+            for (const station in snapshot.child(user).val()) {
 
-            $('#temperature2' + station).text(snapshot.child(station).child('temperature2').val());
-            $('#pressure' + station).text(snapshot.child(station).child('pressure').val());
-            $('#sealeve_pressure' + station).text(snapshot.child(station).child('sealevel_pressure').val());
-            $('#altitude' + station).text(snapshot.child(station).child('altitude').val());
+                $('#temperature' + station).text(snapshot.child(user).child(station).child('temperature').val());
 
-            $('#city' + station).text(snapshot.child(station).child('city').val());
-            $('#weather' + station).text(snapshot.child(station).child('weather').val());
-            $('#wind_dir' + station).text(snapshot.child(station).child('wind_dir').val());
-            $('#wind_kph' + station).text(snapshot.child(station).child('wind_kph').val());
-            $('#dewpoint_c' + station).text(snapshot.child(station).child('dewpoint_c').val());
-            $('#heat_index_c' + station).text(snapshot.child(station).child('heat_index_c').val());
-            $('#windchill_c' + station).text(snapshot.child(station).child('windchill_c').val());
-            $('#feelslike_c' + station).text(snapshot.child(station).child('feelslike_c').val());
-            $('#visibility_km' + station).text(snapshot.child(station).child('visibility_km').val());
-            $('#precip_today_metric' + station).text(snapshot.child(station).child('precip_today_metric').val());
-            $('#icon' + station).text(snapshot.child(station).child('icon').val());
-            $('#icon_url' + station).text(snapshot.child(station).child('icon_url').val());
+                $('#humidityCircle' + station).circleProgress({
+                    value: snapshot.child(user).child(station).child('humidity').val() / 100,
+                    animation: false
+                })
+                $('#humidityStrong' + station).text(snapshot.child(user).child(station).child('humidity').val() + '%');
+
+                $('#temperature2' + station).text(snapshot.child(user).child(station).child('temperature2').val());
+                $('#pressure' + station).text(snapshot.child(user).child(station).child('pressure').val());
+                $('#sealeve_pressure' + station).text(snapshot.child(user).child(station).child('sealevel_pressure').val());
+                $('#altitude' + station).text(snapshot.child(user).child(station).child('altitude').val());
+
+                $('#city' + station).text(snapshot.child(user).child(station).child('city').val());
+                $('#weather' + station).text(snapshot.child(user).child(station).child('weather').val());
+                $('#wind_dir' + station).text(snapshot.child(user).child(station).child('wind_dir').val());
+                $('#wind_kph' + station).text(snapshot.child(user).child(station).child('wind_kph').val());
+                $('#dewpoint_c' + station).text(snapshot.child(user).child(station).child('dewpoint_c').val());
+                $('#heat_index_c' + station).text(snapshot.child(user).child(station).child('heat_index_c').val());
+                $('#windchill_c' + station).text(snapshot.child(user).child(station).child('windchill_c').val());
+                $('#feelslike_c' + station).text(snapshot.child(user).child(station).child('feelslike_c').val());
+                $('#visibility_km' + station).text(snapshot.child(user).child(station).child('visibility_km').val());
+                $('#precip_today_metric' + station).text(snapshot.child(user).child(station).child('precip_today_metric').val());
+                $('#icon' + station).text(snapshot.child(user).child(station).child('icon').val());
+                $('#icon_url' + station).text(snapshot.child(user).child(station).child('icon_url').val());
+
+            }
+
         }
 
     });

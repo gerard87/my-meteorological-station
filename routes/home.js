@@ -33,6 +33,32 @@ router.get('/settings', function(req, res){
 });
 
 
+router.get('/new', function(req, res){
+
+    res.render('newStation', {
+        title: 'New station',
+        config: config
+    });
+
+});
+
+
+router.get('/manage', function(req, res){
+
+    firebase.getUserStations(req.query.id).then(data => {
+
+        res.render('manage', {
+            title: 'Manage stations',
+            data: data,
+            config: config
+        });
+
+    });
+
+
+});
+
+
 router.post('/sensors', function(req, res){
 
     firebase.writeStationSensors(req.body);
