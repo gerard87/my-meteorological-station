@@ -6,14 +6,15 @@ script.
                 $('#signinbtn').css({display: 'none'});
                 $('#username').text(user.displayName);
                 $('#username').css({display: 'block'});
-                $('#accbtn').css({display: 'block'});
+                $('#userimg').attr('src', user.photoURL)
+                $('#userimg').css({display: 'block'});
                 $('#managestations').css({display: 'block'});
                 $('#fab').css({display: 'block'});
             } else {
                 // No user is signed in.
                 $('#signinbtn').css({display: 'block'});
                 $('#username').css({display: 'none'});
-                $('#accbtn').css({display: 'none'});
+                $('#userimg').css({display: 'none'});
                 $('#managestations').css({display: 'none'});
                 $('#fab').css({display: 'none'});
             }

@@ -300,3 +300,14 @@ _:-ms-input-placeholder, :root .demo-graph {
     color:#7a7a7a;
     line-height: 2;
 }
+
+#userimg {
+    width:30px;
+    height:30px;
+    border-radius: 999px;
+    margin-left: 11px;
+}
+
+#username {
+    margin-left: 11px;
+}
