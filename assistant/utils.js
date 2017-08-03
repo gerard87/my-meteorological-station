@@ -6,24 +6,31 @@ function capitalizeFirstLetter (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function uncapitalizeFirstLetter (string) {
+    return string.charAt(0).toLowerCase() + string.slice(1);
+}
+
 function getKeyAndUnit (value) {
     let valueId = ' ';
     let measureUnit = '';
-    switch (value) {
+
+    const val = uncapitalizeFirstLetter(value);
+
+    switch (val) {
         case 'temperature':
-            valueId = value;
+            valueId = val;
             measureUnit = ' centigrade degrees';
             break;
         case 'city':
         case 'weather':
-            valueId = value;
+            valueId = val;
             break;
         case 'humidity':
-            valueId = value;
+            valueId = val;
             measureUnit = ' %';
             break;
         case 'pressure':
-            valueId = value;
+            valueId = val;
             measureUnit = ' Pa';
             break;
         case 'sea level pressure':
@@ -31,7 +38,7 @@ function getKeyAndUnit (value) {
             measureUnit = ' Pa';
             break;
         case 'altitude':
-            valueId = value;
+            valueId = val;
             measureUnit = ' m';
             break;
         case 'wind velocity':
