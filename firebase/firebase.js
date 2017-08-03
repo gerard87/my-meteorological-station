@@ -43,7 +43,7 @@ function writeStationAPI (data) {
                 visibility_km: data.visibility_km,
                 precip_today_metric: data.precip_today_metric,
                 icon: data.icon,
-                icon_url: data.icon_url
+                icon_img: utils.getIconName(data.icon)
             });
         }
 
@@ -61,9 +61,7 @@ function readStations () {
             for (const user in snapshot.val()) {
 
                 for (const station in snapshot.child(user).val()) {
-                    let s = snapshot.child(user).child(station).val();
-                    s.icon = utils.getIconName(snapshot.child(user).child(station).child('icon').val());
-                    data.push(s);
+                    data.push(snapshot.child(user).child(station).val());
                 }
 
             }

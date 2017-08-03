@@ -29,7 +29,7 @@ script.
                 $('#visibility_km' + station).text(snapshot.child(user).child(station).child('visibility_km').val());
                 $('#precip_today_metric' + station).text(snapshot.child(user).child(station).child('precip_today_metric').val());
                 $('#icon' + station).text(snapshot.child(user).child(station).child('icon').val());
-                $('#icon_url' + station).text(snapshot.child(user).child(station).child('icon_url').val());
+                $('#icon_img' + station).attr('src', '/img/'+snapshot.child(user).child(station).child('icon_img').val()+'.png')
 
             }
 
