@@ -9,9 +9,8 @@ function writeStationSensors (data) {
         if (valid) {
             admin.database().ref('stations/' + data.uid + '/' + data.name).update({
                 name: data.name,
-                temperature: utils.round(data.temperature),
+                temperature: utils.round((Number(data.temperature)+Number(data.temperature2))/2),
                 humidity: utils.round(data.humidity),
-                temperature2: utils.round(data.temperature2),
                 pressure: data.pressure,
                 sealevel_pressure: data.sealevel_pressure,
                 altitude: data.altitude
