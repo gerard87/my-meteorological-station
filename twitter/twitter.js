@@ -1,32 +1,31 @@
 const Twit = require('twit');
 const twitterConfig = require('../twitter-config.json');
 
-const admin = require("firebase-admin");
+const { firebase } = require('../firebase');
 
 const twitter = new Twit(twitterConfig);
 
 
 function tweetUpdate () {
 
-    admin.database().ref('/stations/').once('value').then(function(snapshot) {
+    firebase.readStations().then(data => {
 
-        for (const station in snapshot.val()) {
+        for (const station in data) {
 
-            const msg = station + ' \n' +
-                    'City: ' + snapshot.child(station).child('city').val() + '\n' +
-                    'Weather: ' + snapshot.child(station).child('weather').val() + '\n' +
-                    'Temperature: ' + snapshot.child(station).child('temperature').val() + ' ºC\n' +
-                    'Humidity: ' + snapshot.child(station).child('humidity').val() + ' %\n' +
-                    'Pressure: ' + snapshot.child(station).child('pressure').val() + ' Pa\n' +
-                    'Sea level pressure: ' + snapshot.child(station).child('sealevel_pressure').val() + ' Pa\n';
+            const msg = data[station].name + ' \n' +
+                'City: ' + data[station].city + '\n' +
+                'Weather: ' + data[station].weather + '\n' +
+                'Temperature: ' + data[station].temperature + ' ºC\n' +
+                'Humidity: ' + data[station].humidity + ' %\n' +
+                'Pressure: ' + data[station].pressure + ' Pa\n' +
+                'Sea level pressure: ' + data[station].sealevel_pressure + ' Pa\n';
+
 
             twitter.post('statuses/update', {status: msg}, function (err, data, response) {
                 console.log(data);
             });
 
         }
-
-
     });
 
 
