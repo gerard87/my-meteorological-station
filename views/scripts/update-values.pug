@@ -17,7 +17,11 @@ script.
                 document.getElementById('arrow' + station).style.transform =
                     'rotate(' + snapshot.child(user).child(station).child('wind_grades').val() + 'deg)';
 
-                $('#temperature2' + station).text(snapshot.child(user).child(station).child('temperature2').val());
+                $('#windvelp' + station).text(snapshot.child(user).child(station).child('wind_kph').val());
+                $('#windvelimg' + station).attr('src', '/img/'+snapshot.child(user).child(station).child('wind_kph_icon').val()+'.svg')
+
+
+
                 $('#pressure' + station).text(snapshot.child(user).child(station).child('pressure').val());
                 $('#sealevel_pressure' + station).text(snapshot.child(user).child(station).child('sealevel_pressure').val());
                 $('#altitude' + station).text(snapshot.child(user).child(station).child('altitude').val());

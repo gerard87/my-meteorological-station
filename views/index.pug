@@ -68,16 +68,14 @@ block content
 
 
 
-                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
-                            .mdl-cell.mdl-cell--6-col
+                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col.mdl-grid
+                            .mdl-cell.mdl-cell--12-col
                                 center
                                     .circles
                                         div(id='humidityCircle'+val.name).circle
                                             strong(id='humidityStrong'+val.name)
                                             span
                                                 | Humidity
-
-                            .mdl-cell.mdl-cell--6-col
 
                         include scripts/init-circle
 
@@ -86,19 +84,27 @@ block content
                         .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
                             .mdl-cell.mdl-cell--6-col
                                 center
-                                    p(id='cmpp'+val.name).cmpp #{val.wind_dir}
+                                    p.cmpp Wind direction
                                     .circles.circle.compass
 
                                         div(id='arrow'+val.name).arrow
                                         img#disc.disc(src='/img/compassdisc.png')
-                                        span
-                                            | Wind direction
+
+                                    p(id='cmpp'+val.name).cmpp_l #{val.wind_dir}
 
                                 include scripts/init-compass
 
 
                             .mdl-cell.mdl-cell--6-col
+                                center
+                                    p.cmpp Wind velocity
 
+                                    .circles.circle.compass
+                                        img.wind_vel_img.disc(id='windvelimg'+val.name src='/img/'+val.wind_kph_icon+'.svg')
+
+                                    p.cmpp_l.num
+                                        font(id='windvelp'+val.name) #{val.wind_kph}
+                                        font.wind_vel_span &nbsp;kph
 
 
 
@@ -128,18 +134,6 @@ block content
                                     font(id='altitude' + val.name) #{val.altitude}
                                     font &nbsp;m
 
-                            .mdl-cell.mdl-cell--4-col
-                                p Wind velocity
-                            .mdl-cell.mdl-cell--8-col
-                                p
-                                    font(id='wind_kph' + val.name) #{val.wind_kph}
-                                    font &nbsp;kph
-
-                            .mdl-cell.mdl-cell--4-col
-                                p Wind direction
-                            .mdl-cell.mdl-cell--8-col
-                                p
-                                    font(id='wind_dir' + val.name) #{val.wind_dir}
 
                             .mdl-cell.mdl-cell--4-col
                                 p Precipitation (dialy)

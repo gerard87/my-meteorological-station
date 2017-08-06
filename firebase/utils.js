@@ -108,8 +108,20 @@ function getDirection (dir) {
     }
 }
 
+function getWindIcon (vel) {
+    if(vel < 3) {
+        return 'wind-low'
+    } else if (vel >= 3 && vel < 10) {
+        return 'wind-normal'
+    } else if (vel >= 10) {
+        return 'wind-high'
+    }
+
+}
+
 module.exports = {
     round,
     getIconName,
-    getDirection
+    getDirection,
+    getWindIcon
 };

@@ -39,6 +39,7 @@ function writeStationAPI (data) {
                 wind_dir: dir.direction,
                 wind_grades: dir.grades,
                 wind_kph: data.wind_kph,
+                wind_kph_icon: utils.getWindIcon(data.wind_kph),
                 dewpoint_c: data.dewpoint_c,
                 heat_index_c: data.heat_index_c,
                 windchill_c: data.windchill_c,
