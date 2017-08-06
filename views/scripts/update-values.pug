@@ -14,7 +14,7 @@ script.
                 $('#humidityStrong' + station).text(snapshot.child(user).child(station).child('humidity').val() + '%');
 
                 $('#cmpp' + station).text(snapshot.child(user).child(station).child('wind_dir').val());
-                document.getElementById('arrow').style.transform =
+                document.getElementById('arrow' + station).style.transform =
                     'rotate(' + snapshot.child(user).child(station).child('wind_grades').val() + 'deg)';
 
                 $('#temperature2' + station).text(snapshot.child(user).child(station).child('temperature2').val());

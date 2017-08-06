@@ -86,10 +86,10 @@ block content
                         .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
                             .mdl-cell.mdl-cell--6-col
                                 center
-                                    p#cmpp #{val.wind_dir}
+                                    p(id='cmpp'+val.name).cmpp #{val.wind_dir}
                                     .circles.circle.compass
 
-                                        #arrow.arrow
+                                        div(id='arrow'+val.name).arrow
                                         img#disc.disc(src='/img/compassdisc.png')
                                         span
                                             | Wind direction
