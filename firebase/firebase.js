@@ -11,8 +11,8 @@ function writeStationSensors (data) {
                 name: data.name,
                 temperature: utils.round((Number(data.temperature)+Number(data.temperature2))/2),
                 humidity: utils.round(data.humidity),
-                pressure: data.pressure,
-                sealevel_pressure: data.sealevel_pressure,
+                pressure: utils.round(data.pressure),
+                sealevel_pressure: utils.round(data.sealevel_pressure),
                 altitude: data.altitude
             });
         }
@@ -28,18 +28,22 @@ function writeStationAPI (data) {
     isValidStation(data.uid, data.name).then(valid => {
 
         if (valid) {
+
+            const dir = utils.getDirection(data.wind_dir);
+
             admin.database().ref('stations/' + data.uid + '/' + data.name).update({
                 city: data.city,
                 longitude: data.longitude,
                 latitude: data.latitude,
                 weather: data.weather,
-                wind_dir: data.wind_dir,
+                wind_dir: dir.direction,
+                wind_grades: dir.grades,
                 wind_kph: data.wind_kph,
                 dewpoint_c: data.dewpoint_c,
                 heat_index_c: data.heat_index_c,
                 windchill_c: data.windchill_c,
                 feelslike_c: data.feelslike_c,
-                visibility_km: data.visibility_km,
+                visibility_km: utils.round(data.visibility_km),
                 precip_today_metric: data.precip_today_metric,
                 icon: data.icon,
                 icon_img: utils.getIconName(data.icon)

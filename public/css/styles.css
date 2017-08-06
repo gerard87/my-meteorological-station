@@ -241,49 +241,6 @@ _:-ms-input-placeholder, :root .demo-graph {
 }
 
 
-
-.circles {
-    margin-bottom: -10px;
-}
-
-.circle {
-    width: 100px;
-    margin: 6px 6px 20px;
-    display: inline-block;
-    position: relative;
-    text-align: center;
-    line-height: 1.2;
-}
-
-.circle canvas {
-    vertical-align: top;
-    height: 100px;
-}
-
-.circle strong {
-    position: absolute;
-    top: 22%;
-    left: 4%;
-    width: 100%;
-    text-align: center;
-    line-height: 40px;
-    font-size: 25px;
-    color: #7a7a7a;
-}
-
-.circle strong i {
-    font-style: normal;
-    font-size: 0.6em;
-    font-weight: normal;
-}
-
-.circle span {
-    display: block;
-    color: #7a7a7a;
-    font-size: 25px;
-    margin-top: 12px;
-}
-
 #menuitem {
     width: 33px;
     vertical-align: -7px;
