@@ -68,118 +68,129 @@ block content
 
 
 
-                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col.mdl-grid
-                            .mdl-cell.mdl-cell--12-col
-                                center
-                                    .circles
-                                        div(id='humidityCircle'+val.name).circle
-                                            strong(id='humidityStrong'+val.name)
-                                            span
-                                                | Humidity
 
-                        include scripts/init-circle
 
-                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--8-col.mdl-grid
-                            .mdl-cell.mdl-cell--6-col
-                                center
-                                    p.cmpp.alt_title Pressure
 
-                                    p.alt.press
-                                        font(id='pressure' + val.name) #{val.pressure}
-                                        font.wind_vel_span &nbsp;Pa
+                        .demo-updates.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col.mdl-cell--4-col-tablet.mdl-cell--4-col-desktop
+                            .mdl-card__title.mdl-card--expand.mdl-color--blue-grey-50.mdl-color-text--blue-grey-800(style='min-height: 64px;max-height:64px')
+                                h2.mdl-card__title-text Humidity
+                            .mdl-card__supporting-text.mdl-color-text--grey-600
+                                .mdl-cell.mdl-cell--12-col.cell
+                                    center
+                                        .circles
+                                            div(id='humidityCircle' + val.name).circle
+                                                strong(id='humidityStrong' + val.name)
 
-                                #myProgress.pressB
-                                    .myBar(id='pressBar' + val.name)
+                                    include scripts/init-circle
 
-                            .mdl-cell.mdl-cell--6-col
 
-                                center
-                                    p.cmpp.alt_title Sea level pressure
+                        .demo-updates.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col.mdl-cell--4-col-tablet.mdl-cell--4-col-desktop
+                            .mdl-card__title.mdl-card--expand.mdl-color--blue-grey-50.mdl-color-text--blue-grey-800(style='min-height: 64px;max-height:64px')
+                                h2.mdl-card__title-text Pressure
+                            .mdl-card__supporting-text.mdl-color-text--grey-600
+                                .mdl-cell.mdl-cell--12-col.cell
+                                    center
+                                        p.alt.press
+                                            font(id='pressure' + val.name) #{val.pressure}
+                                            font.wind_vel_span &nbsp;Pa
 
-                                    p.alt.press
-                                        font(id='sealevel_pressure' + val.name) #{val.sealevel_pressure}
-                                        font.wind_vel_span &nbsp;Pa
-
-                                #myProgress.pressB
-                                    .myBar(id='seaPressBar' + val.name)
+                                    #myProgress.pressB
+                                        .myBar(id='pressBar' + val.name)
 
 
 
 
-                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--8-col.mdl-grid
-                            .mdl-cell.mdl-cell--6-col
-                                center
-                                    p.cmpp Wind direction
-                                    .circles.circle.compass
+                        .demo-updates.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col.mdl-cell--4-col-tablet.mdl-cell--4-col-desktop
+                            .mdl-card__title.mdl-card--expand.mdl-color--blue-grey-50.mdl-color-text--blue-grey-800(style='min-height: 64px;max-height:64px')
+                                h2.mdl-card__title-text Sea level pressure
+                            .mdl-card__supporting-text.mdl-color-text--grey-600
+                                .mdl-cell.mdl-cell--12-col.cell
+                                    center
+                                        p.alt.press
+                                            font(id='sealevel_pressure' + val.name) #{val.sealevel_pressure}
+                                            font.wind_vel_span &nbsp;Pa
 
-                                        div(id='arrow'+val.name).arrow
-                                        img#disc.disc(src='/img/compassdisc.png')
-
-                                    p(id='cmpp'+val.name).cmpp_l #{val.wind_dir}
-
-                                include scripts/init-compass
-
-
-                            .mdl-cell.mdl-cell--6-col
-                                center
-                                    p.cmpp Wind velocity
-
-                                    .circles.circle.compass
-                                        img.wind_vel_img.disc(id='windvelimg'+val.name src='/img/'+val.wind_kph_icon+'.svg')
-
-                                    p.cmpp_l.num
-                                        font(id='windvelp'+val.name) #{val.wind_kph}
-                                        font.wind_vel_span &nbsp;kph
+                                    #myProgress.pressB
+                                        .myBar(id='seaPressBar' + val.name)
 
 
 
-                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col.mdl-grid
-                            .mdl-cell.mdl-cell--12-col.cell
-                                center
-                                    p.cmpp.alt_title Altitude
 
-                                    p.alt
-                                        font(id='altitude' + val.name) #{val.altitude}
-                                        font.wind_vel_span &nbsp;m
+                        .demo-updates.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col.mdl-cell--4-col-tablet.mdl-cell--8-col-desktop
+                            .mdl-card__title.mdl-card--expand.mdl-color--blue-grey-50.mdl-color-text--blue-grey-800(style='min-height: 64px;max-height:64px')
+                                h2.mdl-card__title-text Wind
+                            .mdl-cell.mdl-cell--12-col.mdl-grid
+                                .mdl-cell.mdl-cell--6-col
+                                    center
+                                        p.cmpp Direction
+                                        .circles.circle.compass
 
-                                #myProgress
-                                    .myBar(id='altBar'+val.name)
+                                            div(id='arrow'+val.name).arrow
+                                            img#disc.disc(src='/img/compassdisc.png')
+
+                                        p(id='cmpp'+val.name).cmpp_l #{val.wind_dir}
+
+                                    include scripts/init-compass
+
+
+                                .mdl-cell.mdl-cell--6-col
+                                    center
+                                        p.cmpp Velocity
+
+                                        .circles.circle.compass
+                                            img.wind_vel_img.disc(id='windvelimg'+val.name src='/img/'+val.wind_kph_icon+'.svg')
+
+                                        p.cmpp_l.num
+                                            font(id='windvelp'+val.name) #{val.wind_kph}
+                                            font.wind_vel_span &nbsp;kph
+
+
+
+                        .demo-updates.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col.mdl-cell--4-col-tablet.mdl-cell--4-col-desktop
+                            .mdl-card__title.mdl-card--expand.mdl-color--blue-grey-50.mdl-color-text--blue-grey-800(style='min-height: 64px;max-height:64px')
+                                h2.mdl-card__title-text Altitude
+                            .mdl-card__supporting-text.mdl-color-text--grey-600(style='margin-top: 30px')
+                                .mdl-cell.mdl-cell--12-col.cell
+                                    center
+                                        p.alt.press
+                                            font(id='altitude' + val.name) #{val.altitude}
+                                            font.wind_vel_span &nbsp;m
+
+                                    #myProgress.pressB
+                                        .myBar(id='altBar' + val.name)
 
 
                         include scripts/init-progressbar
 
 
+                        .demo-updates.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col-desktop
+                            .mdl-card__title.mdl-card--expand.mdl-color--blue-grey-50.mdl-color-text--blue-grey-800(style='min-height: 64px;max-height:64px;')
+                                h2.mdl-card__title-text Other details
+                            .mdl-cell.mdl-cell--12-col.mdl-grid
+                                .mdl-cell.mdl-cell--4-col
+                                    p.detailstext Precipitation (dialy)
+                                .mdl-cell.mdl-cell--8-col
+                                    p.detailstext
+                                        font(id='precip_today_metric' + val.name) #{val.precip_today_metric}
+                                        font &nbsp;mm
 
-                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
-                            .mdl-cell.mdl-cell--12-col
-                                p Current details:
+                                .mdl-cell.mdl-cell--4-col
+                                    p.detailstext Visibility
+                                .mdl-cell.mdl-cell--8-col
+                                    p.detailstext
+                                        font(id='visibility_km' + val.name) #{val.visibility_km}
+                                        font &nbsp;km
 
+                                .mdl-cell.mdl-cell--4-col
+                                    p.detailstext Dewpoint
+                                .mdl-cell.mdl-cell--8-col
+                                    p.detailstext
+                                        font(id='dewpoint_c' + val.name) #{val.dewpoint_c}
+                                        font &nbsp;ºC
 
-
-                            .mdl-cell.mdl-cell--4-col
-                                p Precipitation (dialy)
-                            .mdl-cell.mdl-cell--8-col
-                                p
-                                    font(id='precip_today_metric' + val.name) #{val.precip_today_metric}
-                                    font &nbsp;mm
-
-                            .mdl-cell.mdl-cell--4-col
-                                p Visibility
-                            .mdl-cell.mdl-cell--8-col
-                                p
-                                    font(id='visibility_km' + val.name) #{val.visibility_km}
-                                    font &nbsp;km
-
-                            .mdl-cell.mdl-cell--4-col
-                                p Dewpoint
-                            .mdl-cell.mdl-cell--8-col
-                                p
-                                    font(id='dewpoint_c' + val.name) #{val.dewpoint_c}
-                                    font &nbsp;ºC
-
-                            .mdl-cell.mdl-cell--4-col
-                                p Heat index
-                            .mdl-cell.mdl-cell--8-col
-                                p
-                                    font(id='heat_index_c' + val.name) #{val.heat_index_c}
-                                    font &nbsp;ºC
+                                .mdl-cell.mdl-cell--4-col
+                                    p.detailstext Heat index
+                                .mdl-cell.mdl-cell--8-col
+                                    p.detailstext
+                                        font(id='heat_index_c' + val.name) #{val.heat_index_c}
+                                        font &nbsp;ºC

@@ -268,3 +268,8 @@ _:-ms-input-placeholder, :root .demo-graph {
 #username {
     margin-left: 11px;
 }
+
+.detailstext {
+    color: #7a7a7a;
+    font-size: 19px;
+}
