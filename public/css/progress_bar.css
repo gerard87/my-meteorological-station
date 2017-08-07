@@ -1,0 +1,35 @@
+#myProgress {
+    width: 80%;
+    margin-left: 10%;
+    background-color: #d8d9df;
+}
+
+.myBar {
+    width: 0%;
+    height: 5px;
+    background-color: #607D8B;
+}
+
+.alt {
+    margin-top: 65px;
+    margin-bottom: 65px;
+    color: #7a7a7a;
+    font-size: 45px;
+}
+
+.alt_title {
+    margin-top: 27px;
+}
+
+.cell {
+    height: 100%;
+}
+
+.press {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.pressB {
+    margin-bottom: 17px;
+}

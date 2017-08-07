@@ -52,8 +52,8 @@ block content
                                         font(style='font-size: 3em; position: absolute; margin-top: -16px', color='#888') ºC
 
                                     p(style='line-height: 1.5;')
-                                        font(style='font-size: 1.5em', color='#7a7a7a') Feels like&nbsp;
-                                        font(style='font-size: 2.2em', color='#7a7a7a', id='feelslike_c'+val.name) #{val.feelslike_c}
+                                        font(style='font-size: 1.5em; margin-right:5px', color='#7a7a7a') Feels like&nbsp;
+                                        font(style='font-size: 2.2em; margin-right:5px', color='#7a7a7a', id='feelslike_c'+val.name) #{val.feelslike_c}
                                         font(style='font-size: 1.5em; position: absolute; margin-top: 1.5px', color='#888') ºC
 
 
@@ -79,9 +79,34 @@ block content
 
                         include scripts/init-circle
 
+                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--8-col.mdl-grid
+                            .mdl-cell.mdl-cell--6-col
+                                center
+                                    p.cmpp.alt_title Pressure
+
+                                    p.alt.press
+                                        font(id='pressure' + val.name) #{val.pressure}
+                                        font.wind_vel_span &nbsp;Pa
+
+                                #myProgress.pressB
+                                    .myBar(id='pressBar' + val.name)
+
+                            .mdl-cell.mdl-cell--6-col
+
+                                center
+                                    p.cmpp.alt_title Sea level pressure
+
+                                    p.alt.press
+                                        font(id='sealevel_pressure' + val.name) #{val.sealevel_pressure}
+                                        font.wind_vel_span &nbsp;Pa
+
+                                #myProgress.pressB
+                                    .myBar(id='seaPressBar' + val.name)
 
 
-                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
+
+
+                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--8-col.mdl-grid
                             .mdl-cell.mdl-cell--6-col
                                 center
                                     p.cmpp Wind direction
@@ -108,31 +133,27 @@ block content
 
 
 
+                        .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col.mdl-grid
+                            .mdl-cell.mdl-cell--12-col.cell
+                                center
+                                    p.cmpp.alt_title Altitude
+
+                                    p.alt
+                                        font(id='altitude' + val.name) #{val.altitude}
+                                        font.wind_vel_span &nbsp;m
+
+                                #myProgress
+                                    .myBar(id='altBar'+val.name)
+
+
+                        include scripts/init-progressbar
+
+
+
                         .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
                             .mdl-cell.mdl-cell--12-col
                                 p Current details:
 
-
-                            .mdl-cell.mdl-cell--4-col
-                                p Pressure
-                            .mdl-cell.mdl-cell--8-col
-                                p
-                                    font(id='pressure' + val.name) #{val.pressure}
-                                    font &nbsp;Pa
-
-                            .mdl-cell.mdl-cell--4-col
-                                p Sea level pressure
-                            .mdl-cell.mdl-cell--8-col
-                                p
-                                    font(id='sealevel_pressure' + val.name) #{val.sealevel_pressure}
-                                    font &nbsp;Pa
-
-                            .mdl-cell.mdl-cell--4-col
-                                p Altitude
-                            .mdl-cell.mdl-cell--8-col
-                                p
-                                    font(id='altitude' + val.name) #{val.altitude}
-                                    font &nbsp;m
 
 
                             .mdl-cell.mdl-cell--4-col

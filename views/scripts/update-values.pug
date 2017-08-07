@@ -21,6 +21,21 @@ script.
                 $('#windvelimg' + station).attr('src', '/img/'+snapshot.child(user).child(station).child('wind_kph_icon').val()+'.svg')
 
 
+                let min = -423;
+                let max = 8848;
+                let value = ((snapshot.child(user).child(station).child('altitude').val() - min) * 100) / (max - min);
+                $('#altBar' + station).width(value+'%');
+
+                min = 87000;
+                max = 109210;
+                value = ((snapshot.child(user).child(station).child('pressure').val() - min) * 100) / (max - min);
+                $('#pressBar' + station).width(val + '%');
+
+                value = ((snapshot.child(user).child(station).child('sealevel_pressure').val() - min) * 100) / (max - min);
+                $('#seaPressBar' + station).width(val + '%');
+
+
+
 
                 $('#pressure' + station).text(snapshot.child(user).child(station).child('pressure').val());
                 $('#sealevel_pressure' + station).text(snapshot.child(user).child(station).child('sealevel_pressure').val());
