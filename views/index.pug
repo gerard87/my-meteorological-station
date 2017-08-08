@@ -163,34 +163,35 @@ block content
                         include scripts/init-progressbar
 
 
-                        .demo-updates.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col-desktop
+                        .demo-updates.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col
                             .mdl-card__title.mdl-card--expand.mdl-color-text--blue-grey-800(style='min-height:64px;max-height:64px;background-color:#f7faff')
                                 h2.mdl-card__title-text Other details
-                            .mdl-cell.mdl-cell--12-col.mdl-grid
-                                .mdl-cell.mdl-cell--4-col
-                                    p.detailstext Precipitation (dialy)
-                                .mdl-cell.mdl-cell--8-col
-                                    p.detailstext
-                                        font(id='precip_today_metric' + val.name) #{val.precip_today_metric}
-                                        font &nbsp;mm
 
-                                .mdl-cell.mdl-cell--4-col
-                                    p.detailstext Visibility
-                                .mdl-cell.mdl-cell--8-col
-                                    p.detailstext
-                                        font(id='visibility_km' + val.name) #{val.visibility_km}
-                                        font &nbsp;km
 
-                                .mdl-cell.mdl-cell--4-col
-                                    p.detailstext Dewpoint
-                                .mdl-cell.mdl-cell--8-col
-                                    p.detailstext
-                                        font(id='dewpoint_c' + val.name) #{val.dewpoint_c}
-                                        font &nbsp;ºC
+                            table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.mdl-color-text--blue-grey-800(style='width:100%')
+                                tbody
+                                    tr
 
-                                .mdl-cell.mdl-cell--4-col
-                                    p.detailstext Heat index
-                                .mdl-cell.mdl-cell--8-col
-                                    p.detailstext
-                                        font(id='heat_index_c' + val.name) #{val.heat_index_c}
-                                        font &nbsp;ºC
+                                        td.detailstext.mdl-data-table__cell--non-numeric Precipitation (dialy)
+                                            td.detailstext
+                                                font(id='precip_today_metric' + val.name) #{val.precip_today_metric}
+                                                font &nbsp;mm
+
+                                    tr
+                                        td.detailstext.mdl-data-table__cell--non-numeric Visibility
+                                        td.detailstext
+                                            font(id='visibility_km' + val.name) #{val.visibility_km}
+                                            font &nbsp;km
+
+                                    tr
+                                        td.detailstext.mdl-data-table__cell--non-numeric Dewpoint
+                                        td.detailstext
+                                            font(id='dewpoint_c' + val.name) #{val.dewpoint_c}
+                                            font &nbsp;ºC
+
+                                    tr
+                                        td.detailstext.mdl-data-table__cell--non-numeric Heat index
+                                        td.detailstext
+                                            font(id='heat_index_c' + val.name) #{val.heat_index_c}
+                                            font &nbsp;ºC
+
