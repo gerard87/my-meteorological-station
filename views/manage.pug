@@ -10,17 +10,24 @@ block content
     main.mdl-layout__content.mdl-color--grey-100
         .mdl-grid.demo-content
             each val in data
-                .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid(id='stationmngcard'+val)
-                    .mdl-cell.mdl-cell--6-col
-                        span#stationmng
-                            | #{val}
-                    .mdl-cell.mdl-cell--6-col
+
+                .demo-updates.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col.mdl-cell--4-col-tablet.mdl-cell--4-col-desktop(id='stationmngcard'+val)
+                    .mdl-card__title.mdl-card--expand.mdl-color-text--blue-grey-800(style='min-height:64px;max-height:64px;background-color:#f7faff')
+                        h2.mdl-card__title-text #{val}
+                    .mdl-card__supporting-text.mdl-color-text--grey-600
+                        .mdl-cell.mdl-cell--12-col.cell
+
+                            p(style='font-size: 18px')
+                                | User id
+                                br
+                                | #{id}
+
+                    .mdl-card__actions.mdl-card--border.mdl-color--red-400.mdl-color-text--white
                         include scripts/delete-station
-                        div(align='right')
-                            a.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-color-text--red(href='#', id='remove'+val)
-                                i.material-icons delete
-
-
+                        a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(href='#', id='remove'+val)
+                            | Remove
+                        .mdl-layout-spacer
+                        i.material-icons delete
 
 
 

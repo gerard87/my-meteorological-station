@@ -215,9 +215,7 @@ _:-ms-input-placeholder, :root .demo-graph {
 }
 .demo-options .mdl-card__actions {
   height: 64px;
-  display: -webkit-flex;
   display: -ms-flexbox;
-  display: flex;
   box-sizing: border-box;
   -webkit-align-items: center;
       -ms-flex-align: center;
@@ -250,7 +248,7 @@ _:-ms-input-placeholder, :root .demo-graph {
     display: none;
 }
 
-#stationmng {
+.stationmng {
     font-style: normal;
     font-size: 1.5em;
     font-weight: normal;
@@ -272,4 +270,23 @@ _:-ms-input-placeholder, :root .demo-graph {
 .detailstext {
     color: #7a7a7a;
     font-size: 19px;
+}
+
+.addbtn {
+    font-size: 60px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.mdl-card__actions {
+    display: flex;
+    box-sizing:border-box;
+    align-items: center;
+}
+.mdl-card__actions > .material-icons {
+    padding-right: 10px;
+}
+
+.mdl-card__actions > .mdl-button {
+    color: #fff;
 }

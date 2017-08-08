@@ -23,16 +23,6 @@ router.get('/', function(req, res){
 });
 
 
-router.get('/settings', function(req, res){
-
-    res.render('settings', {
-        title: 'Settings',
-        config: config
-    });
-
-});
-
-
 router.get('/new', function(req, res){
 
     res.render('newStation', {
@@ -50,7 +40,8 @@ router.get('/manage', function(req, res){
         res.render('manage', {
             title: 'Manage stations',
             data: data,
-            config: config
+            config: config,
+            id: req.query.id
         });
 
     });
