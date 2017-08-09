@@ -50,6 +50,16 @@ router.get('/manage', function(req, res){
 });
 
 
+router.get('/createform', function(req, res){
+
+    res.render('createform', {
+        title: 'Station configuration',
+        config: config
+    });
+
+});
+
+
 router.post('/sensors', function(req, res){
 
     firebase.writeStationSensors(req.body);

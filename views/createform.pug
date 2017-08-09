@@ -1,0 +1,82 @@
+extends layout
+
+block tab
+    #header-row.mdl-layout__header-row
+
+
+
+block content
+
+    include scripts/newstation-button
+
+    main.mdl-layout__content.mdl-color--grey-100
+        .mdl-grid.demo-content
+            .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
+
+                .mdl-cell.mdl-cell--12-col
+                    h3 New station configuration
+
+                .mdl-cell.mdl-cell--12-col
+                    h4 Raspberry Pi
+
+                .mdl-cell.mdl-cell--4-col
+
+                    form(action='#')
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                            input#user.mdl-textfield__input(type='text')
+                            label.mdl-textfield__label(for='user') RPi Username (default: pi)
+
+
+                .mdl-cell.mdl-cell--4-col
+
+                    form(action='#')
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                            input#pass.mdl-textfield__input(type='password')
+                            label.mdl-textfield__label(for='pass') RPi Password (default: raspberry)
+
+
+                .mdl-cell.mdl-cell--4-col
+
+                    form(action='#')
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                            input#ip.mdl-textfield__input(type='text')
+                            label.mdl-textfield__label(for='ip') RPi ip
+
+
+                .mdl-cell.mdl-cell--12-col
+                    h4 Server
+
+                .mdl-cell.mdl-cell--6-col
+
+                    form(action='#')
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                            input#serverip.mdl-textfield__input(type='text')
+                            label.mdl-textfield__label(for='serverip') Server URL or ip
+
+                .mdl-cell.mdl-cell--12-col
+                    h4 Weather underground
+
+                .mdl-cell.mdl-cell--6-col
+
+                    form(action='#')
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                            input#apikey.mdl-textfield__input(type='text')
+                            label.mdl-textfield__label(for='apikey') Weather Underground api key
+
+
+
+
+
+                .mdl-cell.mdl-cell--12-col(style='text-align: right;')
+
+                    a#btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-800.mdl-color-text--white Create
+
+
+        dialog.mdl-dialog(style='width: 500px;')
+            h5.mdl-dialog__title Station created successfully
+            .mdl-dialog__content
+                p(style='font-size: 21px;')
+                    | Wait a few minutes while RPi is configuring
+
+            .mdl-dialog__actions
+                button.mdl-button.close(type='button') Ok

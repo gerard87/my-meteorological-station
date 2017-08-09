@@ -1,0 +1,11 @@
+[Unit]
+Description=Start weather api
+After=network.target multi-user.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python /home/<%=user%>/get_api_weather.py <%=apikey%> <%=name%> <%=serverip%> <%=uid%>
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

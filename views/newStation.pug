@@ -7,16 +7,14 @@ block tab
 
 block content
 
-    include scripts/newstation-button
-
     main.mdl-layout__content.mdl-color--grey-100
         .mdl-grid.demo-content
 
-            #nsblock.mdl-cell.mdl-cell--12-col.mdl-grid
+            .mdl-cell.mdl-cell--12-col.mdl-grid
                 .mdl-cell.mdl-cell--4-col
 
                 .mdl-cell.mdl-cell--4-col
-                    #newstationbtn.demo-options.mdl-card.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-js-ripple-effect.mdl-button.mdl-js-button
+                    a.demo-options.mdl-card.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-js-ripple-effect.mdl-button.mdl-js-button(href='/createform')
                         .mdl-card__supporting-text.mdl-color-text--blue-grey-800(style='width: 97%')
                             center
                                 i.material-icons.addbtn.mdl-color-text--blue-grey-800 add
@@ -25,29 +23,3 @@ block content
                                 p.mdl-color-text--blue-grey-800(style='margin-bottom: 0px;font-size: 16px') Create new station
 
                 .mdl-cell.mdl-cell--4-col
-
-
-            dialog.mdl-dialog(style='width: 500px;')
-                h5.mdl-dialog__title Station created successfully
-                .mdl-dialog__content
-                    p(style='font-size: 21px;')
-                        | Use this data to configure your station
-
-                    .md-cell.md-cell--12-col.mdl-grid
-                        .md-cell.mdl-cell--3-col.mdl-color-text--blue-grey-800
-
-                            p(style='font-size: 16px;')
-                                | Station:
-                            p(style='font-size: 16px;')
-                                | User id:
-
-                        .md-cell.mdl-cell--9-col.mdl-color-text--blue-grey-800
-
-                            p#stationname(style='font-size: 18px;')
-                            p#userid(style='font-size: 18px;')
-
-                .mdl-dialog__actions
-                    button.mdl-button.close(type='button') Ok
-
-
-

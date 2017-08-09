@@ -74,3 +74,6 @@ firebase-admin.json
 
 # twitter
 twitter-config.json
+
+# rpi config
+rpi-configuration/services/generated

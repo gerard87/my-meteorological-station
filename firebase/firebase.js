@@ -143,12 +143,48 @@ function isValidStation (uid, name) {
     });
 }
 
+
+function createStation (uid) {
+    return new Promise(function (resolve, reject) {
+
+        let station = 'Station';
+
+        admin.database().ref('station_index/').once('value').then(function (snapshot) {
+
+            if (snapshot.val() === null) {
+                station += 1;
+                admin.database().ref('station_index/').set(
+                    2
+                );
+            } else {
+                station += snapshot.val();
+                admin.database().ref('station_index/').set(
+                    snapshot.val() + 1
+                );
+            }
+
+            admin.database().ref('users/' + uid).push(
+                station
+            );
+
+            return resolve(station);
+
+        }).catch(function (error) {
+            return reject(error);
+        });
+
+
+    });
+
+}
+
 module.exports = {
     writeStationSensors,
     writeStationAPI,
     readStations,
     readStationData,
-    getUserStations
+    getUserStations,
+    createStation
 };
 
 

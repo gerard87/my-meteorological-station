@@ -6,7 +6,7 @@ import Adafruit_BMP.BMP085 as BMP085
 import requests
 import json
 
-def read_sensors(name, ip_server):
+def read_sensors(name, ip_server, uid):
     while(True):
         sensor = Adafruit_DHT.DHT22
         pin = 17
@@ -43,7 +43,8 @@ def read_sensors(name, ip_server):
             'temperature2': '{0:0.2f}'.format(temperature2),
             'pressure': '{0:0.2f}'.format(pressure),
             'sealevel_pressure': '{0:0.2f}'.format(sealevel_pressure),
-            'altitude': '{0:0.2f}'.format(altitude)
+            'altitude': '{0:0.2f}'.format(altitude),
+            'uid': uid
         }
         headers = {"content-type": "application/json"}
 
@@ -62,6 +63,7 @@ if __name__ == "__main__":
     try:
         name = sys.argv[1]
         ip_server = sys.argv[2]
-        read_sensors(name, ip_server)
+        uid = sys.argv[3]
+        read_sensors(name, ip_server, uid)
     except IndexError:
         print "Must provide station name and server ip in code or cmdline arg"

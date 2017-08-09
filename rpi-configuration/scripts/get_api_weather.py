@@ -75,16 +75,16 @@ def get_location():
     return data['city']
 
 
-def get_weather(name, ip_server):
+def get_weather(name, ip_server, uid):
     while True:
         weatherclient = WeatherClient(api_key)
         data = weatherclient.conditions()
         print_data(data)
-        send_to_server(data, name, ip_server)
+        send_to_server(data, name, ip_server, uid)
         time.sleep(180)
 
 
-def send_to_server(data, name, ip_server):
+def send_to_server(data, name, ip_server, uid):
     url = 'http://mymeteorologicalstation.appspot.com/api'
     url2 = 'http://{}:3000/api'.format(ip_server)
 
@@ -103,7 +103,8 @@ def send_to_server(data, name, ip_server):
         'visibility_km': data['visibility_km'],
         'precip_today_metric': data['precip_today_metric'],
         'icon': data['icon'],
-        'icon_url': data['icon_url']
+        'icon_url': data['icon_url'],
+        'uid': uid
     }
     headers = {"content-type": "application/json"}
 
@@ -132,7 +133,8 @@ if __name__ == "__main__":
             api_key = sys.argv[1]
             name = sys.argv[2]
             ip_server = sys.argv[3]
-            get_weather(name, ip_server)
+            uid = sys.argv[4]
+            get_weather(name, ip_server, uid)
         except IndexError:
             print "Must provide api key, station name and local server ip in code or cmdline arg"
 

@@ -1,0 +1,11 @@
+[Unit]                                                                                                                                                                      
+Description=Start weather sensors
+After=network.target multi-user.target                                                                                                                                      
+Wants=network-online.target                                                                                                                                                 
+                                                                                                                                                                            
+[Service]                                                                                                                                                                   
+ExecStart=/usr/bin/python /home/<%=user%>/read_sensors.py <%=name%> <%=serverip%> <%=uid%>
+Restart=on-failure                                                                                                                                                          
+                                                                                                                                                                            
+[Install]
+WantedBy=multi-user.target

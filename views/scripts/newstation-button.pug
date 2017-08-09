@@ -11,44 +11,27 @@ script.
             window.location = '/';
         });
 
+        $('#btn').on('click', function (event) {
 
-        $('#newstationbtn').on('click', function (event) {
             const user = firebase.auth().currentUser;
-            let station = 'Station';
-
             if (user) {
 
-                firebase.database().ref('station_index/').once('value').then(function (snapshot) {
-
-                    if (snapshot.val() === null) {
-                        station += 1;
-                        firebase.database().ref('station_index/').set(
-                            2
-                        );
-                    } else {
-                        station += snapshot.val();
-                        firebase.database().ref('station_index/').set(
-                            snapshot.val() + 1
-                        );
+                $.ajax({
+                    type: "POST",
+                    url: '/config',
+                    data: {
+                        user: $('#user').val(),
+                        pass: $('#pass').val(),
+                        ip: $('#ip').val(),
+                        serverip: $('#serverip').val(),
+                        apikey: $('#apikey').val(),
+                        uid: user.uid
                     }
-
-
-
-
-                    $('#nsblock').css({display: 'none'});
-                    $('#stationname').text(station);
-
-                    $('#userid').text(user.uid);
-
-                    dialog.showModal();
-
-                    firebase.database().ref('users/' + user.uid).push(
-                        station
-                    );
-
                 });
 
-            }
+                dialog.showModal();
 
+            }
         });
+
     });
