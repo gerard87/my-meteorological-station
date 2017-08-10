@@ -1,27 +1,41 @@
 const express = require('express');
 const router = express.Router();
 
+const storage = require('node-persist');
+
 const { lg } = require('../liquidgalaxy');
 const  { firebase } = require('../firebase');
 
 router.post('/', function (req, res){
 
-    if (req.body.stop === 'true') {
 
-        //lg.exit_tour();
-        lg.clean_lg();
+    storage.init().then(function() {
+        storage.getItem('lgip').then(function(lgip) {
 
-    } else {
+            lg.addKey(lgip);
 
-        firebase.readStationData(req.body.name).then(data => {
+            if (req.body.stop === 'true') {
 
-            lg.flyTo(data.city);
-            lg.show_kml_balloon(data);
+                //lg.exit_tour();
+                lg.clean_lg(lgip);
 
-        });
+            } else {
 
-    }
-    res.end();
+                firebase.readStationData(req.body.name).then(data => {
+
+                    lg.flyTo(lgip, data.city);
+                    lg.show_kml_balloon(lgip, data);
+
+                });
+
+            }
+
+            res.end();
+
+        })
+    });
+
+
 
 });
 

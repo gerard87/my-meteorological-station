@@ -87,6 +87,10 @@ html
                         a#managelink.mdl-navigation__link(href='' onclick='setHref()')
                             i.mdl-color-text--blue-grey-50.material-icons(role='presentation') edit
                             | Manage stations
+                    if env !== 'production'
+                        a.mdl-navigation__link(href='settings')
+                            i.mdl-color-text--blue-grey-50.material-icons(role='presentation') settings
+                            | Settings
                     .mdl-layout-spacer
                     a.mdl-navigation__link(href='')
                         i.mdl-color-text--blue-grey-50.material-icons(role='presentation') help_outline

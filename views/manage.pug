@@ -18,16 +18,18 @@ block content
 
                         include scripts/delete-station
 
-                        a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--blue-A200(href='/editform?station='+val, style='min-width: 0')
-                            i.material-icons edit
+                        if env !== 'production'
+                            a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--blue-A200(href='/editform?station='+val, style='min-width: 0')
+                                i.material-icons edit
                         a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--red-400(href='#', id='remove' + val, style='min-width: 0')
                             i.material-icons delete
 
 
 
 block fab
-    a#fab.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored.mdl-color-text--white(href='new')
-        i.material-icons add
+    if env !== 'production'
+        a#fab.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored.mdl-color-text--white(href='new')
+            i.material-icons add
 
 
 

@@ -5,6 +5,7 @@
             <BalloonStyle>
                 <bgColor>ffe6d8ad</bgColor>
                 <displayMode>default</displayMode>
+                <text>$[description]</text>
             </BalloonStyle>
         </Style>
         <Placemark id="feat_2">

@@ -1,0 +1,34 @@
+script.
+    $(function () {
+
+        $('#lgip').val('#{lgip}');
+
+        var dialog = document.querySelector('dialog');
+
+        if (!dialog.showModal) {
+            dialogPolyfill.registerDialog(dialog);
+        }
+        dialog.querySelector('.close').addEventListener('click', function () {
+            dialog.close();
+            window.location = '/';
+        });
+
+        $('#btn').on('click', function (event) {
+
+            const user = firebase.auth().currentUser;
+            if (user) {
+
+                $.ajax({
+                    type: "POST",
+                    url: '/saveSettings',
+                    data: {
+                        ip: $('#lgip').val()
+                    }
+                });
+
+                dialog.showModal();
+
+            }
+        });
+
+    });

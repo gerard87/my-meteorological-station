@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
+const storage = require('node-persist');
+
 const { firebase } = require('../firebase');
 const config = require('../firebase-config.json');
 
 const env = process.env.NODE_ENV || 'development';
+
 
 router.get('/', function(req, res){
 
@@ -71,6 +74,22 @@ router.get('/editform', function(req, res){
 });
 
 
+router.get('/settings', function(req, res){
+
+    storage.init().then(function() {
+        storage.getItem('lgip').then(function(lgip) {
+            res.render('settings', {
+                title: 'Settings',
+                config: config,
+                lgip: lgip
+            });
+        });
+    });
+    
+
+});
+
+
 router.post('/sensors', function(req, res){
 
     firebase.writeStationSensors(req.body);
@@ -82,6 +101,23 @@ router.post('/sensors', function(req, res){
 router.post('/api', function(req, res){
 
     firebase.writeStationAPI(req.body);
+
+    res.json(req.body);
+});
+
+
+router.post('/saveSettings', function(req, res){
+
+    storage.init().then(function() {
+        storage.setItem('lgip',req.body.ip)
+            .then(function() {
+                return storage.getItem('lgip')
+            })
+            .then(function(value) {
+                console.log(value);
+            })
+    });
+
 
     res.json(req.body);
 });
