@@ -5,7 +5,7 @@ const fs = require('fs');
 let exec = require('child_process').exec, child;
 
 
-function configureStation (name, data) {
+function configureStation (name, data, newStation) {
 
 
     createServicesFile('weathersensors.service', {
@@ -22,7 +22,7 @@ function configureStation (name, data) {
             uid: data.uid,
         }).then(function () {
 
-            addkey(data);
+            addkey(data, newStation);
 
         });
     });
@@ -31,37 +31,44 @@ function configureStation (name, data) {
 }
 
 
-function addkey (data) {
+function addkey (data, newStation) {
     const command = 'ssh-keyscan -H '+data.ip+' >> ~/.ssh/known_hosts';
 
     child = exec(command, function (error, stdout, stderr) {
 
-        copyScripts(data);
+        copyScripts(data, newStation);
 
     });
 
 }
 
-function copyScripts (data) {
+function copyScripts (data, newStation) {
     const file_path = path.join(__dirname, '.', 'scripts/*');
     const station_path = '~';
     const command = "sshpass -p '" + data.pass + "' scp " + file_path + " " + data.user +"@" + data.ip + ":" + station_path;
 
     child = exec(command, function (error, stdout, stderr) {
 
-        copyServices(data);
+        copyServices(data, newStation);
 
     });
 }
 
-function copyServices (data) {
+function copyServices (data, newStation) {
     const file_path = path.join(__dirname, '.', 'services/generated/*');
     const station_path = '~';
     const command = "sshpass -p '" + data.pass + "' scp " + file_path + " " + data.user +"@" + data.ip + ":" + station_path;
 
     child = exec(command, function (error, stdout, stderr) {
 
-        updateInstallDep(data);
+        if (newStation) {
+
+            updateInstallDep(data);
+
+        } else {
+
+            initMoveServiceFile(data);
+        }
 
     });
 }
@@ -125,6 +132,28 @@ function installBMP (ssh) {
     });
 
     return false;
+}
+
+
+function initMoveServiceFile (data) {
+    const ssh = new SSH({
+        host: data.ip,
+        user: data.user,
+        pass: data.pass
+    });
+
+    ssh.exec('sudo mv ~/weathersensors.service /lib/systemd/system/ && ' +
+        'sudo mv ~/weatherapi.service /lib/systemd/system/', {
+        pty: true,
+        out: function (stdout) {
+            console.log(stdout);
+        },
+        exit: function (code) {
+
+            enableServices(ssh);
+
+        }
+    }).start();
 }
 
 

@@ -60,6 +60,17 @@ router.get('/createform', function(req, res){
 });
 
 
+router.get('/editform', function(req, res){
+
+    res.render('editform', {
+        title: 'Station edit',
+        config: config,
+        station: req.query.station
+    });
+
+});
+
+
 router.post('/sensors', function(req, res){
 
     firebase.writeStationSensors(req.body);

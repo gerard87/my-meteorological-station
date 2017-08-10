@@ -1,16 +1,5 @@
 script.
-    let min = -423;
-    let max = 8848;
-    let val = ((#{val.altitude} - min) * 100) / (max - min);
-
-    $('#altBar'+'#{val.name}').width(val+'%');
-
-    min = 87000;
-    max = 109210;
-    val = ((#{val.pressure} - min) * 100) / (max - min);
-
-    $('#pressBar'+'#{val.name}').width(val+'%');
-
-    val = ((#{val.sealevel_pressure} - min) * 100) / (max - min);
-
-    $('#seaPressBar'+'#{val.name}').width(val+'%');
+    // width = ((value - min) * 100) / (max - min);
+    $('#altBar'+'#{val.name}').width(((#{val.altitude} - (-423)) * 100) / (8848 - (-423))+'%');
+    $('#pressBar'+'#{val.name}').width(((#{val.pressure} - 87000) * 100) / (109210 - 87000)+'%');
+    $('#seaPressBar'+'#{val.name}').width(((#{val.sealevel_pressure} - 87000) * 100) / (109210 - 87000)+'%');

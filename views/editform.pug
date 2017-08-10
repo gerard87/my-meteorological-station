@@ -7,15 +7,15 @@ block tab
 
 block content
 
-    include scripts/newstation-button
+    include scripts/editstation-button
 
     main.mdl-layout__content.mdl-color--grey-100
         .mdl-grid.demo-content
             .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
 
                 .mdl-cell.mdl-cell--12-col
-                    h3 New station configuration
-                    h6 *All values re required
+                    h3 Edit #{station} configuration
+                    h6 *Add all values again
 
                 .mdl-cell.mdl-cell--12-col
                     h4 Raspberry Pi
@@ -70,11 +70,11 @@ block content
 
                 .mdl-cell.mdl-cell--12-col(style='text-align: right;')
 
-                    a#btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-800.mdl-color-text--white Create
+                    a#btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-800.mdl-color-text--white Edit
 
 
         dialog.mdl-dialog(style='width: 500px;')
-            h5.mdl-dialog__title Station created successfully
+            h5.mdl-dialog__title Station edited successfully
             .mdl-dialog__content
                 p(style='font-size: 21px;')
                     | Wait a few minutes while RPi is configuring

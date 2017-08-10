@@ -24,15 +24,15 @@ script.
                 let min = -423;
                 let max = 8848;
                 let value = ((snapshot.child(user).child(station).child('altitude').val() - min) * 100) / (max - min);
-                $('#altBar' + station).width(value+'%');
+                $('#altBar' + station).width(value + '%');
 
                 min = 87000;
                 max = 109210;
                 value = ((snapshot.child(user).child(station).child('pressure').val() - min) * 100) / (max - min);
-                $('#pressBar' + station).width(val + '%');
+                $('#pressBar' + station).width(value + '%');
 
                 value = ((snapshot.child(user).child(station).child('sealevel_pressure').val() - min) * 100) / (max - min);
-                $('#seaPressBar' + station).width(val + '%');
+                $('#seaPressBar' + station).width(value + '%');
 
 
 
