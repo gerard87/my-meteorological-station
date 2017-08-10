@@ -44,7 +44,8 @@ router.get('/manage', function(req, res){
             title: 'Manage stations',
             data: data,
             config: config,
-            id: req.query.id
+            id: req.query.id,
+            env: env
         });
 
     });
