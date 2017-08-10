@@ -80,10 +80,11 @@ html
                     a.mdl-navigation__link(href='/')
                         i.mdl-color-text--blue-grey-50.material-icons(role='presentation') home
                         | Home
-                    #newstation(style='display: none')
-                        a.mdl-navigation__link(href='new')
-                            i.mdl-color-text--blue-grey-50.material-icons(role='presentation') add
-                            | New station
+                    if env !== 'production'
+                        #newstation(style='display: none')
+                            a.mdl-navigation__link(href='new')
+                                i.mdl-color-text--blue-grey-50.material-icons(role='presentation') add
+                                | New station
                     #managestations(style='display: none')
                         a#managelink.mdl-navigation__link(href='' onclick='setHref()')
                             i.mdl-color-text--blue-grey-50.material-icons(role='presentation') edit
