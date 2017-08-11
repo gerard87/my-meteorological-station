@@ -6,7 +6,7 @@ const storage = require('node-persist');
 const { lg } = require('../liquidgalaxy');
 const  { firebase } = require('../firebase');
 
-router.post('/', function (req, res){
+router.post('/lg', function (req, res){
 
 
     storage.init().then(function() {
@@ -16,7 +16,6 @@ router.post('/', function (req, res){
 
             if (req.body.stop === 'true') {
 
-                //lg.exit_tour();
                 lg.clean_lg(lgip);
 
             } else {
@@ -24,7 +23,7 @@ router.post('/', function (req, res){
                 firebase.readStationData(req.body.name).then(data => {
 
                     lg.flyTo(lgip, data.city);
-                    lg.show_kml_balloon(lgip, data);
+                    lg.show_kml_balloon(lgip, data, false);
 
                 });
 
@@ -35,8 +34,40 @@ router.post('/', function (req, res){
         })
     });
 
+});
 
+
+router.post('/lgrotation', function (req, res){
+
+
+    storage.init().then(function() {
+        storage.getItem('lgip').then(function(lgip) {
+
+            lg.addKey(lgip);
+
+            if (req.body.stop === 'true') {
+
+                lg.exit_tour(lgip);
+                lg.clean_lg(lgip);
+
+            } else {
+
+                firebase.readStationData(req.body.name).then(data => {
+
+                    lg.show_kml_balloon(lgip, data, true);
+
+                });
+
+            }
+
+            res.end();
+
+        })
+    });
 
 });
+
+
+
 
 module.exports = router;

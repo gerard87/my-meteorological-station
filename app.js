@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', home);
 app.use('/', configuration);
-app.use('/lg', liquidgalaxy);
+app.use('/', liquidgalaxy);
 app.use('/assistant', assistant);
 app.use('/tweet', tweet);
 

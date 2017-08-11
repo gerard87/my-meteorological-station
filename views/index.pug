@@ -29,9 +29,17 @@ block content
                                 .mdl-layout-spacer
                                     if val.city === '' || val.city === undefined
                                         div(align='right')
+                                            button(id='lgrotate-btn-' + val.name disabled).mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--blue-grey
+                                                i.material-icons replay
+                                            .mdl-tooltip(data-mdl-for='lgrotate-btn-' + val.name)
+                                                | Enable rotation to the liquid galaxy
                                             button(id='lg-btn-'+val.name disabled).mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-200.mdl-color-text--grey Send to Liquid Galaxy
                                     else
                                         div(align='right')
+                                            button(id='lgrotate-btn-'+val.name).mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--blue-grey
+                                                i.material-icons replay
+                                            .mdl-tooltip(data-mdl-for='lgrotate-btn-' + val.name)
+                                                | Enable rotation to the liquid galaxy
                                             button(id='lg-btn-'+val.name).mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey.mdl-color-text--white Send to Liquid Galaxy
 
 

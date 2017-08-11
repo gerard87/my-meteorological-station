@@ -21,4 +21,24 @@ script.
                 }
             });
         });
+
+        $('#lgrotate-btn-' + '#{val.name}').on('click', function (event) {
+
+            var stop = false;
+            if ($('#lgrotate-btn-' + '#{val.name}').css('color') === 'rgb(96, 125, 139)') {
+                $('#lgrotate-btn-' + '#{val.name}').attr('class', 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--red');
+
+            } else {
+                $('#lgrotate-btn-' + '#{val.name}').attr('class', 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey');
+                stop = true;
+            }
+            $.ajax({
+                type: "POST",
+                url: '/lgrotation',
+                data: {
+                    'name': '#{val.name}',
+                    'stop': stop
+                }
+            });
+        });
     });
