@@ -32,7 +32,7 @@ admin.initializeApp({
 });
 
 // Tweet the update every 24 hours
-setInterval(twitter.tweetUpdate, 86400000);
+setInterval(twitter.tweetUpdate(), 86400000);
 
 
 http.listen(process.env.PORT || 3000, function(){
