@@ -22,7 +22,8 @@ function configureStation (name, data, newStation) {
             uid: data.uid,
             city: data.city,
             latitude: data.latitude,
-            longitude: data.longitude
+            longitude: data.longitude,
+            alias: data.alias
         }).then(function () {
 
             addkey(data, newStation);

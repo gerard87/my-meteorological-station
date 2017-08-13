@@ -24,10 +24,16 @@ block content
             section(class=(index==0) ? 'mdl-layout__tab-panel is-active' : 'mdl-layout__tab-panel', id=val.name)
                 .page-content
 
-                    if env !== 'production'
-                        .mdl-grid.demo-content
-                            .mdl-cell.mdl-cell--12-col.mdl-grid
-                                .mdl-layout-spacer
+
+                    .mdl-grid.demo-content
+                        .demo-charts.mdl-cell.mdl-cell--12-col.mdl-grid(style='margin-top: -10px; margin-bottom: -25px')
+                            .mdl-cell.mdl-cell--6-col
+                                p(style='margin-top:20px')
+                                    font(style='font-size: 2em', color='#7a7a7a',) #{val.alias}
+
+                            if env !== 'production'
+                                .mdl-cell.mdl-cell--6-col
+                                    .mdl-layout-spacer
                                     if val.city === '' || val.city === undefined
                                         div(align='right')
                                             button(id='lgrotate-btn-' + val.name disabled).mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--blue-grey

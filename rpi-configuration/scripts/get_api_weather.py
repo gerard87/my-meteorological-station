@@ -61,16 +61,16 @@ def print_data(data):
     print "icon_url: " + data['icon_url']
 
 
-def get_weather(name, ip_server, uid, city, latitude, longitude):
+def get_weather(name, ip_server, uid, city, latitude, longitude, alias):
     while True:
         weatherclient = WeatherClient(api_key)
         data = weatherclient.conditions(city)
         print_data(data)
-        send_to_server(data, name, ip_server, uid, city, latitude, longitude)
+        send_to_server(data, name, ip_server, uid, city, latitude, longitude, alias)
         time.sleep(180)
 
 
-def send_to_server(data, name, ip_server, uid, city, latitude, longitude):
+def send_to_server(data, name, ip_server, uid, city, latitude, longitude, alias):
     url = 'http://mymeteorologicalstation.appspot.com/api'
     url2 = 'http://{}:3000/api'.format(ip_server)
 
@@ -90,7 +90,8 @@ def send_to_server(data, name, ip_server, uid, city, latitude, longitude):
         'precip_today_metric': data['precip_today_metric'],
         'icon': data['icon'],
         'icon_url': data['icon_url'],
-        'uid': uid
+        'uid': uid,
+        'alias': alias
     }
     headers = {"content-type": "application/json"}
 
@@ -114,7 +115,8 @@ if __name__ == "__main__":
         city = sys.argv[5]
         latitude = sys.argv[6]
         longitude = sys.argv[7]
-        get_weather(name, ip_server, uid, city, latitude, longitude)
+        alias = sys.argv[8]
+        get_weather(name, ip_server, uid, city, latitude, longitude, alias)
     except IndexError:
         print "Must provide api key, station name and local server ip in code or cmdline arg"
 

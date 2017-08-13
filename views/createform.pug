@@ -18,7 +18,18 @@ block content
 
                 .mdl-cell.mdl-cell--12-col
                     h3 New station configuration
-                    h6 *All values re required
+                    h6 *All values required
+
+                .mdl-cell.mdl-cell--12-col
+                    h4 Alias
+
+
+                .mdl-cell.mdl-cell--4-col
+
+                    form(action='#')
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                            input#alias.mdl-textfield__input(type='text')
+                            label.mdl-textfield__label(for='alias') Add an alias (ex: Office station)
 
                 .mdl-cell.mdl-cell--12-col
                     h4 Location

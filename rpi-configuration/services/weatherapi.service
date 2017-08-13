@@ -4,7 +4,7 @@ After=network.target multi-user.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/bin/python /home/<%=user%>/get_api_weather.py <%=apikey%> <%=name%> <%=serverip%> <%=uid%> <%=city%> <%=latitude%> <%=longitude%>
+ExecStart=/usr/bin/python /home/<%=user%>/get_api_weather.py <%=apikey%> <%=name%> <%=serverip%> <%=uid%> '<%=city%>' <%=latitude%> <%=longitude%> '<%=alias%>'
 Restart=on-failure
 
 [Install]

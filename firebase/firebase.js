@@ -47,7 +47,8 @@ function writeStationAPI (data) {
                 visibility_km: utils.round(data.visibility_km),
                 precip_today_metric: data.precip_today_metric,
                 icon: data.icon,
-                icon_img: utils.getIconName(data.icon)
+                icon_img: utils.getIconName(data.icon),
+                alias: data.alias
             });
         }
 
