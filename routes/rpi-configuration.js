@@ -14,7 +14,6 @@ router.post('/config', function(req, res){
         res.end();
     });
 
-
 });
 
 router.post('/edit', function(req, res){

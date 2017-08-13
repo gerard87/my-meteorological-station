@@ -5,6 +5,7 @@ const storage = require('node-persist');
 
 const { firebase } = require('../firebase');
 const config = require('../firebase-config.json');
+const mapskey = require('../maps-key.json');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -58,7 +59,8 @@ router.get('/createform', function(req, res){
 
     res.render('createform', {
         title: 'Station configuration',
-        config: config
+        config: config,
+        mapskey: mapskey.apikey
     });
 
 });
@@ -69,7 +71,8 @@ router.get('/editform', function(req, res){
     res.render('editform', {
         title: 'Station edit',
         config: config,
-        station: req.query.station
+        station: req.query.station,
+        mapskey: mapskey.apikey
     });
 
 });

@@ -1,0 +1,19 @@
+script.
+    var map;
+    var marker;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 42.457, lng: 1.507},
+            zoom: 6
+        });
+
+        map.addListener('click', function (event) {
+            if (marker !== undefined){
+                marker.setMap(null);
+            }
+            marker = new google.maps.Marker({
+                position: event.latLng,
+                map: map
+            });
+        });
+    }

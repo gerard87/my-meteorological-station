@@ -7,6 +7,9 @@ block tab
 
 block content
 
+    link(rel='stylesheet', href='../css/maps.css')
+    include scripts/maps
+    script(src='https://maps.googleapis.com/maps/api/js?key='+mapskey+'&callback=initMap', async='', defer='')
     include scripts/newstation-button
 
     main.mdl-layout__content.mdl-color--grey-100
@@ -16,6 +19,13 @@ block content
                 .mdl-cell.mdl-cell--12-col
                     h3 New station configuration
                     h6 *All values re required
+
+                .mdl-cell.mdl-cell--12-col
+                    h4 Location
+                    h6 Select the station location
+
+                .mdl-cell.mdl-cell--12-col
+                    #map
 
                 .mdl-cell.mdl-cell--12-col
                     h4 Raspberry Pi

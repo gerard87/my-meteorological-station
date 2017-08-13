@@ -21,19 +21,16 @@ class WeatherClient(object):
         super(WeatherClient, self).__init__()
         self.api_key = api_key
 
-    def conditions(self):
+    def conditions(self, city):
 
         url = WeatherClient.url_base + api_key + \
-            WeatherClient.url_services["conditions"] + get_location() + "." + response_format
+            WeatherClient.url_services["conditions"] + city + "." + response_format
         f = urllib2.urlopen(url)
         response = f.read()
 
         resp_json = json.loads(response)['current_observation']
 
         data = {
-            'city': resp_json['display_location']['city'],
-            'longitude': resp_json['display_location']['longitude'],
-            'latitude': resp_json['display_location']['latitude'],
             'weather': resp_json['weather'],
             'wind_dir': resp_json['wind_dir'],
             'wind_kph': str(resp_json['wind_kph']),
@@ -51,9 +48,6 @@ class WeatherClient(object):
 
 
 def print_data(data):
-    print "City: " + data['city']
-    print "Longitude: " + data['longitude']
-    print "Latitude: " + data['latitude']
     print "Weather: " + data['weather']
     print "wind_dir: " + data['wind_dir']
     print "wind_kph: " + data['wind_kph']
@@ -67,32 +61,24 @@ def print_data(data):
     print "icon_url: " + data['icon_url']
 
 
-def get_location():
-    url = 'http://ipinfo.io/json'
-    url2 = 'http://ip-api.com/json'
-    response = urllib2.urlopen(url2)
-    data = json.load(response)
-    return data['city']
-
-
-def get_weather(name, ip_server, uid):
+def get_weather(name, ip_server, uid, city, latitude, longitude):
     while True:
         weatherclient = WeatherClient(api_key)
-        data = weatherclient.conditions()
+        data = weatherclient.conditions(city)
         print_data(data)
-        send_to_server(data, name, ip_server, uid)
+        send_to_server(data, name, ip_server, uid, city, latitude, longitude)
         time.sleep(180)
 
 
-def send_to_server(data, name, ip_server, uid):
+def send_to_server(data, name, ip_server, uid, city, latitude, longitude):
     url = 'http://mymeteorologicalstation.appspot.com/api'
     url2 = 'http://{}:3000/api'.format(ip_server)
 
     fields = {
         'name': name,
-        'city': data['city'],
-        'longitude': data['longitude'],
-        'latitude': data['latitude'],
+        'city': city,
+        'latitude': latitude,
+        'longitude': longitude,
         'weather': data['weather'],
         'wind_dir': data['wind_dir'],
         'wind_kph': data['wind_kph'],
@@ -120,22 +106,16 @@ def send_to_server(data, name, ip_server, uid):
 
 
 if __name__ == "__main__":
-    if api_key:
-        try:
-            name = sys.argv[1]
-            ip_server = sys.argv[2]
-            get_weather(name, ip_server)
-        except IndexError:
-            print "Must provide a station name and local server ip in cmdline arg"
-
-    else:
-        try:
-            api_key = sys.argv[1]
-            name = sys.argv[2]
-            ip_server = sys.argv[3]
-            uid = sys.argv[4]
-            get_weather(name, ip_server, uid)
-        except IndexError:
-            print "Must provide api key, station name and local server ip in code or cmdline arg"
+    try:
+        api_key = sys.argv[1]
+        name = sys.argv[2]
+        ip_server = sys.argv[3]
+        uid = sys.argv[4]
+        city = sys.argv[5]
+        latitude = sys.argv[6]
+        longitude = sys.argv[7]
+        get_weather(name, ip_server, uid, city, latitude, longitude)
+    except IndexError:
+        print "Must provide api key, station name and local server ip in code or cmdline arg"
 
 

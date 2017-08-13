@@ -77,3 +77,9 @@ twitter-config.json
 
 # rpi config
 rpi-configuration/services/generated
+
+# maps api key
+maps-key.json
+
+# node persist
+.node-persist/

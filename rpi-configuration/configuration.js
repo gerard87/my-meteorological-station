@@ -12,7 +12,7 @@ function configureStation (name, data, newStation) {
         user: data.user,
         name: name,
         serverip: data.serverip,
-        uid: data.uid,
+        uid: data.uid
     }).then(function () {
         createServicesFile('weatherapi.service', {
             user: data.user,
@@ -20,6 +20,9 @@ function configureStation (name, data, newStation) {
             name: name,
             serverip: data.serverip,
             uid: data.uid,
+            city: data.city,
+            latitude: data.latitude,
+            longitude: data.longitude
         }).then(function () {
 
             addkey(data, newStation);
@@ -84,7 +87,7 @@ function updateInstallDep (data) {
 
 
     ssh.exec('sudo apt-get update && ' +
-        'sudo apt-get install git build-essential python-dev && ' +
+        'sudo apt-get -y install git build-essential python-dev && ' +
         'pip install -r requirements.txt', {
         pty: true,
         out: function (stdout) {
