@@ -10,7 +10,7 @@ const serviceAccount = require("./firebase-admin.json");
 
 const { twitter } = require('./twitter');
 
-const { home, assistant, liquidgalaxy, tweet, configuration } = require('./routes');
+const { home, assistant, liquidgalaxy, tweet, configuration, physicalweb } = require('./routes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -21,8 +21,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', home);
 app.use('/', configuration);
 app.use('/', liquidgalaxy);
-app.use('/assistant', assistant);
-app.use('/tweet', tweet);
+app.use('/', assistant);
+app.use('/', tweet);
+app.use('/', physicalweb);
 
 
 

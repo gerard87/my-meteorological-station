@@ -1,0 +1,12 @@
+script.
+    $(function () {
+        $('#remove' + '#{val.id}').on('click', function (event) {
+
+            const user = firebase.auth().currentUser.uid;
+
+            firebase.database().ref('/beacons/' + user + '/' + '#{val.id}').remove();
+            $('#stationmngcard' + '#{val.id}').remove();
+
+
+        });
+    });

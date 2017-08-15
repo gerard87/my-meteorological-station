@@ -1,0 +1,60 @@
+extends layout
+
+block tab
+    #header-row.mdl-layout__header-row
+
+
+
+block content
+
+    include scripts/editbeacon-button
+
+    main.mdl-layout__content.mdl-color--grey-100
+        .mdl-grid.demo-content
+            .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
+
+                .mdl-cell.mdl-cell--6-col
+
+                    h4 Beacon name
+
+                    form(action='#')
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                            input#name.mdl-textfield__input(type='text')
+                            label.mdl-textfield__label(for='name') Enter the beacon name
+
+
+
+                .mdl-cell.mdl-cell--6-col
+
+
+                    h4 Select a station
+
+
+                    form(action='#')
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fullwidth
+                            input#stations.mdl-textfield__input(name='stations', value='Select your station', readonly, tabIndex='-1', style='color: #7a7a7a;')
+                            label(for='stations')
+                                i.material-icons.mdl-icon-toggle__label(style='float:right;margin-top:-30px;color:rgba(0,0,0,0.4);') keyboard_arrow_down
+                            label.mdl-textfield__label(for='stations') Stations
+                            ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='stations')
+                                each val in stations
+                                    li.mdl-menu__item #{val.name}
+
+
+
+
+
+
+                .mdl-cell.mdl-cell--12-col(style='text-align: right;')
+
+
+                    button#btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-800.mdl-color-text--white Save
+
+
+        dialog.mdl-dialog(style='width: 500px;')
+            h5.mdl-dialog__title(style='font-size: 30px') Beacon edited successfully
+            .mdl-dialog__content
+                p(style='font-size: 21px;')
+
+            .mdl-dialog__actions
+                button.mdl-button.close(type='button') Ok

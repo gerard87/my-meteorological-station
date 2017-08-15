@@ -1,0 +1,21 @@
+script.
+    $(function () {
+
+        $('li').on('click', function () {
+            $('#stations').val($(this).text());
+            $('#btn').removeAttr('disabled ');
+            $('#btn').addClass('mdl-color--blue-grey-800');
+        });
+
+        $('#btn').on('click', function () {
+
+            const user = firebase.auth().currentUser.uid;
+
+            if (user) {
+                window.location = '/pw/url/' + user + '?name=' + $('#name').val() + '&station=' + $('#stations').val();
+            }
+
+
+        });
+
+    });

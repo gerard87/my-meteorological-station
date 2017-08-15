@@ -1,0 +1,52 @@
+extends layout
+
+block tab
+    #header-row.mdl-layout__header-row
+
+
+
+block content
+
+    include scripts/newbeacon-button
+
+
+    main.mdl-layout__content.mdl-color--grey-100
+        .mdl-grid.demo-content
+            .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
+
+                .mdl-cell.mdl-cell--6-col
+
+                    h4 Beacon name
+
+                    form(action='#')
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                            input#name.mdl-textfield__input(type='text')
+                            label.mdl-textfield__label(for='name') Enter the beacon name
+
+
+
+                .mdl-cell.mdl-cell--6-col
+
+
+                    h4 Select a station (you can change it later)
+
+
+                    form(action='#')
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.getmdl-select.getmdl-select__fullwidth
+                            input#stations.mdl-textfield__input(name='stations', value='Select your station', readonly, tabIndex='-1', style='color: #7a7a7a;')
+                            label(for='stations')
+                                i.material-icons.mdl-icon-toggle__label(style='float:right;margin-top:-30px;color:rgba(0,0,0,0.4);') keyboard_arrow_down
+                            label.mdl-textfield__label(for='stations') Stations
+                            ul.mdl-menu.mdl-menu--bottom-left.mdl-js-menu(for='stations')
+                                each val in data
+                                    li.mdl-menu__item #{val.name}
+
+
+
+
+
+
+                .mdl-cell.mdl-cell--12-col(style='text-align: right;')
+
+
+                    button#btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-200.mdl-color-text--white(disabled) Create

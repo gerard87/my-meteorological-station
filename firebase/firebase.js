@@ -57,6 +57,15 @@ function writeStationAPI (data) {
 }
 
 
+function createBeacon (name, uid, station) {
+    return admin.database().ref('beacons/' + uid + '/').push({
+        name: name,
+        station: station,
+    });
+}
+
+
+
 function readStations () {
     return new Promise(function (resolve, reject) {
         admin.database().ref('/stations/').once('value').then(function (snapshot) {
@@ -179,13 +188,60 @@ function createStation (uid) {
 
 }
 
+
+function getBeacon (id) {
+    return new Promise(function (resolve, reject) {
+        admin.database().ref('beacons/').once('value').then(snapshot => {
+
+            for (const user in snapshot.val()) {
+                for (const beacon in snapshot.child(user).val()) {
+
+                    if (beacon === id) {
+                        return resolve(snapshot.child(user).child(beacon).val());
+                    }
+                }
+            }
+        }).catch(error => {
+            return reject(error);
+        })
+    });
+}
+
+function getUserBeacons (uid) {
+
+    return new Promise(function (resolve, reject) {
+
+        admin.database().ref('/beacons/' + uid).once('value').then(function(snapshot) {
+
+            let data = [];
+
+            for (const beacon in snapshot.val()) {
+                const values = snapshot.child(beacon).val();
+                values.id = beacon;
+                data.push(values);
+            }
+
+            return resolve(data);
+
+        }).catch(function (error) {
+            return reject(error);
+        });
+
+    });
+
+}
+
+
 module.exports = {
     writeStationSensors,
     writeStationAPI,
     readStations,
     readStationData,
     getUserStations,
-    createStation
+    createStation,
+    createBeacon,
+    getBeacon,
+    getUserBeacons
 };
 
 

@@ -1,0 +1,36 @@
+extends layout
+
+block tab
+    #header-row.mdl-layout__header-row
+
+
+
+block content
+
+    main.mdl-layout__content.mdl-color--grey-100
+        .mdl-grid.demo-content
+            .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
+
+                .mdl-cell.mdl-cell--12-col
+                    center
+                        h4 Your URL is
+                        h4 #{url}
+
+                        h6 Copy this link to the Physical Web Beacon using this&nbsp;
+                            a(href='https://beaufortfrancois.github.io/sandbox/web-bluetooth/eddystone-url-config/index.html') website
+
+
+
+
+                .mdl-cell.mdl-cell--12-col(style='text-align: right;')
+
+
+                    button#btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-800.mdl-color-text--white Ok
+
+
+                script.
+                    $(function () {
+                        $('#btn').on('click', function () {
+                            window.location = '/'
+                        });
+                    });

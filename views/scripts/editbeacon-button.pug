@@ -1,0 +1,38 @@
+script.
+
+    $(function () {
+
+        var dialog = document.querySelector('dialog');
+
+        if (!dialog.showModal) {
+            dialogPolyfill.registerDialog(dialog);
+        }
+        dialog.querySelector('.close').addEventListener('click', function () {
+            dialog.close();
+            window.location = '/';
+        });
+
+        $('#name').val('#{data.name}');
+        $('#stations').val('#{data.station}');
+
+        $('li').on('click', function () {
+            $('#stations').val($(this).text());
+        });
+
+        $('#btn').on('click', function () {
+
+            const user = firebase.auth().currentUser.uid;
+
+            if (user) {
+
+                firebase.database().ref('/beacons/' + user + '/'+ '#{id}').update({
+                    name: $('#name').val(),
+                    station: $('#stations').val()
+                });
+
+                dialog.showModal();
+            }
+
+        });
+
+    });

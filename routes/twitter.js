@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { twitter } = require('../twitter');
 
-router.post('/', function(req, res){
+router.post('/tweet', function(req, res){
 
     twitter.tweetUpdate();
     res.end();

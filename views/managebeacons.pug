@@ -1,0 +1,50 @@
+extends layout
+
+block tab
+    #header-row.mdl-layout__header-row
+
+
+
+block content
+
+    main.mdl-layout__content.mdl-color--grey-100
+        .mdl-grid.demo-content
+            each val in data
+
+                .demo-updates.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col.mdl-cell--4-col-tablet.mdl-cell--4-col-desktop(id='stationmngcard'+val.id, style='min-height: 150px')
+                    .mdl-card__title.mdl-card--expand.mdl-color-text--blue-grey-800(style='min-height:64px;max-height:64px;background-color:#f7faff')
+                        h2.mdl-card__title-text #{val.name}
+                    .mdl-card__supporting-text.mdl-color-text--grey-600
+
+                        .mdl-cell.mdl-cell--12-col.mdl-grid
+                            .mdl-cell.mdl-cell--4-col
+                                h6 Station:
+
+                            .mdl-cell.mdl-cell--8-col
+                                h6 #{val.station}
+
+
+                            .mdl-cell.mdl-cell--4-col
+                                h6 URL:
+
+                            .mdl-cell.mdl-cell--8-col
+                                h6 #{val.url}
+
+                        include scripts/delete-beacon
+
+                        div(style='text-align: right; bottom: 0;')
+
+                            if env !== 'production'
+                                a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--blue-A200(href='/pw/'+val.id+'/edit', style='min-width: 0')
+                                    i.material-icons edit
+                            a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--red-400(href='#', id='remove' + val.id, style='min-width: 0')
+                                i.material-icons delete
+
+
+
+block fab
+    if env !== 'production'
+        a#fab.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored.mdl-color-text--white(href='new')
+            i.material-icons add
+
+

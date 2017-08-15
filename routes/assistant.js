@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { assistant } = require('../assistant');
 
-router.post('/', function(req, res){
+router.post('/assistant', function(req, res){
 
     assistant.webhook(req, res);
 
