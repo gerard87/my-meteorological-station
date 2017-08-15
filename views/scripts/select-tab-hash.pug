@@ -1,9 +1,9 @@
 script.
     $(function () {
         if (window.location.hash !== '') {
-            $('a[href="#Station1"]').removeClass('is-active');
+            $('a[href="#'+'#{val.name}'+'"]').removeClass('is-active');
             $('a[href="' + window.location.hash + '"]').addClass('is-active');
-            $('#Station1').removeClass('is-active');
+            $('#'+'#{val.name}').removeClass('is-active');
             $(window.location.hash).addClass('is-active');
         }
     });

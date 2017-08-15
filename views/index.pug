@@ -3,14 +3,16 @@ extends layout
 block tab
     .mdl-layout__tab-bar.mdl-js-ripple-effect.mdl-color--blue-grey.mdl-color-text--grey-600
         each val, index in data
-            a(class=(index == 0) ? 'mdl-layout__tab is-active' : 'mdl-layout__tab' href='#' + val.name) #{val.name}
+            a(class=(index === 0) ? 'mdl-layout__tab is-active' : 'mdl-layout__tab' href='#' + val.name) #{val.name}
 
 
 block content
 
-    include scripts/select-tab-hash
+
     include scripts/update-values
-    each val in data
+    each val, index in data
+        if index === 0
+            include scripts/select-tab-hash
         include scripts/lg-button
 
 
@@ -21,7 +23,7 @@ block content
 
 
         each val, index in data
-            section(class=(index==0) ? 'mdl-layout__tab-panel is-active' : 'mdl-layout__tab-panel', id=val.name)
+            section(class=(index===0) ? 'mdl-layout__tab-panel is-active' : 'mdl-layout__tab-panel', id=val.name)
                 .page-content
 
 
