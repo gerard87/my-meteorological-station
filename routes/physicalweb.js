@@ -13,7 +13,8 @@ router.get('/pw/', function (req, res){
 
     res.render('physicalweb', {
         title: 'Physical web',
-        config: config
+        config: config,
+        env: env
     });
 });
 
@@ -25,7 +26,8 @@ router.get('/pw/new', function (req, res){
         res.render('newbeacon', {
             title: 'New beacon',
             data: data,
-            config: config
+            config: config,
+            env: env
         });
 
     });
@@ -91,7 +93,8 @@ router.get('/pw/url/:uid', function (req, res){
         res.render('geturl', {
             title: 'URL',
             url: url,
-            config: config
+            config: config,
+            env: env
         });
     });
 
@@ -102,8 +105,8 @@ router.get('/pw/:id', function (req, res){
 
     firebase.getBeacon(req.params.id).then(data => {
         res.render('pwcontent', {
-            title: data.station,
-            description: 'Tap to open ' + data.station,
+            title: 'My meteorological station',
+            description: 'There is a nearby station! Touch to open.',
             url: 'https://mymeteorologicalstation.appspot.com/#' + data.station
         });
     });
