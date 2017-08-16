@@ -27,6 +27,10 @@ function getContent (data) {
 
         '<div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid" style="width: 98%">'+
 
+        '<div class="mdl-cell mdl-cell--6-col mdl-layout-spacer" style="text-align: left;">' +
+        '<img src="/img/rpi-logo.png" height="32" width="32"/>' +
+        '</div>' +
+
         '<div class="mdl-cell mdl-cell--3-col mdl-layout-spacer">' +
         '<p style="font-size:1.5em;color:#474747;line-height:0.5;">Humidity:</p>' +
         '</div>' +
@@ -70,6 +74,10 @@ function getContent (data) {
 
 
         '<div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid" style="width: 98%">'+
+
+        '<div class="mdl-cell mdl-cell--6-col mdl-layout-spacer" style="text-align: left;">' +
+        '<img src="/img/wunderground-logo.jpg" height="22" width="40"/>' +
+        '</div>' +
 
         '<div class="mdl-cell mdl-cell--3-col mdl-layout-spacer">' +
         '<p style="font-size:1.5em;color:#474747;line-height:0.5;">Wind velocity:</p>' +
