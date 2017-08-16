@@ -22,7 +22,7 @@ router.post('/lg', function (req, res){
 
                 firebase.readStationData(req.body.name).then(data => {
 
-                    lg.flyTo(lgip, data.city);
+                    lg.flyTo(lgip, data.latitude, data.longitude);
                     lg.show_kml_balloon(lgip, data, false);
 
                 });

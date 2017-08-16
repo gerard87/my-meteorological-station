@@ -12,8 +12,8 @@ function addKey (lgip) {
     execute_command(command);
 }
 
-function flyTo (lgip, city) {
-    const message = "echo 'search="+city+"' > /tmp/query.txt";
+function flyTo (lgip, latitude, longitude) {
+    const message = "echo 'search="+latitude+","+longitude+"' > /tmp/query.txt";
     communicate(lgip, message);
 }
 
