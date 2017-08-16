@@ -159,19 +159,9 @@ function createStation (uid) {
 
         let station = 'Station';
 
-        admin.database().ref('station_index/').once('value').then(function (snapshot) {
+        getFirstEmptyIndex().then(index => {
 
-            if (snapshot.val() === null) {
-                station += 1;
-                admin.database().ref('station_index/').set(
-                    2
-                );
-            } else {
-                station += snapshot.val();
-                admin.database().ref('station_index/').set(
-                    snapshot.val() + 1
-                );
-            }
+            station += index;
 
             admin.database().ref('users/' + uid).push(
                 station
@@ -184,6 +174,23 @@ function createStation (uid) {
         });
 
 
+    });
+
+}
+
+
+function getFirstEmptyIndex () {
+    return new Promise(function (resolve, reject) {
+        readStations().then(data => {
+            let freeCounter = 1;
+
+            for (const station in data){
+                if (data[station].name === 'Station'+freeCounter) {
+                    freeCounter++;
+                }
+            }
+            return resolve(freeCounter);
+        });
     });
 
 }
