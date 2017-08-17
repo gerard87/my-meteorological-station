@@ -4,7 +4,7 @@ function getContent (data) {
         '<table width="470" style="font-family: Roboto;"><tr><td>' +
         '<div id="content">'+'<div id="siteNotice">'+'</div>' +
         '<h1 id="firstHeading" class="firstHeading" style="color: #474747;font-size: 1.5em;line-height:0.2;text-align:center">My meteorological station</h1>' +
-        '<h1 id="firstHeading" class="firstHeading" style="color: #474747;font-size: 2em;line-height:1;text-align:center">' + data.name + '</h1>' +
+        '<h1 id="firstHeading" class="firstHeading" style="color: #474747;font-size: 2em;line-height:1;text-align:center">' + data.name + ': ' + data.alias + '</h1>' +
         '<div id="bodyContent" style="text-align: center;">' +
 
         '<div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid" style="width: 98%">'+

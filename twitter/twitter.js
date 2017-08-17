@@ -12,7 +12,7 @@ function tweetUpdate () {
 
         for (const station in data) {
 
-            const msg = data[station].name + ' \n' +
+            const msg = data[station].name + ': ' + data[station].alias +' \n' +
                 'City: ' + data[station].city + '\n' +
                 'Weather: ' + data[station].weather + '\n' +
                 'Temperature: ' + data[station].temperature + ' ºC\n' +
