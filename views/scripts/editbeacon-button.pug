@@ -21,11 +21,11 @@ script.
 
         $('#btn').on('click', function () {
 
-            const user = firebase.auth().currentUser.uid;
+            const user = firebase.auth().currentUser;
 
             if (user) {
 
-                firebase.database().ref('/beacons/' + user + '/'+ '#{id}').update({
+                firebase.database().ref('/beacons/' + user.uid + '/'+ '#{id}').update({
                     name: $('#name').val(),
                     station: $('#stations').val()
                 });

@@ -14,7 +14,8 @@ router.get('/pw/', function (req, res){
     res.render('physicalweb', {
         title: 'Physical web',
         config: config,
-        env: env
+        env: env,
+        id: req.query.id
     });
 });
 
@@ -27,7 +28,8 @@ router.get('/pw/new', function (req, res){
             title: 'New beacon',
             data: data,
             config: config,
-            env: env
+            env: env,
+            id: req.query.id
         });
 
     });
@@ -94,7 +96,8 @@ router.get('/pw/url/:uid', function (req, res){
             title: 'URL',
             url: url,
             config: config,
-            env: env
+            env: env,
+            id: req.params.uid
         });
     });
 

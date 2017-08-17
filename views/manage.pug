@@ -19,7 +19,7 @@ block content
                         include scripts/delete-station
 
                         if env !== 'production'
-                            a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--blue-A200(href='/editform?station='+val, style='min-width: 0')
+                            a#editstbtn.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--blue-A200(href='/editform?station='+val, style='min-width: 0')
                                 i.material-icons edit
                         a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--red-400(href='#', id='remove' + val, style='min-width: 0')
                             i.material-icons delete

@@ -7,8 +7,12 @@ script.
             dialogPolyfill.registerDialog(dialog);
         }
         dialog.querySelector('.close').addEventListener('click', function () {
+            const user = firebase.auth().currentUser;
+
             dialog.close();
-            window.location = '/';
+
+            if (user) window.location = '/?id=' + user.uid;
+            else window.location = '/';
         });
 
         $('#btn').on('click', function (event) {

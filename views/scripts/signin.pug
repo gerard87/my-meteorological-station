@@ -11,6 +11,17 @@ script.
                 $('#managestations').css({display: 'block'});
                 $('#fab').css({display: 'block'});
                 $('#newstation').css({display: 'block'});
+
+                $('#homelink').attr('href','/?id='+user.uid);
+                $('#newlink').attr('href','/new?id='+user.uid);
+                $('#managelink').attr('href','/manage?id='+user.uid);
+                $('#pwlink').attr('href','/pw?id='+user.uid);
+                $('#settingslink').attr('href','/settings?id='+user.uid);
+                $('#fab').attr('href','/new?id='+user.uid);
+                $('#newstbtn').attr('href','/createform?id='+user.uid);
+                $('#editstbtn').attr('href', $('#editstbtn').attr('href') + '&id='+user.uid);
+                $('#newbcnbtn').attr('href','/pw/new?id='+user.uid);
+
             } else {
                 // No user is signed in.
                 $('#signinbtn').css({display: 'block'});
@@ -39,6 +50,7 @@ script.
         $('#signout').on('click', function (event) {
 
             firebase.auth().signOut().then(function () {
+                window.location = '/';
             }).catch(function (error) {
                 console.log(error);
             });

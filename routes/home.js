@@ -18,7 +18,8 @@ router.get('/', function(req, res){
             title: 'Home',
             data: data,
             env: env,
-            config: config
+            config: config,
+            id: req.query.id
         });
 
     });
@@ -31,7 +32,8 @@ router.get('/new', function(req, res){
 
     res.render('newStation', {
         title: 'New station',
-        config: config
+        config: config,
+        id: req.query.id
     });
 
 });
@@ -60,7 +62,8 @@ router.get('/createform', function(req, res){
     res.render('createform', {
         title: 'Station configuration',
         config: config,
-        mapskey: mapskey.apikey
+        mapskey: mapskey.apikey,
+        id: req.query.id
     });
 
 });
@@ -72,7 +75,8 @@ router.get('/editform', function(req, res){
         title: 'Station edit',
         config: config,
         station: req.query.station,
-        mapskey: mapskey.apikey
+        mapskey: mapskey.apikey,
+        id: req.query.id
     });
 
 });
@@ -85,7 +89,8 @@ router.get('/settings', function(req, res){
             res.render('settings', {
                 title: 'Settings',
                 config: config,
-                lgip: lgip
+                lgip: lgip,
+                id: req.query.id
             });
         });
     });

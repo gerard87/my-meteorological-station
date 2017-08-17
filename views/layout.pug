@@ -43,20 +43,16 @@ html
                 #bar.mdl-layout__header-row
                     span.mdl-layout-title #{title}
                     .mdl-layout-spacer
-                    .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable
-                        .mdl-textfield__expandable-holder
-                            input#search.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='search') Enter your query...
                     button#hdrbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon
                         i.material-icons more_vert
                     ul.mdl-menu.mdl-js-menu.mdl-js-ripple-effect.mdl-menu--bottom-right(for='hdrbtn')
                         li.mdl-menu__item About
                         li.mdl-menu__item Contact
 
-                    #signinbtn.mdl-button.mdl-js-button.mdl-color-text--blue-grey-50 SIGN IN
+                    #signinbtn.mdl-button.mdl-js-button.mdl-color-text--blue-grey-50(style=(id!==undefined)?'display: none':'') SIGN IN
                     a#username.mdl-color--blue-grey.mdl-color-text--blue-grey-50
                     a#imglink(href='#')
-                        img#userimg(style='display: none')
+                        img#userimg(style=(id===undefined)?'display: none':'')
                     ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for='imglink')
                         li.mdl-menu__item
                             #signout
@@ -77,23 +73,23 @@ html
 
                 nav.demo-navigation.mdl-navigation.mdl-color--blue-grey
 
-                    a.mdl-navigation__link(href='/')
+                    a#homelink.mdl-navigation__link(href='/')
                         i.mdl-color-text--blue-grey-50.material-icons(role='presentation') home
                         | Home
                     if env !== 'production'
-                        #newstation(style='display: none')
-                            a.mdl-navigation__link(href='/new')
+                        #newstation(style=(id===undefined)?'display: none': '')
+                            a#newlink.mdl-navigation__link(href='/new')
                                 i.mdl-color-text--blue-grey-50.material-icons(role='presentation') add
                                 | New station
-                    #managestations(style='display: none')
+                    #managestations(style=(id===undefined)?'display: none': '')
                         a#managelink.mdl-navigation__link(href='' onclick='setHref()')
                             i.mdl-color-text--blue-grey-50.material-icons(role='presentation') edit
                             | Manage stations
-                        a.mdl-navigation__link(href='/pw')
+                        a#pwlink.mdl-navigation__link(href='/pw')
                             i.mdl-color-text--blue-grey-50.material-icons(role='presentation') wifi_tethering
                             | Phyisical web
                     if env !== 'production'
-                        a.mdl-navigation__link(href='/settings')
+                        a#settingslink.mdl-navigation__link(href='/settings')
                             i.mdl-color-text--blue-grey-50.material-icons(role='presentation') settings
                             | Settings
                     .mdl-layout-spacer

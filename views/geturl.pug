@@ -31,6 +31,8 @@ block content
                 script.
                     $(function () {
                         $('#btn').on('click', function () {
-                            window.location = '/'
+                            const user = firebase.auth().currentUser;
+                            if (user) window.location = '/?id=' + user.uid;
+                            else window.location = '/';
                         });
                     });
