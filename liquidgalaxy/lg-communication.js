@@ -34,37 +34,36 @@ function show_kml_balloon (lgip, data, tour) {
 
     const template = tour ? 'template_rotation' : 'template';
 
-
-    ejs.renderFile(path.join(__dirname, '..', 'public/templates/'+ template +'.kml'), {
+    const values = {
         description: contentString,
         coordinates: data.longitude+','+data.latitude,
         longitude: data.longitude,
         latitude: data.latitude
-    }, function (err, content) {
-        if (err) {
-            console.log(err);
-        } else {
-            const dir = path.join(__dirname, '..', 'public/kml');
-            if (!fs.existsSync(dir)) {
-                fs.mkdir(dir, function (err) {});
-            }
+    };
 
-            const command = 'rm '+dir+'/MMS-*.kml';
-            child = exec( command, function (error, stdout, stderr) {
-                if (error !== null) {
-                    console.log('exec error: ' + error);
-                }
-
-                const millis = new Date().getMilliseconds();
-                const name = 'MMS-'+data.city+'-'+millis+'.kml';
-                fs.writeFile(path.join(dir, name), content, function (err) {});
-
-                send_single_kml(lgip, name, dir, tour);
-            });
-        }
+    renderFile(data.city, values, template).then(data => {
+        send_single_kml(lgip, data[0], data[1], tour);
     });
 
 }
+
+
+function show_all_stations_tour (lgip, data) {
+
+    for (const station in data) {
+
+        const contentString = content.getContent(data[station]);
+        data[station].description = contentString;
+
+    }
+
+    const values = { data: data };
+
+    renderFile('all', values, 'template_all').then(data => {
+        send_single_kml(lgip, data[0], data[1], true);
+    });
+}
+
 
 
 function send_single_kml (lgip, name, route, tour) {
@@ -139,6 +138,36 @@ function clean_lg (lgip) {
 }
 
 
+function renderFile (fname, values, template) {
+    return new Promise(function (resolve, reject) {
+        ejs.renderFile(path.join(__dirname, '..', 'public/templates/'+ template +'.kml'), values, function (err, content) {
+            if (err) {
+                console.log(err);
+            } else {
+                const dir = path.join(__dirname, '..', 'public/kml');
+                if (!fs.existsSync(dir)) {
+                    fs.mkdir(dir, function (err) {});
+                }
+
+                const command = 'rm '+dir+'/MMS-*.kml';
+                child = exec( command, function (error, stdout, stderr) {
+                    if (error !== null) {
+                        console.log('exec error: ' + error);
+                    }
+
+                    const millis = new Date().getMilliseconds();
+                    const name = 'MMS-'+fname+'-'+millis+'.kml';
+                    fs.writeFile(path.join(dir, name), content, function (err) {});
+
+                    return resolve([name, dir]);
+                });
+            }
+        });
+    });
+}
+
+
+
 function execute_command (command) {
     child = exec( command, function (error, stdout, stderr) {
         if (error !== null) {
@@ -153,5 +182,6 @@ module.exports = {
     start_tour,
     exit_tour,
     clean_lg,
-    addKey
+    addKey,
+    show_all_stations_tour
 };

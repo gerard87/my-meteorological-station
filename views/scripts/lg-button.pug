@@ -1,44 +1,58 @@
 script.
     $(function () {
-        $('#lg-btn-'+'#{val.name}').on('click', function (event) {
-            var stop = false;
-            if ($('#lg-btn-'+'#{val.name}').text() === 'Send to Liquid Galaxy') {
-                $('#lg-btn-'+'#{val.name}').text('Stop Liquid Galaxy');
-                $('#lg-btn-'+'#{val.name}').attr('class', 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' +
-                    ' mdl-button--accent mdl-color--red mdl-color-text--white');
-            } else {
-                $('#lg-btn-'+'#{val.name}').text('Send to Liquid Galaxy');
-                $('#lg-btn-'+'#{val.name}').attr('class', 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' +
-                    ' mdl-button--accent mdl-color--blue-grey mdl-color-text--white');
-                stop = true;
-            }
+
+        $('#lg-ball-btn-'+'#{val.name}').on('click', function (event) {
+
+            $('#lg-'+'#{val.name}').attr('style', 'display:none');
+            $('#lg-stop-'+'#{val.name}').attr('style', 'display:block');
+
             $.ajax({
                 type: "POST",
-                url: '/lg',
+                url: '/lg/balloon',
                 data: {
-                    'name': '#{val.name}',
-                    'stop': stop
+                    'name': '#{val.name}'
                 }
             });
         });
 
-        $('#lgrotate-btn-' + '#{val.name}').on('click', function (event) {
+        $('#lg-rotate-btn-' + '#{val.name}').on('click', function (event) {
 
-            var stop = false;
-            if ($('#lgrotate-btn-' + '#{val.name}').css('color') === 'rgb(96, 125, 139)') {
-                $('#lgrotate-btn-' + '#{val.name}').attr('class', 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--red');
+            $('#lg-' + '#{val.name}').attr('style', 'display:none');
+            $('#lg-stop-' + '#{val.name}').attr('style', 'display:block');
 
-            } else {
-                $('#lgrotate-btn-' + '#{val.name}').attr('class', 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey');
-                stop = true;
-            }
             $.ajax({
                 type: "POST",
-                url: '/lgrotation',
+                url: '/lg/rotation',
                 data: {
-                    'name': '#{val.name}',
-                    'stop': stop
+                    'name': '#{val.name}'
                 }
             });
         });
+
+        $('#lg-all-btn-' + '#{val.name}').on('click', function (event) {
+
+            $('#lg-' + '#{val.name}').attr('style', 'display:none');
+            $('#lg-stop-' + '#{val.name}').attr('style', 'display:block');
+
+            $.ajax({
+                type: "POST",
+                url: '/lg/all'
+            });
+        });
+
+
+        $('#lg-stop-' + '#{val.name}').on('click', function (event) {
+
+            $('#lg-' + '#{val.name}').attr('style', 'display:block');
+            $('#lg-stop-' + '#{val.name}').attr('style', 'display:none');
+
+            $.ajax({
+                type: "POST",
+                url: '/lg/stop'
+            });
+        });
+
+
+
+
     });

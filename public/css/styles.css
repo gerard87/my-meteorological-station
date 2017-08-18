@@ -239,7 +239,7 @@ _:-ms-input-placeholder, :root .demo-graph {
 }
 
 
-#menuitem {
+.menuitem {
     width: 33px;
     vertical-align: -7px;
 }
