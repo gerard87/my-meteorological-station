@@ -34,10 +34,10 @@
                     </LookAt>
                 </gx:FlyTo>
                 <gx:Wait id="tour_1">
-                    <gx:duration>3.0</gx:duration>
+                    <gx:duration>1.5</gx:duration>
                 </gx:Wait>
                 <gx:FlyTo id="tour_2">
-                    <gx:duration>5.0</gx:duration>
+                    <gx:duration>2.5</gx:duration>
                     <gx:flyToMode>smooth</gx:flyToMode>
                     <LookAt>
                         <longitude><%=longitude%></longitude>
@@ -50,7 +50,7 @@
                     </LookAt>
                 </gx:FlyTo>
                 <gx:Wait id="tour_3">
-                    <gx:duration>5.0</gx:duration>
+                    <gx:duration>2.5</gx:duration>
                 </gx:Wait>
                 <gx:FlyTo id="tour_4">
                     <gx:duration>1</gx:duration>
