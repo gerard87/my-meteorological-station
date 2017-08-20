@@ -1,6 +1,13 @@
 script.
     $(function () {
-        $('#remove'+'#{val}').on('click', function (event) {
+
+        var dialog = document.querySelector('#dialog' + '#{val}');
+
+        if (!dialog.showModal) {
+            dialogPolyfill.registerDialog(dialog);
+        }
+
+        dialog.querySelector('.ok').addEventListener('click', function () {
 
             const user = firebase.auth().currentUser.uid;
 
@@ -13,6 +20,17 @@ script.
                     }
                 }
             });
+
+            dialog.close();
+        });
+
+        dialog.querySelector('.cancel').addEventListener('click', function () {
+            dialog.close();
+        });
+
+        $('#remove'+'#{val}').on('click', function (event) {
+
+            dialog.showModal();
 
         });
     });

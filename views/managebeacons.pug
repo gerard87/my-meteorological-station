@@ -39,6 +39,16 @@ block content
                             a.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect.mdl-color-text--red-400(href='#', id='remove' + val.id, style='min-width: 0')
                                 i.material-icons delete
 
+                dialog.mdl-dialog(id='dialog' + val.id style='width: 500px;')
+                    h5.mdl-dialog__title Remove #{val.name}
+                    .mdl-dialog__content
+                        p(style='font-size: 21px;')
+                            | Do you want to remove the #{val.name}?
+
+                    .mdl-dialog__actions
+                        button.mdl-button.ok(type='button') Ok
+                        button.mdl-button.cancel(type='button') Cancel
+
 
 
 block fab

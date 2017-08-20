@@ -1,12 +1,30 @@
 script.
     $(function () {
-        $('#remove' + '#{val.id}').on('click', function (event) {
+
+        var dialog = document.querySelector('#dialog' + '#{val.id}');
+
+        if (!dialog.showModal) {
+            dialogPolyfill.registerDialog(dialog);
+        }
+
+        dialog.querySelector('.ok').addEventListener('click', function () {
 
             const user = firebase.auth().currentUser.uid;
 
             firebase.database().ref('/beacons/' + user + '/' + '#{val.id}').remove();
             $('#stationmngcard' + '#{val.id}').remove();
 
+            dialog.close();
+        });
+
+        dialog.querySelector('.cancel').addEventListener('click', function () {
+            dialog.close();
+        });
+
+
+        $('#remove' + '#{val.id}').on('click', function (event) {
+
+            dialog.showModal();
 
         });
     });
