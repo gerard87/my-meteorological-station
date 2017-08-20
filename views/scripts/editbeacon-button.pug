@@ -19,7 +19,7 @@ script.
             $('#stations').val($(this).text());
         });
 
-        $('#btn').on('click', function () {
+        $('#form').submit(function () {
 
             const user = firebase.auth().currentUser;
 
@@ -32,6 +32,8 @@ script.
 
                 dialog.showModal();
             }
+
+            return false;
 
         });
 
