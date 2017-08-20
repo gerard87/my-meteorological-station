@@ -1,6 +1,9 @@
 script.
     $(function () {
 
+        'use strict';
+        var snackbarContainer = document.querySelector('#toast');
+
         var dialog = document.querySelector('dialog');
 
         if (!dialog.showModal) {
@@ -15,11 +18,20 @@ script.
             else window.location = '/';
         });
 
-        $('#btn').on('click', function (event) {
+        $('#form').submit(function (event) {
 
             var geocoder = new google.maps.Geocoder;
-            var latlng = marker.position;
-            geocodeLatLng(geocoder, latlng);
+            if (marker) {
+                var latlng = marker.position;
+                geocodeLatLng(geocoder, latlng);
+            }
+            else {
+                'use strict';
+                var data = {message: 'Please, select a location to create the station'};
+                snackbarContainer.MaterialSnackbar.showSnackbar(data);
+            }
+
+            return false;
 
         });
 

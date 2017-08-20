@@ -13,85 +13,80 @@ block content
     include scripts/editstation-button
 
     main.mdl-layout__content.mdl-color--grey-100
-        .mdl-grid.demo-content
-            .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
+        form#form(action='#')
+            .mdl-grid.demo-content
+                .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
 
-                .mdl-cell.mdl-cell--12-col
-                    h3 Edit #{station} configuration
-                    h6 *Add all values again
+                    .mdl-cell.mdl-cell--12-col
+                        h3 Edit #{station} configuration
+                        h6 *Add all values again
 
-                .mdl-cell.mdl-cell--12-col
-                    h4 Alias
+                    .mdl-cell.mdl-cell--12-col
+                        h4 Alias
 
 
-                .mdl-cell.mdl-cell--4-col
+                    .mdl-cell.mdl-cell--4-col
 
-                    form(action='#')
                         .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                            input#alias.mdl-textfield__input(type='text')
+                            input#alias.mdl-textfield__input(type='text' required)
                             label.mdl-textfield__label(for='alias') Add an alias (ex: Office station)
 
-                .mdl-cell.mdl-cell--12-col
-                    h4 Location
-                    h6 Select the station location
+                    .mdl-cell.mdl-cell--12-col
+                        h4 Location
+                        h6 Select the station location
 
-                .mdl-cell.mdl-cell--12-col
-                    #map
+                    .mdl-cell.mdl-cell--12-col
+                        #map
 
-                .mdl-cell.mdl-cell--12-col
-                    h4 Raspberry Pi
+                    .mdl-cell.mdl-cell--12-col
+                        h4 Raspberry Pi
 
-                .mdl-cell.mdl-cell--4-col
+                    .mdl-cell.mdl-cell--4-col
 
-                    form(action='#')
                         .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                            input#user.mdl-textfield__input(type='text')
+                            input#user.mdl-textfield__input(type='text' required)
                             label.mdl-textfield__label(for='user') RPi Username (default: pi)
 
 
-                .mdl-cell.mdl-cell--4-col
+                    .mdl-cell.mdl-cell--4-col
 
-                    form(action='#')
                         .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                            input#pass.mdl-textfield__input(type='password')
+                            input#pass.mdl-textfield__input(type='password' required)
                             label.mdl-textfield__label(for='pass') RPi Password (default: raspberry)
 
 
-                .mdl-cell.mdl-cell--4-col
+                    .mdl-cell.mdl-cell--4-col
 
-                    form(action='#')
                         .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                            input#ip.mdl-textfield__input(type='text')
+                            input#ip.mdl-textfield__input(type='text' required)
                             label.mdl-textfield__label(for='ip') RPi ip
 
 
-                .mdl-cell.mdl-cell--12-col
-                    h4 Server
+                    .mdl-cell.mdl-cell--12-col
+                        h4 Server
 
-                .mdl-cell.mdl-cell--6-col
+                    .mdl-cell.mdl-cell--6-col
 
-                    form(action='#')
                         .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                            input#serverip.mdl-textfield__input(type='text')
+                            input#serverip.mdl-textfield__input(type='text' required)
                             label.mdl-textfield__label(for='serverip') Server URL or ip
 
-                .mdl-cell.mdl-cell--12-col
-                    h4 Weather underground
+                    .mdl-cell.mdl-cell--12-col
+                        h4 Weather underground
 
-                .mdl-cell.mdl-cell--6-col
+                    .mdl-cell.mdl-cell--6-col
 
-                    form(action='#')
                         .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                            input#apikey.mdl-textfield__input(type='text')
+                            input#apikey.mdl-textfield__input(type='text' required)
                             label.mdl-textfield__label(for='apikey') Weather Underground api key
 
 
 
 
 
-                .mdl-cell.mdl-cell--12-col(style='text-align: right;')
+                    .mdl-cell.mdl-cell--12-col(style='text-align: right;')
 
-                    a#btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-800.mdl-color-text--white Save
+                        input#btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-800.mdl-color-text--white(type='submit')
 
 
         dialog.mdl-dialog(style='width: 500px;')
@@ -102,3 +97,7 @@ block content
 
             .mdl-dialog__actions
                 button.mdl-button.close(type='button') Ok
+
+        #toast.mdl-js-snackbar.mdl-snackbar
+            .mdl-snackbar__text
+            button.mdl-snackbar__action(type='button')
