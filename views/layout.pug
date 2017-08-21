@@ -96,14 +96,26 @@ html
                     a.mdl-navigation__link(href='')
                         i.mdl-color-text--blue-grey-50.material-icons(role='presentation') help_outline
                         | Help
-                    hr
-                    a.mdl-navigation__link(href='https://twitter.com/mymeteostation' style='height: 5px')
-                        img(src="/img/twitter-logo.png" height="24" width="24" role='presentation' style='margin-right: 32px')
-                        | Twitter
+                    hr(style='margin-bottom: -10px')
 
-                    a.mdl-navigation__link(href='https://github.com/gerard87/my-meteorological-station' style='height: 5px')
-                        img(src="/img/github-logo.svg" height="22" width="22" role='presentation' style='margin-right: 32px')
-                        | Github
+                    .mdl-cell.mdl-cell--12-col.mdl-grid(style='height: 46px')
+                        .mdl-cell.mdl-cell--12-col
+                            center
+
+                                a#twitter(href='https://twitter.com/mymeteostation')
+                                    img(src="/img/twitter-logo.png" height="24" width="24" role='presentation' style='margin-right: 32px')
+                                .mdl-tooltip.mdl-tooltip--large.mdl-tooltip--top(data-mdl-for='twitter')
+                                    | Follow station
+                                    br
+                                    | updates on twitter
+
+
+                                a#github(href='https://github.com/gerard87/my-meteorological-station')
+                                    img(src="/img/github-logo.svg" height="22" width="22" role='presentation' style='margin-right: 32px')
+                                .mdl-tooltip.mdl-tooltip--large.mdl-tooltip--top(data-mdl-for='github')
+                                    | See source code
+                                    br
+                                    | on github
 
 
 
