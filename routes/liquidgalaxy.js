@@ -12,14 +12,14 @@ router.post('/lg/balloon', function (req, res){
 
 
     storage.init().then(function() {
-        storage.getItem('lgip').then(function(lgip) {
+        storage.getItem('lgsettings').then(function(lgsettings) {
 
-            lg.addKey(lgip);
+            lg.addKey(lgsettings.ip);
 
             firebase.readStationData(req.body.name).then(data => {
 
-                lg.flyTo(lgip, data.latitude, data.longitude);
-                lg.show_kml_balloon(lgip, data, false);
+                lg.flyTo(lgsettings.ip, lgsettings.pass, data.latitude, data.longitude);
+                lg.show_kml_balloon(lgsettings.ip, lgsettings.pass, data, false);
 
             });
 
@@ -33,11 +33,10 @@ router.post('/lg/balloon', function (req, res){
 
 router.post('/lg/stop', function (req, res){
     storage.init().then(function() {
-        storage.getItem('lgip').then(function(lgip) {
+        storage.getItem('lgsettings').then(function(lgsettings) {
 
-            lg.exit_tour(lgip);
-            lg.clean_lg(lgip);
-
+            lg.clean_lg(lgsettings.ip, lgsettings.pass);
+            lg.exit_tour(lgsettings.ip, lgsettings.pass);
             res.end();
         });
     });
@@ -48,13 +47,13 @@ router.post('/lg/stop', function (req, res){
 router.post('/lg/all', function (req, res){
 
     storage.init().then(function() {
-        storage.getItem('lgip').then(function(lgip) {
+        storage.getItem('lgsettings').then(function(lgsettings) {
 
-            lg.addKey(lgip);
+            lg.addKey(lgsettings.ip);
 
             firebase.readStations().then(data => {
 
-                lg.show_all_stations_tour(lgip, data);
+                lg.show_all_stations_tour(lgsettings.ip, lgsettings.pass, data);
 
             });
 
@@ -71,13 +70,13 @@ router.post('/lg/rotation', function (req, res){
 
 
     storage.init().then(function() {
-        storage.getItem('lgip').then(function(lgip) {
+        storage.getItem('lgsettings').then(function(lgsettings) {
 
-            lg.addKey(lgip);
+            lg.addKey(lgsettings.ip);
 
             firebase.readStationData(req.body.name).then(data => {
 
-                lg.show_kml_balloon(lgip, data, true);
+                lg.show_kml_balloon(lgsettings.ip, lgsettings.pass, data, true);
 
             });
 

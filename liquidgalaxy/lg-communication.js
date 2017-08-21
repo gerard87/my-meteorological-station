@@ -5,21 +5,19 @@ const fs = require('fs');
 const ip = require('ip');
 const content = require('./balloonContent');
 
-const galaxy_pass = 'lqgalaxy';
-
 function addKey (lgip) {
     const command = 'ssh-keyscan -H '+lgip+' >> ~/.ssh/known_hosts';
     execute_command(command);
 }
 
-function flyTo (lgip, latitude, longitude) {
+function flyTo (lgip, lgpass, latitude, longitude) {
     const message = "echo 'search="+latitude+","+longitude+"' > /tmp/query.txt";
-    communicate(lgip, message);
+    communicate(lgip, lgpass, message);
 }
 
-function communicate (lgip, message) {
+function communicate (lgip, lgpass, message) {
     console.log(message);
-    const command = "sshpass -p '"+galaxy_pass+"' ssh lg@"+lgip+" \""+message+"\"";
+    const command = "sshpass -p '"+lgpass+"' ssh lg@"+lgip+" \""+message+"\"";
     console.log(command);
     execute_command(command);
 }
@@ -28,7 +26,7 @@ function get_server_ip () {
     return ip.address();
 }
 
-function show_kml_balloon (lgip, data, tour) {
+function show_kml_balloon (lgip, lgpass, data, tour) {
 
     const contentString = content.getContent(data);
 
@@ -42,13 +40,13 @@ function show_kml_balloon (lgip, data, tour) {
     };
 
     renderFile(data.city, values, template).then(data => {
-        send_single_kml(lgip, data[0], data[1], tour);
+        send_single_kml(lgip, lgpass, data[0], data[1], tour);
     });
 
 }
 
 
-function show_all_stations_tour (lgip, data) {
+function show_all_stations_tour (lgip, lgpass, data) {
 
     for (const station in data) {
 
@@ -60,13 +58,13 @@ function show_all_stations_tour (lgip, data) {
     const values = { data: data };
 
     renderFile('all', values, 'template_all').then(data => {
-        send_single_kml(lgip, data[0], data[1], true);
+        send_single_kml(lgip, lgpass, data[0], data[1], true);
     });
 }
 
 
 
-function send_single_kml (lgip, name, route, tour) {
+function send_single_kml (lgip, lgpass, name, route, tour) {
     const content = 'http://' + get_server_ip() + ':3000/kml/' + name + '\n';
     const command = "echo '" + content + "' > "+route+"/kmls.txt";
     child = exec( command, function (error, stdout, stderr) {
@@ -75,9 +73,9 @@ function send_single_kml (lgip, name, route, tour) {
         }
 
         if (tour) {
-            send_galaxy_tour(lgip, route);
+            send_galaxy_tour(lgip, lgpass, route);
         } else {
-            send_galaxy(lgip, route);
+            send_galaxy(lgip, lgpass, route);
         }
 
 
@@ -85,24 +83,24 @@ function send_single_kml (lgip, name, route, tour) {
 
 }
 
-function send_galaxy (lgip, route) {
+function send_galaxy (lgip, lgpass, route) {
     const file_path = route+'/kmls.txt';
     const server_path = '/var/www/html/kmls_1.txt';
-    const command = "sshpass -p '" + galaxy_pass + "' scp " + file_path + " lg@" + lgip + ":" + server_path;
+    const command = "sshpass -p '" + lgpass + "' scp " + file_path + " lg@" + lgip + ":" + server_path;
     execute_command(command);
 }
 
-function send_galaxy_tour (lgip, route) {
+function send_galaxy_tour (lgip, lgpass, route) {
     const file_path = route+'/kmls.txt';
     const server_path = '/var/www/html/kmls_1.txt';
-    const command = "sshpass -p '" + galaxy_pass + "' scp " + file_path + " lg@" + lgip + ":" + server_path;
+    const command = "sshpass -p '" + lgpass + "' scp " + file_path + " lg@" + lgip + ":" + server_path;
 
     child = exec( command, function (error, stdout, stderr) {
         if (error !== null) {
             console.log('exec error: ' + error);
         }
         setTimeout(function () {
-            start_tour(lgip);
+            start_tour(lgip, lgpass);
         }, 1000);
 
     });
@@ -110,18 +108,18 @@ function send_galaxy_tour (lgip, route) {
 
 
 
-function start_tour (lgip) {
+function start_tour (lgip, lgpass) {
     const message = "echo 'playtour=Show Balloon' > /tmp/query.txt";
-    communicate(lgip, message)
+    communicate(lgip, lgpass, message)
 }
 
-function exit_tour (lgip) {
+function exit_tour (lgip, lgpass) {
     const message = "echo 'exittour=Show Balloon' > /tmp/query.txt";
-    communicate(lgip, message)
+    communicate(lgip, lgpass, message)
 }
 
 
-function clean_lg (lgip) {
+function clean_lg (lgip, lgpass) {
     const route = path.join(__dirname, '..', 'public/kml');
     const command = "echo '' > "+route+"/kmls.txt";
     child = exec( command, function (error, stdout, stderr) {
@@ -130,7 +128,7 @@ function clean_lg (lgip) {
         }
         const file_path = route+'/kmls.txt';
         const server_path = '/var/www/html/kmls_1.txt';
-        const command = "sshpass -p '" + galaxy_pass + "' scp " + file_path + " lg@" + lgip + ":" + server_path;
+        const command = "sshpass -p '" + lgpass + "' scp " + file_path + " lg@" + lgip + ":" + server_path;
         execute_command(command);
     });
 

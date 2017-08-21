@@ -84,17 +84,20 @@ router.get('/editform', function(req, res){
 
 router.get('/settings', function(req, res){
 
-    storage.init().then(function() {
-        storage.getItem('lgip').then(function(lgip) {
-            res.render('settings', {
-                title: 'Settings',
-                config: config,
-                lgip: lgip,
-                id: req.query.id
-            });
-        });
+    storage.initSync();
+    data = storage.getItemSync('lgsettings');
+
+    if (data === undefined) {
+        data = {ip:'', pass:''};
+    }
+
+    res.render('settings', {
+        title: 'Settings',
+        config: config,
+        lgip: data.ip,
+        lgpass: data.pass,
+        id: req.query.id
     });
-    
 
 });
 
@@ -118,15 +121,15 @@ router.post('/api', function(req, res){
 router.post('/saveSettings', function(req, res){
 
     storage.init().then(function() {
-        storage.setItem('lgip',req.body.ip)
-            .then(function() {
-                return storage.getItem('lgip')
-            })
-            .then(function(value) {
-                console.log(value);
-            })
+        storage.setItem('lgsettings',{
+            ip: req.body.ip,
+            pass: req.body.pass
+        }).then(function() {
+            return storage.getItem('lgip')
+        }).then(function(value) {
+            console.log(value);
+        });
     });
-
 
     res.json(req.body);
 });

@@ -10,23 +10,31 @@ block content
     include scripts/savesettingsbtn
 
     main.mdl-layout__content.mdl-color--grey-100
-        .mdl-grid.demo-content
-            .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
+        form(action='#')
+            .mdl-grid.demo-content
+                center
+                    .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--10-col.mdl-grid
 
-                .mdl-cell.mdl-cell--12-col
-                    h4 Liquid galaxy
+                        .mdl-cell.mdl-cell--12-col
+                            h4 Liquid galaxy
 
-                .mdl-cell.mdl-cell--4-col
+                        .mdl-cell.mdl-cell--6-col
 
-                    form(action='#')
-                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                            input#lgip.mdl-textfield__input(type='text')
-                            label.mdl-textfield__label(for='lgip') Liquid Galaxy ip
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                                input#lgip.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='lgip') Liquid Galaxy ip
 
 
-                .mdl-cell.mdl-cell--12-col(style='text-align: right;')
+                        .mdl-cell.mdl-cell--6-col
 
-                    a#btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-800.mdl-color-text--white Save
+                            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                                input#lgpass.mdl-textfield__input(type='text')
+                                label.mdl-textfield__label(for='lgpass') Liquid Galaxy password
+
+
+                        .mdl-cell.mdl-cell--12-col(style='text-align: right;')
+
+                            a#btn.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent.mdl-color--blue-grey-800.mdl-color-text--white Save
 
 
         dialog.mdl-dialog(style='width: 500px;')
