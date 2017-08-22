@@ -7,13 +7,20 @@ const App = require('actions-on-google').ApiAiApp;
 
 const { firebase, utils } = require('../firebase');
 const assistant_utils = require('./utils');
+const storage = require('node-persist');
+const { lg } = require('../liquidgalaxy');
 
 
 
 const VALUE_STATION_ACTION = 'value_station';
 const ALL_VALUES_ACTION = 'all_values';
+const STATION_BALLOON_ACTION = 'station_balloon';
+const STATION_ROTATION_BALLOON_ACTION = 'station_rotation_balloon';
+const ALL_STATIONS_BALLOON_ACTION = 'all_stations_balloon';
+const CLEAN_LG_ACTION = 'clean_lg';
 const VALUE_ARGUMENT = 'value';
 const STATION_ARGUMENT = 'station';
+const NUMBER_ARGUMENT = 'number';
 
 
 
@@ -83,9 +90,119 @@ function webhook (req, res) {
 
     }
 
+
+    function stationBalloon (app) {
+
+        const number = app.getArgument(NUMBER_ARGUMENT);
+        const station = 'Station'+ number;
+
+        let answer = '<speak>';
+
+        storage.init().then(function() {
+            storage.getItem('lgsettings').then(function(lgsettings) {
+
+                lg.addKey(lgsettings.ip);
+
+                firebase.readStationData(station).then(data => {
+
+                    lg.flyTo(lgsettings.ip, lgsettings.pass, data.latitude, data.longitude);
+                    lg.show_kml_balloon(lgsettings.ip, lgsettings.pass, data, false);
+
+                });
+
+                answer += 'Let\'s go, showing information about '+ station +' to liquid galaxy. <break time="2" /> ';
+                answer += 'Do you want anything more?</speak>';
+
+                app.ask(answer);
+
+            })
+        });
+    }
+
+    function stationRotationBalloon (app) {
+
+        const number = app.getArgument(NUMBER_ARGUMENT);
+        const station = 'Station'+ number;
+
+        let answer = '<speak>';
+
+        storage.init().then(function() {
+            storage.getItem('lgsettings').then(function(lgsettings) {
+
+                lg.addKey(lgsettings.ip);
+
+                firebase.readStationData(station).then(data => {
+
+                    lg.show_kml_balloon(lgsettings.ip, lgsettings.pass, data, true);
+
+                });
+
+
+                answer += 'Let\'s go, showing rotation of the '+ station +' to liquid galaxy. <break time="2" /> ';
+                answer += 'Do you want anything more?</speak>';
+
+                app.ask(answer);
+
+            })
+        });
+    }
+
+
+    function allStationsBalloon (app) {
+
+        let answer = '<speak>';
+
+        storage.init().then(function() {
+            storage.getItem('lgsettings').then(function(lgsettings) {
+
+                lg.addKey(lgsettings.ip);
+
+                firebase.readStations().then(data => {
+
+                    lg.show_all_stations_tour(lgsettings.ip, lgsettings.pass, data);
+
+                });
+
+                answer += 'Let\'s go, showing tour of all stations to liquid galaxy. <break time="2" /> ';
+                answer += 'Do you want anything more?</speak>';
+
+                app.ask(answer);
+
+            })
+        });
+
+    }
+
+
+    function cleanGalaxy (app) {
+
+        let answer = '<speak>';
+
+        storage.init().then(function() {
+            storage.getItem('lgsettings').then(function(lgsettings) {
+
+                lg.clean_lg(lgsettings.ip, lgsettings.pass);
+                lg.exit_tour(lgsettings.ip, lgsettings.pass);
+
+
+                answer += 'Cleaning Liquid Galaxy. <break time="2" /> ';
+                answer += 'Do you want anything more?</speak>';
+
+                app.ask(answer);
+
+            });
+        });
+
+    }
+
+
     let actionMap = new Map();
     actionMap.set(VALUE_STATION_ACTION, valueStationIntent);
     actionMap.set(ALL_VALUES_ACTION, allValuesIntent);
+    actionMap.set(STATION_BALLOON_ACTION, stationBalloon);
+    actionMap.set(STATION_ROTATION_BALLOON_ACTION, stationRotationBalloon);
+    actionMap.set(ALL_STATIONS_BALLOON_ACTION, allStationsBalloon);
+    actionMap.set(CLEAN_LG_ACTION, cleanGalaxy);
 
     app.handleRequest(actionMap);
 
