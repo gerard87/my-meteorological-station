@@ -34,8 +34,7 @@ def read_sensors(name, ip_server, uid):
         print('Sealevel Pressure = {0:0.2f} Pa'.format(sealevel_pressure))
 
 
-        url = 'http://mymeteorologicalstation.appspot.com/sensors'
-        url2 = 'http://{}:3000/sensors'.format(ip_server)
+        url = 'http://{}/sensors'.format(ip_server)
         fields = {
             'name': name,
             'temperature': '{0:0.2f}'.format(temperature),
@@ -53,10 +52,6 @@ def read_sensors(name, ip_server, uid):
         except requests.exceptions.RequestException as e:
             print e
 
-        try:
-            r = requests.post(url2, data=json.dumps(fields), headers=headers)
-        except requests.exceptions.RequestException as e:
-            print e
 
 if __name__ == "__main__":
 

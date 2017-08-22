@@ -71,8 +71,8 @@ def get_weather(name, ip_server, uid, city, latitude, longitude, alias):
 
 
 def send_to_server(data, name, ip_server, uid, city, latitude, longitude, alias):
-    url = 'http://mymeteorologicalstation.appspot.com/api'
-    url2 = 'http://{}:3000/api'.format(ip_server)
+
+    url = 'http://{}/api'.format(ip_server)
 
     fields = {
         'name': name,
@@ -97,11 +97,6 @@ def send_to_server(data, name, ip_server, uid, city, latitude, longitude, alias)
 
     try:
         r = requests.post(url, data=json.dumps(fields), headers=headers)
-    except requests.exceptions.RequestException as e:
-        print e
-
-    try:
-        r = requests.post(url2, data=json.dumps(fields), headers=headers)
     except requests.exceptions.RequestException as e:
         print e
 
