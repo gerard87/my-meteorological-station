@@ -17,8 +17,7 @@ function tweetUpdate () {
                 'Weather: ' + data[station].weather + '\n' +
                 'Temperature: ' + data[station].temperature + ' ºC\n' +
                 'Humidity: ' + data[station].humidity + ' %\n' +
-                'Pressure: ' + data[station].pressure + ' Pa\n' +
-                'Sea level pressure: ' + data[station].sealevel_pressure + ' Pa\n';
+                'Pressure: ' + data[station].pressure + ' Pa\n';
 
 
             twitter.post('statuses/update', {status: msg}, function (err, data, response) {
