@@ -13,6 +13,7 @@ const { lg } = require('../liquidgalaxy');
 
 
 const VALUE_STATION_ACTION = 'value_station';
+const STATION_ACTION = 'station';
 const ALL_VALUES_ACTION = 'all_values';
 const STATION_BALLOON_ACTION = 'station_balloon';
 const STATION_ROTATION_BALLOON_ACTION = 'station_rotation_balloon';
@@ -58,6 +59,39 @@ function webhook (req, res) {
         });
 
     }
+
+
+    function stationIntent (app) {
+
+        const number = app.getArgument(NUMBER_ARGUMENT);
+
+        const station = 'Station'+ number;
+
+        firebase.readStationData(station).then(data => {
+            let answer = '<speak>';
+
+            answer += 'This is the information about the ' + data.name + ' <break time="2" />: ';
+
+            answer += 'The city is ' + data.city + ' <break time="1"/>. ' +
+                'The weather is ' + data.weather + ' <break time="1"/>. ' +
+                'The temperature is ' + utils.round(data.temperature) + ' centigrade degrees <break time="1"/>. ' +
+                'The humidity is ' + utils.round(data.humidity) + ' % <break time="1"/>. ' +
+                'The pressure is ' + utils.round(data.pressure) + ' Pa <break time="1"/>. ' +
+                'The sea level pressure is ' + utils.round(data.sealevel_pressure) + ' Pa <break time="1"/>. ' +
+                'The altitude is ' + utils.round(data.altitude) + ' m <break time="1"/>. ' +
+                'The visibility is ' + utils.round(data.visibility_km) + ' km <break time="1"/>. ' +
+                'The wind velocity is ' + utils.round(data.wind_kph) + ' kph <break time="1"/>. ';
+
+            answer += 'That\'s all the information. Do you want anything more?</speak>';
+
+            app.ask(answer);
+
+        }).catch(error => {
+
+        });
+
+    }
+
 
     function allValuesIntent (app) {
 
@@ -200,6 +234,7 @@ function webhook (req, res) {
 
     let actionMap = new Map();
     actionMap.set(VALUE_STATION_ACTION, valueStationIntent);
+    actionMap.set(STATION_ACTION, stationIntent);
     actionMap.set(ALL_VALUES_ACTION, allValuesIntent);
     actionMap.set(STATION_BALLOON_ACTION, stationBalloon);
     actionMap.set(STATION_ROTATION_BALLOON_ACTION, stationRotationBalloon);
