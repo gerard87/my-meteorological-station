@@ -19,7 +19,6 @@ const STATION_ROTATION_BALLOON_ACTION = 'station_rotation_balloon';
 const ALL_STATIONS_BALLOON_ACTION = 'all_stations_balloon';
 const CLEAN_LG_ACTION = 'clean_lg';
 const VALUE_ARGUMENT = 'value';
-const STATION_ARGUMENT = 'station';
 const NUMBER_ARGUMENT = 'number';
 
 
@@ -33,8 +32,11 @@ function webhook (req, res) {
 
     function valueStationIntent (app) {
         const value = app.getArgument(VALUE_ARGUMENT);
-        const station = assistant_utils.normalizeName(app.getArgument(STATION_ARGUMENT));
-        const val = assistant_utils.getKeyAndUnit(value);
+        const number = app.getArgument(NUMBER_ARGUMENT);
+
+        const station = 'Station'+ number;
+        let val = '';
+        if (value !== null) val = assistant_utils.getKeyAndUnit(value);
 
         firebase.readStationData(station).then(data => {
             let answer = '<speak>';
