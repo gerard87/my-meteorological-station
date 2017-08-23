@@ -88,6 +88,11 @@ html
                         a#pwlink.mdl-navigation__link(href='/pw')
                             i.mdl-color-text--blue-grey-50.material-icons(role='presentation') wifi_tethering
                             | Physical web
+
+                    a.mdl-navigation__link(href='https://twitter.com/mymeteostation')
+                        img(src="/img/twitter-logo.png" height="22" width="22" role='presentation' style='margin-right: 32px')
+                        | Twitter updates
+
                     if env !== 'production'
                         a#settingslink.mdl-navigation__link(href='/settings')
                             i.mdl-color-text--blue-grey-50.material-icons(role='presentation') settings
@@ -98,26 +103,9 @@ html
                         | Help
                     hr(style='margin-bottom: -10px')
 
-                    .mdl-cell.mdl-cell--12-col.mdl-grid(style='height: 46px')
-                        .mdl-cell.mdl-cell--12-col
-                            center
-
-                                a#twitter(href='https://twitter.com/mymeteostation')
-                                    img(src="/img/twitter-logo.png" height="24" width="24" role='presentation' style='margin-right: 32px')
-                                .mdl-tooltip.mdl-tooltip--large.mdl-tooltip--top(data-mdl-for='twitter')
-                                    | Follow station
-                                    br
-                                    | updates on twitter
-
-
-                                a#github(href='https://github.com/gerard87/my-meteorological-station')
-                                    img(src="/img/github-logo.svg" height="22" width="22" role='presentation' style='margin-right: 32px')
-                                .mdl-tooltip.mdl-tooltip--large.mdl-tooltip--top(data-mdl-for='github')
-                                    | See source code
-                                    br
-                                    | on github
-
-
+                    a.mdl-navigation__link(href='https://github.com/gerard87/my-meteorological-station' style='padding-bottom:6px')
+                        img(src="/img/github-logo.svg" height="22" width="22" role='presentation' style='margin-right: 32px')
+                        | Github
 
 
 
