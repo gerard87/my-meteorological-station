@@ -85,7 +85,7 @@ router.get('/editform', function(req, res){
 router.get('/settings', function(req, res){
 
     storage.initSync();
-    data = storage.getItemSync('lgsettings');
+    let data = storage.getItemSync('lgsettings');
 
     if (data === undefined) {
         data = {ip:'', pass:''};
@@ -96,6 +96,29 @@ router.get('/settings', function(req, res){
         config: config,
         lgip: data.ip,
         lgpass: data.pass,
+        id: req.query.id
+    });
+
+});
+
+
+router.get('/help', function(req, res){
+
+    res.render('help', {
+        title: 'Help',
+        config: config,
+        id: req.query.id
+    });
+
+});
+
+
+router.get('/about', function(req, res){
+
+
+    res.render('about', {
+        title: 'About',
+        config: config,
         id: req.query.id
     });
 

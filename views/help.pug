@@ -1,0 +1,196 @@
+extends layout
+
+block tab
+    #header-row.mdl-layout__header-row
+
+
+block content
+
+    main.mdl-layout__content.mdl-color--grey-100
+        .mdl-grid.demo-content
+
+            .demo-charts.mdl-cell.mdl-cell--10-col.mdl-grid
+                .mdl-cell.mdl-cell--12-col(style='margin-top:-25px;margin-bottom:-25px')
+                    h4 Help
+
+
+            .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
+                .mdl-cell.mdl-cell--12-col
+                    h4 Stations
+
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+
+                    p First you need to build a station with a raspberry pi. Follow this&nbsp;
+                        a(href='https://github.com/gerard87/my-meteorological-station/blob/master/README.md') link
+                        | &nbsp;instruccions in order to build a fully working station.
+                        br
+                        | To create and edit stations you must&nbsp;
+                        b log in&nbsp;
+                        | with your&nbsp;
+                        b Google account&nbsp;
+                        | and&nbsp;
+                        b connect the Raspberry Pi to the same LAN (local area network) as the server.
+
+
+                    h5 Create station
+
+                    p To create a station go to the&nbsp;
+                        a(href='/new') New station
+                        | &nbsp;seccion and click "create new station" button.
+                        br
+                        | You need to fill out the form with the following values:
+
+                    ul
+                        li
+                            b Alias:&nbsp;
+                            | Assign a name to identify your station.
+
+                        li
+                            b Location:&nbsp;
+                            | Select the station location in the map (be as accurate as possible).
+
+                        li
+                            b Raspberry Pi username:&nbsp;
+                            | Write the username of your RPi. If you don't changed anything, the default raspbian user is&nbsp;
+                            b pi.
+
+                        li
+                            b Raspberry Pi password:&nbsp;
+                            | Enter the password of your RPi user. If you don't changed anything, the default raspbian password is&nbsp;
+                            b raspberry.
+
+                        li
+                            b Raspberry Pi IP:&nbsp;
+                            | Enter the RPi IP. To know your ip you can open a terminal type 'ifconfig' command and search 'inet address'.
+
+                        li
+                            b Server URL or ip:&nbsp;
+                            | Add the server IP so the station can send the data. You can use a public URL like
+                            | "mymeteorologicalstation.appspot.com" or a local ip and port like "192.168.1.12:3000".
+
+                        li
+                            b Weather underground api key:&nbsp;
+                            | You need to create api key from&nbsp;
+                            a(href='https://www.wunderground.com/weather/api') weather underground
+                            | &nbsp;to complete all the data from the station.
+
+                    p Click "submit" and wait a few minutes until RPi gets configured. When the station gets ready, automatically appears in the homepage.
+
+
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+                    h5 Edit station
+
+                    p Go to "Manage station", click "edit" button in the station card and complete the form using same
+                        | &nbsp;procedure as create station form.
+
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+                    h5 Remove station
+
+                    p Go to "Manage station", click "remove" and click "Ok" when the confirmation dialog appears.
+
+
+
+
+
+
+
+                .mdl-cell.mdl-cell--12-col
+                    h4 Physical Web
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+
+                    | The Physical Web, an open-source project launched by Google, offers a web of the internet that allows
+                    | direct engagement with people when they are nearby.
+                    | The Physical Web send contextual information to your device, at anytime.
+                    | It does this by presenting location-based content as a URL, casted by a beacon.
+
+
+                    h5 Create beacon
+
+                    p To create a beacon go to the&nbsp;
+                        a(href='/pw') Physical web
+                        | &nbsp;seccion and click "create new beacon" button.
+                        br
+                        | You need to fill out the form with the following values:
+
+                    ul
+                        li
+                            b Name:&nbsp;
+                            | Assign a name to identify your beacon.
+
+                        li
+                            b Station:&nbsp;
+                            | Select the station you want to cast.
+
+                    | Click "submit" and you will get a URL.
+                    | To write the URL to the beacon you need to follow this steps:
+
+                    ol
+                        li Go to&nbsp;
+                            a(href='https://beaufortfrancois.github.io/sandbox/web-bluetooth/eddystone-url-config/index.html') Eddystone beacon config web.
+
+                        li Open beacon.
+                        li Click search button.
+                        li Select beacon and click pair.
+                        li Copy the URL into the URL textbox
+                        li Click update.
+
+                    | Now you get the beacon working and casting the station URL.
+                    | Time to locate your beacon nearby from your station.
+
+
+
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+                    h5 Edit beacon
+
+                    p Go to "Physical web" seccion, click "Manage beacons" button,
+                        click "edit" button in the station card and complete the form using same
+                        | &nbsp;procedure as create beacon form.
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+                    h5 Remove beacon
+
+                    p Go to "Physical web" seccion, click "Manage beacons" button, click "remove" and "Ok" when the confirmation dialog appears.
+
+
+
+
+
+
+
+
+
+                .mdl-cell.mdl-cell--12-col
+                    h4 Liquid Galaxy
+
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+
+                    p Liquid Galaxy is a cluster of computers with a synchronized displays creating a panoramic and immersive experience.
+                        | It executes a google earth instance allowing to view your data in the globe.
+                    p To build your own Liquid Galaxy installation use the instruccions detailed&nbsp;
+                        a(href='https://github.com/LiquidGalaxyLAB/liquid-galaxy') here.
+
+
+                    h5 Station balloon
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+                    h5 Station balloon rotation
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+                    h5 Tour to all the stations
+
+
+                .mdl-cell.mdl-cell--12-col
+                    h4 Google Assistant
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+                    h5 Questions you can ask
+
+                .mdl-cell.mdl-cell--12-col
+                    h4 Google Assistant
+

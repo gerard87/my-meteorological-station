@@ -46,8 +46,8 @@ html
                     button#hdrbtn.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-button--icon
                         i.material-icons more_vert
                     ul.mdl-menu.mdl-js-menu.mdl-js-ripple-effect.mdl-menu--bottom-right(for='hdrbtn')
-                        li.mdl-menu__item About
-                        li.mdl-menu__item Contact
+                        a#aboutlink.mdl-menu__item(href='/about') About
+                        a.mdl-menu__item(href='mailto:mymeteorostation@gmail.com') Contact
 
                     #signinbtn.mdl-button.mdl-js-button.mdl-color-text--blue-grey-50(style=(id!==undefined)?'display: none':'') SIGN IN
                     a#username.mdl-color--blue-grey.mdl-color-text--blue-grey-50
@@ -93,7 +93,7 @@ html
                             i.mdl-color-text--blue-grey-50.material-icons(role='presentation') settings
                             | Settings
                     .mdl-layout-spacer
-                    a.mdl-navigation__link(href='')
+                    a#helplink.mdl-navigation__link(href='/help')
                         i.mdl-color-text--blue-grey-50.material-icons(role='presentation') help_outline
                         | Help
                     hr(style='margin-bottom: -10px')

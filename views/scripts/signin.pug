@@ -21,6 +21,8 @@ script.
                 $('#newstbtn').attr('href','/createform?id='+user.uid);
                 $('#editstbtn').attr('href', $('#editstbtn').attr('href') + '&id='+user.uid);
                 $('#newbcnbtn').attr('href','/pw/new?id='+user.uid);
+                $('#helplink').attr('href', '/help?id='+user.uid)
+                $('#aboutlink').attr('href', '/about?id='+user.uid)
 
             } else {
                 // No user is signed in.
