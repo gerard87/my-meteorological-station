@@ -15,7 +15,7 @@ block content
 
 
             .demo-charts.mdl-color--white.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col.mdl-grid
-                .mdl-cell.mdl-cell--12-col
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 30px')
                     h4 Stations
 
 
@@ -97,7 +97,7 @@ block content
 
 
 
-                .mdl-cell.mdl-cell--12-col
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 30px')
                     h4 Physical Web
 
                 .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
@@ -164,7 +164,7 @@ block content
 
 
 
-                .mdl-cell.mdl-cell--12-col
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 30px')
                     h4 Liquid Galaxy
 
 
@@ -176,21 +176,147 @@ block content
                         a(href='https://github.com/LiquidGalaxyLAB/liquid-galaxy') here.
 
 
-                    h5 Station balloon
+                    p You can do the following actions to the Liquid Galaxy:
 
-                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
-                    h5 Station balloon rotation
+                    ul
+                        li
+                            b Station balloon:
+                            | &nbsp;Fly to the location of the station and show a balloon with all the station information.
 
-                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
-                    h5 Tour to all the stations
+                        li
+                            b Station balloon rotation:
+                            | &nbsp;Make a 360º rotation to the station balloon.
+
+                        li
+                            b Tour to all the stations:
+                            | &nbsp;It makes a tour to all the stations, showing the information balloon.
 
 
-                .mdl-cell.mdl-cell--12-col
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 30px')
                     h4 Google Assistant
 
+
+
                 .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+
+                    p Google Assistant technology lets you talk to the system, answering questions about the stations
+                        | &nbsp;and perform actions on LG.
+
+
                     h5 Questions you can ask
 
-                .mdl-cell.mdl-cell--12-col
-                    h4 Google Assistant
+                    h6 General information
+                    ul
+                        li
+                            b Ask for a value of a station:
+                            br
+                            br
+                            | &nbsp;What's the
+                            b &nbsp;{value}
+                            | &nbsp;of the
+                            b &nbsp;{station name}?
+
+                            p
+
+                            p &nbsp;Example: What's the temperature of the station 1?
+
+                            p The values you can ask are:
+
+                            ul
+                                li Temperature
+                                li Humidity
+                                li City
+                                li Weather
+                                li Pressure
+                                li Sea level pressure
+                                li altitude
+                                li Wind velocity
+
+                        br
+
+                        li
+                            b Ask for all values of a station:
+                            br
+                            br
+                            | &nbsp;What's the status of the
+                            b &nbsp;{station name}?
+
+                            p
+
+                            p &nbsp;Example: What's the status of the station 1?
+
+
+                        br
+
+                        li
+                            b Ask for all values of all stations:
+                            br
+                            br
+                            | &nbsp;All the stations information
+
+
+                    br
+                    br
+
+                    h6 Liquid Galaxy actions
+
+                        ul
+                            li
+                                b Show a balloon of a station:
+                                br
+                                br
+                                | &nbsp;Show me the
+                                b &nbsp;{station name}
+                                | &nbsp;balloon
+
+                                p
+
+                                p &nbsp;Example: Show me the station 3 balloon?
+
+
+                            br
+
+                            li
+                                b Show balloon rotation of a station:
+                                br
+                                br
+                                | &nbsp;Rotate
+                                b &nbsp;{station name}
+
+                                p
+
+                                p &nbsp;Example: Rotate station 1?
+
+
+                            br
+
+                            li
+                                b Tour to all stations:
+                                br
+                                br
+                                | &nbsp;Make a complete tour
+
+                            br
+
+                            li
+                                b Remove all Liquid Galaxy KML:
+                                br
+                                br
+                                | &nbsp;Clean Liquid Galaxy
+
+
+
+
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 30px')
+                    h4 Twitter
+
+                .mdl-cell.mdl-cell--12-col(style='margin-left: 60px')
+
+                    p The server tweet every 24 hours all the stations values.
+                    | You can follow the updates following&nbsp;
+                    a(href='') this twitter account
+
+
 
