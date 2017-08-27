@@ -1,31 +1,31 @@
 
 
-<p align="center">
+<h1 align="center">
   <a href="http://mymeteorologicalstation.appspot.com/"><img src="https://raw.githubusercontent.com/gerard87/my-meteorological-station/master/public/img/logos/my_meteorological_station.png"  width="350"></a>
-</p>
+  <br>
+  My meteorological station
+  <br>
+</h1>
 
 
-# My meteorological station
+My meteorological station is a Web app to manage homemade weather stations built with Raspberry Pi.
 
-
-My meteorological station is a Web app to manage homemade weather stations built with Raspberry Pi
-
- This is a project for Google Summer of Code 2017 - Physical Web organization
+ This is a project for Google Summer of Code 2017 - Physical Web organization.
 
 
 <br>
 
 ## Table of content
 
-- [Getting started](#installation)
-    - [Build your station with a Raspberry Pi](#build-your-station-with-a-raspberry-pi)
+- [Getting started](#getting-started)
+    - [Build your station (Raspberry Pi)](#build-your-station-raspberry-pi)
     	- [Station requirements](#station-requirements)
     	- [Connect sensors to GPIO](#connect-sensors-to-gpio)
     	- [Install and configure Raspbian](#install-and-configure-raspbian)
     - [Server installation](#server-installation)
     	- [Server requirements](#server-requirements)
     	- [Start server](#start-server)
-- [Google assistant and API.AI configuration](#google-assistant-and-api.ai-configuration)
+- [Google assistant and API.AI configuration](#google-assistant-and-apiai-configuration)
 - [License](#license)
 
 <br>
