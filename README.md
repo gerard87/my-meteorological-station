@@ -232,7 +232,7 @@ Create a new [twitter app](https://apps.twitter.com/), go to Keys and Access Tok
 
 3. Select the mmsagent.zip inside /assistant/agent folder.
 
-4. Go to Fullfitment and enter the URL: https://< your_server >/assistant
+4. Go to Fullfitment and enter the URL: https://<your_server_URL>/assistant
 
 
 ## License

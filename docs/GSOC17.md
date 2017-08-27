@@ -1,7 +1,7 @@
 # Google summer of code 2017 - Gerard Farré Gomez
 
 
-> Phyisical web organization project
+> Physical web organization project
 
 <br>
 
