@@ -56,18 +56,18 @@ This image shows how RPi GPIO pins are labeled.
 </p>
 
 
-** DHT22 sensor:**
+**DHT22 sensor:**
 
-- '+' to '3.3v' pin 
-- 'out' to pin '17'
-- '-' to 'Ground' pin
+- **+** to **3.3v** pin 
+- **out** to pin **17**
+- **-** to **Ground** pin
 
-** BMP180 sensor:**
+**BMP180 sensor:**
 
-- 'VIN' to '3.3v' pin 
-- 'GND' to 'Ground' pin
-- 'SLC' to pin '3'
-- 'SDA' to pin '2'
+- **VIN** to **3.3v** pin 
+- **GND** to **Ground** pin
+- **SLC** to pin **3**
+- **SDA** to pin **2**
 
 The final result can be like this:
 
