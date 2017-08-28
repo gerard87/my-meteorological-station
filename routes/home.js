@@ -107,7 +107,8 @@ router.get('/help', function(req, res){
     res.render('help', {
         title: 'Help',
         config: config,
-        id: req.query.id
+        id: req.query.id,
+        env: env
     });
 
 });
@@ -119,7 +120,8 @@ router.get('/about', function(req, res){
     res.render('about', {
         title: 'About',
         config: config,
-        id: req.query.id
+        id: req.query.id,
+        env: env
     });
 
 });
